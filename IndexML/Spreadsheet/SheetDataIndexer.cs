@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Text.RegularExpressions;
     using DocumentFormat.OpenXml.Spreadsheet;
+    using IndexML.Extensions;
 
     /// <summary>
     /// OpenXml utility class for manipulating sheet data.

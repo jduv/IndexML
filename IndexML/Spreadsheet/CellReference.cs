@@ -43,6 +43,11 @@
         public static readonly Regex RangeCellRefRegex = new Regex(RangeCellRefRegexString, RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         /// <summary>
+        /// The alphabet.
+        /// </summary>
+        private static readonly char[] alphabet = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
+
+        /// <summary>
         /// The cell reference.
         /// </summary>
         private readonly string reference;
@@ -214,7 +219,7 @@
                 }
             }
 
-            colIdx = default(long);
+            colIdx = default(int);
             return false;
         }
 
@@ -243,6 +248,27 @@
         }
 
         /// <summary>
+        /// Converts the target column index into the approriate Excel column name.
+        /// </summary>
+        /// <param name="colIdx">The column index to convert.</param>
+        /// <returns>A string corresponding to the correct column index.</returns>
+        public static string GetColumnName(long colIdx)
+        {
+            var dividend = colIdx;
+            var columnName = string.Empty;
+            long modulo;
+
+            while (dividend > 0)
+            {
+                modulo = (dividend - 1) % 26;
+                columnName = Convert.ToChar(65 + modulo).ToString() + columnName;
+                dividend = (int)((dividend - modulo) / 26);
+            }
+
+            return columnName;
+        }
+
+        /// <summary>
         /// Given an input string, attempt to parse it into a row index based on a regular expression.
         /// </summary>
         /// <param name="inputString">The input string.</param>
@@ -260,17 +286,29 @@
                 }
             }
 
-            rowIdx = default(long);
+            rowIdx = default(int);
             return false;
         }
 
         /// <inheritdoc/>
         public abstract bool ContainsOrSubsumes(ICellReference cellRef);
 
+        /// <inheritdoc/>
+        public abstract ICellReference ExtendColumnRange(int length);
+
+        /// <inheritdoc/>
+        public abstract ICellReference ExtendRowRange(int length);
+
         /// <inheritdoc />
         public bool Equals(ICellReference other)
         {
             return this.Value.Equals(other.Value, StringComparison.OrdinalIgnoreCase) || this.ContainsOrSubsumes(other);
+        }
+
+        /// <inheritdoc />
+        public override string ToString()
+        {
+            return this.Value;
         }
 
         #endregion

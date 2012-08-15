@@ -85,8 +85,7 @@
 
         #region Public Methods
         
-        /// <inheritdoc />
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="cellRef"/> is null.</exception>
+        /// <inheritdoc />        
         public override bool ContainsOrSubsumes(ICellReference cellRef)
         {
             if (cellRef == null)
@@ -95,6 +94,88 @@
             }
 
             return this.Value.Equals(cellRef.Value, StringComparison.OrdinalIgnoreCase);
+        }
+
+        /// <inheritdoc />
+        public override ICellReference ExtendColumnRange(int length)
+        {
+            ICellReference cellRef;
+            if (length == 0)
+            {
+                cellRef = new SingleCellReference(this.Value);
+            }
+            else if (length < 0)
+            {
+                if (this.ColumnIndex == 1)
+                {
+                    cellRef = new SingleCellReference(this.Value);
+                }
+                else
+                {
+                    var refStr = string.Format(
+                         "{0}{1}:{2}{3}",
+                         CellReference.GetColumnName(Math.Max(1, this.ColumnIndex + length)),
+                         this.RowIndex,
+                         this.ColumnName,
+                         this.RowIndex);
+
+                    cellRef = new RangeCellReference(refStr);
+                }
+            }
+            else
+            {                
+                var refStr = string.Format(
+                    "{0}{1}:{2}{3}",
+                    this.ColumnName,
+                    this.RowIndex,
+                    CellReference.GetColumnName(this.ColumnIndex + length),
+                    this.RowIndex);
+
+                cellRef = new RangeCellReference(refStr);
+            }
+
+            return cellRef;
+        }
+
+        /// <inheritdoc />
+        public override ICellReference ExtendRowRange(int length)
+        {
+            ICellReference cellRef;
+            if (length == 0)
+            {
+                cellRef = new SingleCellReference(this.Value);
+            }
+            else if (length < 0)
+            {
+                if (this.RowIndex == 1)
+                {
+                    cellRef = new SingleCellReference(this.Value);
+                }
+                else
+                {
+                    var refStr = string.Format(
+                       "{0}{1}:{2}{3}",
+                       this.ColumnName,
+                       Math.Max(1, this.RowIndex + length),
+                       this.ColumnName,
+                       this.RowIndex);
+
+                    cellRef = new RangeCellReference(refStr);
+                }
+            }
+            else
+            {
+                var refStr = string.Format(
+                   "{0}{1}:{2}{3}",
+                   this.ColumnName,
+                   this.RowIndex,
+                  this.ColumnName,
+                   this.RowIndex + length);
+
+                cellRef = new RangeCellReference(refStr);
+            }
+
+            return cellRef;
         }
 
         #endregion

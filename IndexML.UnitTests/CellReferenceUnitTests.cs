@@ -133,6 +133,14 @@
             Assert.AreEqual(default(string), colName, true);
         }
 
+        [TestMethod]
+        public void ToString_ValidCell_ReturnsValue()
+        {
+            string refStr = "A1";
+            var target = CellReference.Create(refStr);
+            Assert.AreEqual(refStr, target.ToString());
+        }
+
         #endregion
     }
 }

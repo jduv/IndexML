@@ -21,11 +21,28 @@
         #region Interface Methods
 
         /// <summary>
-        /// Does teh cell reference contain the other cell reference?
+        /// Does the cell reference contain the other cell reference?
         /// </summary>
         /// <param name="cellRef">The cell reference to check for.</param>
         /// <returns>True if the reference contains the target cell, false otherwise.</returns>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="cellRef"/> is null.</exception>
         bool ContainsOrSubsumes(ICellReference cellRef);
+
+        /// <summary>
+        ///  Extends the column range of this cell reference by the target length and returns
+        ///  the result.
+        /// </summary>
+        /// <param name="length">The number of columns to extend the range to.</param>
+        /// <returns>A new cell reference implementation with an extended range.</returns>
+        ICellReference ExtendColumnRange(int length);
+
+        /// <summary>
+        ///  Extends the row range of this cell reference by the target length and returns
+        ///  the result.
+        /// </summary>
+        /// <param name="length">The number of columns to extend the range to.</param>
+        /// <returns>A new cell reference implementation with an extended range.</returns>
+        ICellReference ExtendRowRange(int length);
 
         #endregion
     }

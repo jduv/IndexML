@@ -65,6 +65,18 @@
             }
         }
 
+        /// <inheritdoc />
+        public override ICellReference ExtendColumnRange(int length)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public override ICellReference ExtendRowRange(int length)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
         #region Private Methods

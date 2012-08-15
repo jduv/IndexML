@@ -1,4 +1,4 @@
-﻿namespace IndexML
+﻿namespace IndexML.Extensions
 {
     /// <summary>
     /// Extensions to the Array class.
