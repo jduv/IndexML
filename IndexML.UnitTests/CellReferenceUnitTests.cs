@@ -1,7 +1,6 @@
 ﻿namespace IndexML.UnitTests
 {
     using System;
-    using DocumentFormat.OpenXml;
     using DocumentFormat.OpenXml.Spreadsheet;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

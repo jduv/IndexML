@@ -4,6 +4,9 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
 
+    /// <summary>
+    /// Unit tests for the <see cref="RangeCellReference"/> class.
+    /// </summary>
     [TestClass]
     public class RangeCellReferenceUnitTests : OpenXmlIndexerTest
     {
