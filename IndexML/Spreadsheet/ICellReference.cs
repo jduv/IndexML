@@ -30,7 +30,7 @@
 
         /// <summary>
         ///  Extends the column range of this cell reference by the target length and returns
-        ///  the result.
+        ///  the result. Pass negative numbers to shrink a column range.
         /// </summary>
         /// <param name="length">The number of columns to extend the range to.</param>
         /// <returns>A new cell reference implementation with an extended range.</returns>
@@ -38,7 +38,7 @@
 
         /// <summary>
         ///  Extends the row range of this cell reference by the target length and returns
-        ///  the result.
+        ///  the result. Pass negative numbers to shrink a row range.
         /// </summary>
         /// <param name="length">The number of columns to extend the range to.</param>
         /// <returns>A new cell reference implementation with an extended range.</returns>
