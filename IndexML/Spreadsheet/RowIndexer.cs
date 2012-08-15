@@ -14,7 +14,7 @@
         /// <summary>
         /// The capacity of the indexer.
         /// </summary>
-        private static readonly short capacity = 1024 * 16;
+        private static readonly short Capacity = 1024 * 16;
 
         /// <summary>
         /// An array of rows. This takes up a bit of memory.
@@ -140,7 +140,7 @@
         {
             get
             {
-                if (colIndex > capacity || colIndex < 1)
+                if (colIndex > Capacity || colIndex < 1)
                 {
                     throw new IndexOutOfRangeException("Column index out of range!");
                 }
