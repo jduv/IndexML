@@ -3,6 +3,7 @@
     using System;
     using System.Text.RegularExpressions;
     using DocumentFormat.OpenXml.Spreadsheet;
+    using IndexML.Extensions;
 
     /// <summary>
     /// Abstract class containing utility methods and base implementations
@@ -50,11 +51,20 @@
         /// <summary>
         /// The cell reference.
         /// </summary>
-        private readonly string reference;
+        private string reference;
 
         #endregion
 
         #region Constructors & Destructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CellReference"/> class. This is a default instance
+        /// with no extra initialization performed on the values contained inside--it is the subclasses
+        /// responsibility to ensure that the Value property is correctly set.
+        /// </summary>
+        protected CellReference()
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CellReference"/> class.
@@ -62,11 +72,11 @@
         /// <param name="cellRef">The cell to initialize with.</param>
         /// <exception cref="ArgumentException">Thrown if <paramref name="cellRef"/> is null, empty,
         /// or invalid.</exception>
-        public CellReference(string cellRef)
+        protected CellReference(string cellRef)
         {
             if (string.IsNullOrEmpty(cellRef))
             {
-                throw new ArgumentException("Invalid cell reference: (" + (cellRef == null ? "null" : "empty") + ").");
+                throw new ArgumentException("Invalid cell reference:" + cellRef.PrettyPrint());
             }
 
             if (IsValidCellReference(cellRef))
@@ -88,7 +98,22 @@
         {
             get
             {
+                if (string.IsNullOrEmpty(this.reference))
+                {
+                    throw new InvalidOperationException("The value for this reference hasn't been set properly!");
+                }
+
                 return this.reference;
+            }
+
+            protected set
+            {
+                if (string.IsNullOrEmpty(value) || !IsValidCellReference(value))
+                {
+                    throw new InvalidOperationException("The value for this reference is invalid: " + value.PrettyPrint());
+                }
+
+                this.reference = value;
             }
         }
 
@@ -254,6 +279,12 @@
         /// <returns>A string corresponding to the correct column index.</returns>
         public static string GetColumnName(long colIdx)
         {
+            if (colIdx <= 0)
+            {
+                throw new ArgumentOutOfRangeException(
+                    "Invalid column index. " + colIdx + ". Remember that column indices are one based.");
+            }
+
             var dividend = colIdx;
             var columnName = string.Empty;
             long modulo;
@@ -292,23 +323,37 @@
 
         /// <inheritdoc/>
         public abstract bool ContainsOrSubsumes(ICellReference cellRef);
-
-        /// <inheritdoc/>
-        public abstract ICellReference ExtendColumnRange(int length);
-
-        /// <inheritdoc/>
-        public abstract ICellReference ExtendRowRange(int length);
+        
+        /// <inheritdoc />
+        public abstract ICellReference Scale(int rows, int cols);                
 
         /// <inheritdoc />
-        public bool Equals(ICellReference other)
+        public abstract ICellReference Translate(int rows, int cols);        
+
+        /// <summary>
+        /// Checks to see if the value contained in one cell reference is exactly equal to the value contained in
+        /// the other cell reference. Use this for quick comparisons or testing, otherwise use Equals, which calls
+        /// this method anyhow.
+        /// </summary>
+        /// <param name="first">The first cell reference to compare.</param>
+        /// <param name="second">The second cell reference to compare.</param>
+        /// <returns>True if the value properties of this and the other cell reference are exactly equal,
+        /// false otherwise.</returns>
+        public static bool ValueEquals(ICellReference first, ICellReference second)
         {
-            return this.Value.Equals(other.Value, StringComparison.OrdinalIgnoreCase) || this.ContainsOrSubsumes(other);
+            // We should only compare valid cell references. Nulls mean no equality.
+            if (first == null || second == null)
+            {
+                return false;
+            }
+
+            return first.Value.Equals(second.Value, StringComparison.OrdinalIgnoreCase);
         }
 
         /// <inheritdoc />
         public override string ToString()
         {
-            return this.Value;
+            return this.Value.PrettyPrint();
         }
 
         #endregion

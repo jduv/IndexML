@@ -133,11 +133,46 @@
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void GetColumnName_NegativeColumn_ThrowsException()
+        {
+            var name = CellReference.GetColumnName(-1);
+        }
+
+        [TestMethod]
+        public void GetColumnName_ValidColumnIndex_CorrectName()
+        {
+            var A = CellReference.GetColumnName(1);
+            Assert.AreEqual("A", A, true);
+
+            var AA = CellReference.GetColumnName(27);
+            Assert.AreEqual("AA", AA, true);
+        }
+
+        [TestMethod]
         public void ToString_ValidCell_ReturnsValue()
         {
             string refStr = "A1";
-            var target = CellReference.Create(refStr);
+            var target = CellReference.Create(refStr);            
             Assert.AreEqual(refStr, target.ToString());
+        }
+
+        [TestMethod]
+        public void ValueEquals_EqualCells_ReturnsTrue()
+        {
+            var target = CellReference.Create("A1");
+            var other = CellReference.Create("A1");
+
+            Assert.IsTrue(CellReference.ValueEquals(target, other));
+        }
+
+        [TestMethod]
+        public void ValueEquals_NonEqualCells_ReturnsFalse()
+        {
+            var target = CellReference.Create("A1");
+            var other = CellReference.Create("A2");
+
+            Assert.IsFalse(CellReference.ValueEquals(target, other));
         }
 
         #endregion

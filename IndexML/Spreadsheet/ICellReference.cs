@@ -7,7 +7,7 @@
     /// Defines behavior for a cell reference implementation. A cell reference is a simple wrapper around
     /// a string that allows for simple conversion between string references (A1, B4, etc) and coordinates.
     /// </summary>
-    public interface ICellReference : IEquatable<ICellReference>
+    public interface ICellReference
     {
         #region Interface Properties
 
@@ -29,20 +29,20 @@
         bool ContainsOrSubsumes(ICellReference cellRef);
 
         /// <summary>
-        ///  Extends the column range of this cell reference by the target length and returns
-        ///  the result. Pass negative numbers to shrink a column range.
+        /// Scales the cell reference by the target amounts in each direction.
         /// </summary>
-        /// <param name="length">The number of columns to extend the range to.</param>
-        /// <returns>A new cell reference implementation with an extended range.</returns>
-        ICellReference ExtendColumnRange(int length);
+        /// <param name="rows">The number of rows to scale by.</param>
+        /// <param name="cols">The number of columns to scale by.</param>
+        /// <returns>A scaled cell reference.</returns>
+        ICellReference Scale(int rows, int cols);
 
         /// <summary>
-        ///  Extends the row range of this cell reference by the target length and returns
-        ///  the result. Pass negative numbers to shrink a row range.
+        /// Translates the cell reference by the target amounts in each direction.
         /// </summary>
-        /// <param name="length">The number of columns to extend the range to.</param>
-        /// <returns>A new cell reference implementation with an extended range.</returns>
-        ICellReference ExtendRowRange(int length);
+        /// <param name="rows">The number of rows to translate by.</param>
+        /// <param name="cols">The number of columns to translate by.</param>
+        /// <returns>A translated cell reference.</returns>
+        ICellReference Translate(int rows, int cols);
 
         #endregion
     }

@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using DocumentFormat.OpenXml.Spreadsheet;
 
     /// <summary>
@@ -99,7 +100,7 @@
             {
                 // Only add the new cell reference if it doesn't already exist.
                 var refToAdd = CellReference.Create(toAdd.CellReference.Value);
-                if (!this.cellReferences.Contains(refToAdd))
+                if (!this.Contains(refToAdd))
                 {
                     this.cellReferences.Add(refToAdd);
                 }
@@ -134,13 +135,31 @@
         /// Check to see if this indexer contains a reference to the target cell.
         /// </summary>
         /// <param name="toCheck">The cell to check for.</param>
-        /// <returns>
-        /// True if the validator contains a reference to the target cell, false otherwise.
-        /// </returns>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="toCheck"/> is null.</exception>
+        /// <returns>True if the indexer contains a reference to the target cell, false otherwise.
+        /// </returns>        
         public bool Contains(Cell toCheck)
         {
-            return toCheck.HasValidCellRef() && this.cellReferences.Contains(CellReference.Create(toCheck));
+            if (toCheck == null)
+            {
+                return false;
+            }
+
+            return toCheck.HasValidCellRef() && this.Contains(CellReference.Create(toCheck));
+        }
+
+        /// <summary>
+        /// Checks to see if this indexer contains the target cell reference.
+        /// </summary>
+        /// <param name="toCheck">The cell reference to check for.</param>
+        /// <returns>True if the indexer contains a reference to the target cell, false otherwise.</returns>
+        public bool Contains(ICellReference toCheck)
+        {
+            if (toCheck == null)
+            {
+                return false;
+            }
+
+            return this.cellReferences.Any(x => CellReference.ValueEquals(x, toCheck) || x.ContainsOrSubsumes(toCheck));
         }
 
         #endregion

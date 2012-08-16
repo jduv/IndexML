@@ -30,6 +30,30 @@
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RangeCellReference"/> class.
+        /// </summary>
+        /// <param name="startingCell">The starging cell.</param>
+        /// <param name="endingCell">The ending cell.</param>
+        /// <exception cref="ArgumentNullException">Thrown if either <paramref name="startingCell"/> or 
+        /// <paramref name="endingCell"/> is null.</exception>
+        public RangeCellReference(SingleCellReference startingCell, SingleCellReference endingCell)            
+        {
+            if (startingCell == null)
+            {
+                throw new ArgumentNullException("startingCell");
+            }
+
+            if (endingCell == null)
+            {
+                throw new ArgumentNullException("endingCell");
+            }
+
+            this.StartingCellReference = startingCell;
+            this.EndingCellReference = endingCell;
+            this.Value = startingCell.Value + ":" + endingCell.Value;
+        }
+
         #endregion
 
         #region Properties
@@ -43,6 +67,28 @@
         /// Gets the ending cell reference for the range.
         /// </summary>
         public SingleCellReference EndingCellReference { get; private set; }
+
+        /// <summary>
+        /// Gets the number of rows contained within the range.
+        /// </summary>
+        public long Rows
+        {
+            get
+            {
+                return this.EndingCellReference.RowIndex;
+            }
+        }
+
+        /// <summary>
+        /// Gets the number of columns contained within the range.
+        /// </summary>
+        public long Columns
+        {
+            get
+            {
+                return this.EndingCellReference.ColumnIndex;
+            }
+        }
 
         #endregion
 
@@ -66,15 +112,31 @@
         }
 
         /// <inheritdoc />
-        public override ICellReference ExtendColumnRange(int length)
+        /// <remarks>
+        /// Scaling a ranged cell should make the range larger or smaller based on the arguments
+        /// passed. If the range collapses upon itself, this method will return a single cell reference of
+        /// the correct resultant cell. For example, if you scale the range A1:C4 by (-2,-2) you should 
+        /// get a resulting single cell reference of size 1 pointing to cell A1.
+        /// </remarks>
+        public override ICellReference Scale(int rows, int cols)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public override ICellReference ExtendRowRange(int length)
+        /// <remarks>
+        /// Translating a ranged cell will move the entire block as you might expect. For example, if you
+        /// translate the range A1:C4 by (2, 2) you will get C4:E6. This transformation should never 
+        /// affect the type of cell returned. A ranged cell translated will always be another range. Also note
+        /// that you cannot translate past cell A1. Attempting to do so will simply return the translated
+        /// range starting at A1.
+        /// </remarks>
+        public override ICellReference Translate(int rows, int cols)
         {
-            throw new NotImplementedException();
+            // Simply translate the inner points.
+            return new RangeCellReference(
+                this.StartingCellReference.Translate(rows, cols) as SingleCellReference,
+                this.EndingCellReference.Translate(rows, cols) as SingleCellReference);
         }
 
         #endregion

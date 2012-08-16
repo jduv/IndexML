@@ -44,6 +44,29 @@
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SingleCellReference"/> class.
+        /// </summary>
+        /// <param name="row">The row index to initialize with.</param>
+        /// <param name="column">The column index to initialize with.</param>
+        public SingleCellReference(long row, long column)
+        {
+            if (column <= 0)
+            {
+                throw new ArgumentOutOfRangeException("column");
+            }
+
+            if (row <= 0)
+            {
+                throw new ArgumentOutOfRangeException("row");
+            }
+
+            this.colIdx = column;
+            this.rowIdx = row;
+            this.colName = GetColumnName(colIdx);
+            this.Value = this.ColumnName + this.RowIndex;
+        }
+
         #endregion
 
         #region Properties
@@ -96,87 +119,49 @@
             return this.Value.Equals(cellRef.Value, StringComparison.OrdinalIgnoreCase);
         }
 
-        /// <inheritdoc />
-        public override ICellReference ExtendColumnRange(int length)
+        /// <inheritdoc/>
+        /// <remarks>
+        /// Scaling a single cell reference will always result in a ranged cell reference. For example,
+        /// if you scale the single reference A1 by (2, 0) the result will be A1:A3. This works in both
+        /// directions.
+        /// </remarks>
+        public override ICellReference Scale(int row, int col)
         {
-            ICellReference cellRef;
-            if (length == 0)
+            var rowIdx = Math.Max(1, this.RowIndex + row);
+            var colIdx = Math.Max(1, this.ColumnIndex + col);
+
+            // If no changes were made, i.e. we're at origin scaling negative or (0, 0) was passed
+            if (rowIdx == this.RowIndex && colIdx == this.ColumnIndex)
             {
-                cellRef = new SingleCellReference(this.Value);
-            }
-            else if (length < 0)
-            {
-                if (this.ColumnIndex == 1)
-                {
-                    cellRef = new SingleCellReference(this.Value);
-                }
-                else
-                {
-                    var refStr = string.Format(
-                         "{0}{1}:{2}{3}",
-                         CellReference.GetColumnName(Math.Max(1, this.ColumnIndex + length)),
-                         this.RowIndex,
-                         this.ColumnName,
-                         this.RowIndex);
-
-                    cellRef = new RangeCellReference(refStr);
-                }
-            }
-            else
-            {                
-                var refStr = string.Format(
-                    "{0}{1}:{2}{3}",
-                    this.ColumnName,
-                    this.RowIndex,
-                    CellReference.GetColumnName(this.ColumnIndex + length),
-                    this.RowIndex);
-
-                cellRef = new RangeCellReference(refStr);
-            }
-
-            return cellRef;
-        }
-
-        /// <inheritdoc />
-        public override ICellReference ExtendRowRange(int length)
-        {
-            ICellReference cellRef;
-            if (length == 0)
-            {
-                cellRef = new SingleCellReference(this.Value);
-            }
-            else if (length < 0)
-            {
-                if (this.RowIndex == 1)
-                {
-                    cellRef = new SingleCellReference(this.Value);
-                }
-                else
-                {
-                    var refStr = string.Format(
-                       "{0}{1}:{2}{3}",
-                       this.ColumnName,
-                       Math.Max(1, this.RowIndex + length),
-                       this.ColumnName,
-                       this.RowIndex);
-
-                    cellRef = new RangeCellReference(refStr);
-                }
+                return new SingleCellReference(this.RowIndex, this.ColumnIndex);
             }
             else
             {
-                var refStr = string.Format(
-                   "{0}{1}:{2}{3}",
-                   this.ColumnName,
-                   this.RowIndex,
-                  this.ColumnName,
-                   this.RowIndex + length);
+                var start = new SingleCellReference(
+                    Math.Min(this.RowIndex, rowIdx), 
+                    Math.Min(this.ColumnIndex, colIdx));
 
-                cellRef = new RangeCellReference(refStr);
+                var end = new SingleCellReference(
+                    Math.Max(this.RowIndex, rowIdx),
+                    Math.Max(this.ColumnIndex, colIdx));
+
+                return new RangeCellReference(start, end);
             }
-
-            return cellRef;
         }
+
+        /// <inheritdoc />
+        /// <remarks>
+        /// Translating a cell reference simply moves it as you might expect. The method will not
+        /// affect the type of cell reference. For example, translating the cell A1 by (2, 2) will result
+        /// in C3.
+        /// </remarks>
+        public override ICellReference Translate(int row, int col)
+        {
+            var rowIdx = Math.Max(1, this.RowIndex + row);
+            var colIdx = Math.Max(1, this.ColumnIndex + col);
+
+            return new SingleCellReference(rowIdx, colIdx);
+        }      
 
         #endregion
     }
