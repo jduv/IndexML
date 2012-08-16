@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using DocumentFormat.OpenXml.Spreadsheet;
+    using IndexML.Extensions;
 
     /// <summary>
     /// An indexer for a data validation OpenXml element.

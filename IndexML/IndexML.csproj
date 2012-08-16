@@ -56,7 +56,7 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\ArrayExtensions.cs" />
-    <Compile Include="Spreadsheet\CellExtensions.cs" />
+    <Compile Include="Extensions\CellExtensions.cs" />
     <Compile Include="Spreadsheet\CellIndexer.cs" />
     <Compile Include="Spreadsheet\CellReference.cs" />
     <Compile Include="Spreadsheet\DataValidationIndexer.cs" />

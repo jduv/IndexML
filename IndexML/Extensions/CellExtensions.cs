@@ -1,4 +1,4 @@
-﻿namespace IndexML
+﻿namespace IndexML.Extensions
 {
     using DocumentFormat.OpenXml.Spreadsheet;
 
