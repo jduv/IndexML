@@ -386,7 +386,23 @@
         [TestMethod]
         public void Scale_NegativeRowsPastStartingCell_ReturnsCorrectRange()
         {
-            Assert.Fail("Not Implemented");
+            var target = new RangeCellReference("D4:F6");
+            var result = target.Scale(-4, 0) as RangeCellReference;
+
+            // Should be a range
+            Assert.IsNotNull(result);
+
+            // Starting cell should be changed
+            Assert.IsFalse(CellReference.ValueEquals(target.StartingCellReference, result.StartingCellReference));
+            Assert.AreEqual("D", result.StartingCellReference.ColumnName, true);
+            Assert.AreEqual(4, result.StartingCellReference.ColumnIndex);
+            Assert.AreEqual(2, result.StartingCellReference.RowIndex);
+
+            // Ending cell should be changed
+            Assert.IsFalse(CellReference.ValueEquals(target.StartingCellReference, result.StartingCellReference));
+            Assert.AreEqual("F", result.EndingCellReference.ColumnName, true);
+            Assert.AreEqual(6, result.EndingCellReference.ColumnIndex);
+            Assert.AreEqual(4, result.EndingCellReference.RowIndex);
         }
 
         [TestMethod]
@@ -436,7 +452,23 @@
         [TestMethod]
         public void Scale_NegativeColumnsPastStartingCell_ReturnsCorrectRange()
         {
-            Assert.Fail("Not Implemented");
+            var target = new RangeCellReference("D4:F6");
+            var result = target.Scale(0, -4) as RangeCellReference;
+
+            // Should be a range
+            Assert.IsNotNull(result);
+
+            // Starting cell should be changed
+            Assert.IsFalse(CellReference.ValueEquals(target.StartingCellReference, result.StartingCellReference));
+            Assert.AreEqual("B", result.StartingCellReference.ColumnName, true);
+            Assert.AreEqual(2, result.StartingCellReference.ColumnIndex);
+            Assert.AreEqual(4, result.StartingCellReference.RowIndex);
+
+            // Ending cell should be changed
+            Assert.IsFalse(CellReference.ValueEquals(target.StartingCellReference, result.StartingCellReference));
+            Assert.AreEqual("D", result.EndingCellReference.ColumnName, true);
+            Assert.AreEqual(4, result.EndingCellReference.ColumnIndex);
+            Assert.AreEqual(6, result.EndingCellReference.RowIndex);
         }
 
         [TestMethod]
