@@ -231,15 +231,15 @@
                 string parsedColName;
                 if (TryGetColumnName(columnName, strict, out parsedColName))
                 {
-                    int position = 0;
-                    var chars = parsedColName.ToUpperInvariant().ToCharArray();
-                    for (var index = 0; index < chars.Length; index++)
+                    int number = 0;
+                    int pow = 1;
+                    for (int i = parsedColName.Length - 1; i >= 0; i--)
                     {
-                        var c = chars[index] - 64;
-                        position += index == 0 ? c : (c * (int)Math.Pow(26, index));
+                        number += (parsedColName[i] - 'A' + 1) * pow;
+                        pow *= 26;
                     }
 
-                    colIdx = position;
+                    colIdx = number;
                     return true;
                 }
             }

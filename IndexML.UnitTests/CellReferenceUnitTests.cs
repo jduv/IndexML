@@ -150,6 +150,66 @@
         }
 
         [TestMethod]
+        public void TryGetColumnIndex_StrictValidSingleCell_ReturnsExpected()
+        {
+            long colIdx;
+            var result = CellReference.TryGetColumnIndex("A1", true, out colIdx);
+
+            Assert.IsTrue(result);
+            Assert.AreEqual(1, colIdx);
+        }
+
+        [TestMethod]
+        public void TryGetColumnIndex_NotStrictValidSingleCell_ReturnsExpected()
+        {
+            long colIdx;
+            var result = CellReference.TryGetColumnIndex("A", false, out colIdx);
+
+            Assert.IsTrue(result);
+            Assert.AreEqual(1, colIdx);
+        }
+
+        [TestMethod]
+        public void TryGetColumnIndex_StrictDoubleLetterCell_ReturnsExpected()
+        {
+            long colIdx;
+            var result = CellReference.TryGetColumnIndex("AZ1", true, out colIdx);
+
+            Assert.IsTrue(result);
+            Assert.AreEqual(52, colIdx);
+        }
+
+        [TestMethod]
+        public void TryGetcolumnIndex_NotStrictDoubleLetterCell_ReturnsExpected()
+        {
+            long colIdx;
+            var result = CellReference.TryGetColumnIndex("AZ", false, out colIdx);
+
+            Assert.IsTrue(result);
+            Assert.AreEqual(52, colIdx);
+        }
+
+        [TestMethod]
+        public void TryGetColumnIndex_StrictTripleLetterCell_ReturnsExpected()
+        {
+            long colIdx;
+            var result = CellReference.TryGetColumnIndex("AAA1", true, out colIdx);
+
+            Assert.IsTrue(result);
+            Assert.AreEqual(703, colIdx);
+        }
+
+        [TestMethod]
+        public void TryGetcolumnIndex_NotStrictTripleLetterCell_ReturnsExpected()
+        {
+            long colIdx;
+            var result = CellReference.TryGetColumnIndex("AAA", false, out colIdx);
+
+            Assert.IsTrue(result);
+            Assert.AreEqual(703, colIdx);
+        }
+
+        [TestMethod]
         public void ToString_ValidCell_ReturnsValue()
         {
             string refStr = "A1";
