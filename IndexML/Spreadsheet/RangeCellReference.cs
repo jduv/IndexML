@@ -37,7 +37,7 @@
         /// <param name="endingCell">The ending cell.</param>
         /// <exception cref="ArgumentNullException">Thrown if either <paramref name="startingCell"/> or 
         /// <paramref name="endingCell"/> is null.</exception>
-        public RangeCellReference(SingleCellReference startingCell, SingleCellReference endingCell)            
+        public RangeCellReference(SingleCellReference startingCell, SingleCellReference endingCell)
         {
             if (startingCell == null)
             {
@@ -120,7 +120,17 @@
         /// </remarks>
         public override ICellReference Scale(int rows, int cols)
         {
-            throw new NotImplementedException();
+            var startRow = Math.Max(1, Math.Min(this.EndingCellReference.RowIndex + rows, this.StartingCellReference.RowIndex));
+            var startCol = Math.Max(1, Math.Min(this.EndingCellReference.ColumnIndex + cols, this.StartingCellReference.ColumnIndex));
+
+            var endRow = Math.Max(this.EndingCellReference.RowIndex + rows, this.StartingCellReference.RowIndex);
+            var endCol = Math.Max(this.EndingCellReference.ColumnIndex + cols, this.StartingCellReference.ColumnIndex);
+
+            return (startRow == endRow && startCol == endCol) ?
+                (ICellReference)new SingleCellReference(startRow, startCol) :
+                (ICellReference)new RangeCellReference(
+                    new SingleCellReference(startRow, startCol),
+                    new SingleCellReference(endRow, endCol));
         }
 
         /// <inheritdoc />
@@ -133,10 +143,13 @@
         /// </remarks>
         public override ICellReference Translate(int rows, int cols)
         {
+            var maxRowTranslate = (int)Math.Max(-this.StartingCellReference.RowIndex + 1, rows);
+            var maxColTranslate = (int)Math.Max(-this.StartingCellReference.ColumnIndex + 1, cols);
+
             // Simply translate the inner points.
             return new RangeCellReference(
                 this.StartingCellReference.Translate(rows, cols) as SingleCellReference,
-                this.EndingCellReference.Translate(rows, cols) as SingleCellReference);
+                this.EndingCellReference.Translate(maxRowTranslate, maxColTranslate) as SingleCellReference);
         }
 
         #endregion

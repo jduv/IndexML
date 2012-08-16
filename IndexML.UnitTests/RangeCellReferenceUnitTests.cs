@@ -244,7 +244,7 @@
         [TestMethod]
         public void Translate_NegativeColumns_ReturnsCorrectRange()
         {
-            var target = new RangeCellReference("D1:G4");
+            var target = new RangeCellReference("D1:F4");
             var result = target.Translate(0, -3) as RangeCellReference;
 
             // Should still be a range            
@@ -264,7 +264,7 @@
         [TestMethod]
         public void Translate_NegativeColumnsPastOrigin_ReturnsCorrectRange()
         {
-            var target = new RangeCellReference("D1:G4");
+            var target = new RangeCellReference("D1:F4");
             var result = target.Translate(0, -5) as RangeCellReference;
 
             // Should still be a range            
@@ -298,23 +298,93 @@
         [TestMethod]
         public void Scale_PositiveRows_ReturnsCorrectRange()
         {
-            Assert.Fail("Not Implemented");
+            var target = new RangeCellReference("A1:C4");
+            var result = target.Scale(3, 0) as RangeCellReference;
+
+            // Should still be a range            
+            Assert.IsNotNull(result);
+
+            // Starting cell should be unchanged
+            Assert.IsTrue(CellReference.ValueEquals(target.StartingCellReference, result.StartingCellReference));
+            Assert.AreEqual(target.StartingCellReference.ColumnName, result.StartingCellReference.ColumnName, true);
+            Assert.AreEqual(target.StartingCellReference.ColumnIndex, result.StartingCellReference.ColumnIndex);
+            Assert.AreEqual(target.StartingCellReference.RowIndex, result.StartingCellReference.RowIndex);
+
+            // Ending cell row should be scaled
+            Assert.IsFalse(CellReference.ValueEquals(target.EndingCellReference, result.EndingCellReference));
+            Assert.AreEqual(target.EndingCellReference.ColumnName, result.EndingCellReference.ColumnName, true);
+            Assert.AreEqual(target.EndingCellReference.ColumnIndex, result.EndingCellReference.ColumnIndex);
+            Assert.AreEqual(7, result.EndingCellReference.RowIndex);
         }
 
         [TestMethod]
         public void Scale_PositiveColumns_ReturnsCorrectRange()
         {
-            Assert.Fail("Not Implemented");
+            var target = new RangeCellReference("A1:D4");
+            var result = target.Scale(0, 3) as RangeCellReference;
+
+            // Should still be a range            
+            Assert.IsNotNull(result);
+
+            // Starting cell should be unchanged
+            Assert.IsTrue(CellReference.ValueEquals(target.StartingCellReference, result.StartingCellReference));
+            Assert.AreEqual(target.StartingCellReference.ColumnName, result.StartingCellReference.ColumnName, true);
+            Assert.AreEqual(target.StartingCellReference.ColumnIndex, result.StartingCellReference.ColumnIndex);
+            Assert.AreEqual(target.StartingCellReference.RowIndex, result.StartingCellReference.RowIndex);
+
+            // Ending cell column should be scaled
+            Assert.IsFalse(CellReference.ValueEquals(target.EndingCellReference, result.EndingCellReference));
+            Assert.AreEqual("G", result.EndingCellReference.ColumnName, true);
+            Assert.AreEqual(7, result.EndingCellReference.ColumnIndex);
+            Assert.AreEqual(target.EndingCellReference.RowIndex, result.EndingCellReference.RowIndex);
         }
 
         [TestMethod]
         public void Scale_NegativeRows_ReturnsCorrectRange()
         {
-            Assert.Fail("Not Implemented");
+            var target = new RangeCellReference("A1:D4");
+            var result = target.Scale(-3, 0) as RangeCellReference;
+
+            // Should still be a range            
+            Assert.IsNotNull(result);
+
+            // Starting cell should be unchanged
+            Assert.IsTrue(CellReference.ValueEquals(target.StartingCellReference, result.StartingCellReference));
+            Assert.AreEqual(target.StartingCellReference.ColumnName, result.StartingCellReference.ColumnName, true);
+            Assert.AreEqual(target.StartingCellReference.ColumnIndex, result.StartingCellReference.ColumnIndex);
+            Assert.AreEqual(target.StartingCellReference.RowIndex, result.StartingCellReference.RowIndex);
+
+            // Ending cell row should be scaled
+            Assert.IsFalse(CellReference.ValueEquals(target.EndingCellReference, result.EndingCellReference));
+            Assert.AreEqual(target.EndingCellReference.ColumnName, result.EndingCellReference.ColumnName, true);
+            Assert.AreEqual(target.EndingCellReference.ColumnIndex, result.EndingCellReference.ColumnIndex);
+            Assert.AreEqual(1, result.EndingCellReference.RowIndex);
         }
 
         [TestMethod]
         public void Scale_NegativeRowsPastOrigin_ReturnsCorrectRange()
+        {
+            var target = new RangeCellReference("A1:D4");
+            var result = target.Scale(-5, 0) as RangeCellReference;
+
+            // Should still be a range            
+            Assert.IsNotNull(result);
+
+            // Starting cell should be unchanged
+            Assert.IsTrue(CellReference.ValueEquals(target.StartingCellReference, result.StartingCellReference));
+            Assert.AreEqual(target.StartingCellReference.ColumnName, result.StartingCellReference.ColumnName, true);
+            Assert.AreEqual(target.StartingCellReference.ColumnIndex, result.StartingCellReference.ColumnIndex);
+            Assert.AreEqual(target.StartingCellReference.RowIndex, result.StartingCellReference.RowIndex);
+
+            // Ending cell row should be scaled
+            Assert.IsFalse(CellReference.ValueEquals(target.EndingCellReference, result.EndingCellReference));
+            Assert.AreEqual(target.EndingCellReference.ColumnName, result.EndingCellReference.ColumnName, true);
+            Assert.AreEqual(target.EndingCellReference.ColumnIndex, result.EndingCellReference.ColumnIndex);
+            Assert.AreEqual(1, result.EndingCellReference.RowIndex);
+        }
+
+        [TestMethod]
+        public void Scale_NegativeRowsPastStartingCell_ReturnsCorrectRange()
         {
             Assert.Fail("Not Implemented");
         }
@@ -322,11 +392,49 @@
         [TestMethod]
         public void Scale_NegativeColumns_ReturnsCorrectRange()
         {
-            Assert.Fail("Not Implemented");
-        }
+            var target = new RangeCellReference("A1:D4");
+            var result = target.Scale(0, -3) as RangeCellReference;
+
+            // Should still be a range            
+            Assert.IsNotNull(result);
+
+            // Starting cell should be unchanged
+            Assert.IsTrue(CellReference.ValueEquals(target.StartingCellReference, result.StartingCellReference));
+            Assert.AreEqual(target.StartingCellReference.ColumnName, result.StartingCellReference.ColumnName, true);
+            Assert.AreEqual(target.StartingCellReference.ColumnIndex, result.StartingCellReference.ColumnIndex);
+            Assert.AreEqual(target.StartingCellReference.RowIndex, result.StartingCellReference.RowIndex);
+
+            // Ending cell column should be scaled
+            Assert.IsFalse(CellReference.ValueEquals(target.EndingCellReference, result.EndingCellReference));
+            Assert.AreEqual("A", result.EndingCellReference.ColumnName, true);
+            Assert.AreEqual(1, result.EndingCellReference.ColumnIndex);
+            Assert.AreEqual(target.EndingCellReference.RowIndex, result.EndingCellReference.RowIndex);
+        }       
 
         [TestMethod]
         public void Scale_NegativeColumnsPastOrigin_ReturnsCorrectRange()
+        {
+            var target = new RangeCellReference("A1:D4");
+            var result = target.Scale(0, -5) as RangeCellReference;
+
+            // Should still be a range            
+            Assert.IsNotNull(result);
+
+            // Starting cell should be unchanged
+            Assert.IsTrue(CellReference.ValueEquals(target.StartingCellReference, result.StartingCellReference));
+            Assert.AreEqual(target.StartingCellReference.ColumnName, result.StartingCellReference.ColumnName, true);
+            Assert.AreEqual(target.StartingCellReference.ColumnIndex, result.StartingCellReference.ColumnIndex);
+            Assert.AreEqual(target.StartingCellReference.RowIndex, result.StartingCellReference.RowIndex);
+
+            // Ending cell column should be scaled
+            Assert.IsFalse(CellReference.ValueEquals(target.EndingCellReference, result.EndingCellReference));
+            Assert.AreEqual("A", result.EndingCellReference.ColumnName, true);
+            Assert.AreEqual(1, result.EndingCellReference.ColumnIndex);
+            Assert.AreEqual(target.EndingCellReference.RowIndex, result.EndingCellReference.RowIndex);
+        }
+
+        [TestMethod]
+        public void Scale_NegativeColumnsPastStartingCell_ReturnsCorrectRange()
         {
             Assert.Fail("Not Implemented");
         }
@@ -334,7 +442,31 @@
         [TestMethod]
         public void Scale_CollapseRange_ReturnsSingleCell()
         {
-            Assert.Fail("Not Implemented");
+            var target = new RangeCellReference("B2:D4");
+            var result = target.Scale(-2, -2) as SingleCellReference;
+
+            // Should be a single cell
+            Assert.IsNotNull(result);
+
+            // Should be cell B2
+            Assert.AreEqual("B", result.ColumnName);
+            Assert.AreEqual(2, result.ColumnIndex);
+            Assert.AreEqual(2, result.RowIndex);
+        }
+
+        [TestMethod]
+        public void Scale_CollapseToOrigin_ReturnsOrigin()
+        {
+            var target = new RangeCellReference("A1:D4");
+            var result = target.Scale(-4, -4) as SingleCellReference;
+
+            // Should be a single cell
+            Assert.IsNotNull(result);
+
+            // Should be cell B2
+            Assert.AreEqual("A", result.ColumnName);
+            Assert.AreEqual(1, result.ColumnIndex);
+            Assert.AreEqual(1, result.RowIndex);
         }
 
         #endregion
