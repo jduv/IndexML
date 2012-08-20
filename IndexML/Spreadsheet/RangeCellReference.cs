@@ -118,7 +118,7 @@
         /// the correct resultant cell. For example, if you scale the range A1:C4 by (-2,-2) you should 
         /// get a resulting single cell reference of size 1 pointing to cell A1.
         /// </remarks>
-        public override ICellReference Scale(int rows, int cols)
+        public override ICellReference Resize(int rows, int cols)
         {
             var startRow = Math.Max(1, Math.Min(this.EndingCellReference.RowIndex + rows, this.StartingCellReference.RowIndex));
             var startCol = Math.Max(1, Math.Min(this.EndingCellReference.ColumnIndex + cols, this.StartingCellReference.ColumnIndex));
@@ -141,15 +141,15 @@
         /// that you cannot translate past cell A1. Attempting to do so will simply return the translated
         /// range starting at A1.
         /// </remarks>
-        public override ICellReference Translate(int rows, int cols)
+        public override ICellReference Move(int rows, int cols)
         {
             var maxRowTranslate = (int)Math.Max(-this.StartingCellReference.RowIndex + 1, rows);
             var maxColTranslate = (int)Math.Max(-this.StartingCellReference.ColumnIndex + 1, cols);
 
             // Simply translate the inner points.
             return new RangeCellReference(
-                this.StartingCellReference.Translate(rows, cols) as SingleCellReference,
-                this.EndingCellReference.Translate(maxRowTranslate, maxColTranslate) as SingleCellReference);
+                this.StartingCellReference.Move(rows, cols) as SingleCellReference,
+                this.EndingCellReference.Move(maxRowTranslate, maxColTranslate) as SingleCellReference);
         }
 
         #endregion

@@ -119,7 +119,7 @@
         public void Translate_Zero_NoChanges()
         {
             var target = new SingleCellReference("C1");
-            var result = target.Translate(0, 0);
+            var result = target.Move(0, 0);
 
             Assert.IsNotNull(result);
             Assert.IsTrue(CellReference.ValueEquals(target, result));
@@ -129,7 +129,7 @@
         public void Translate_PositiveRows_ReturnsCorrectCell()
         {
             var target = new SingleCellReference("A1");
-            var result = target.Translate(3, 0) as SingleCellReference;
+            var result = target.Move(3, 0) as SingleCellReference;
 
             // Should still be a single cell            
             Assert.IsNotNull(result);
@@ -146,7 +146,7 @@
         public void Translate_PositiveColumns_ReturnsCorrectCell()
         {
             var target = new SingleCellReference("A1");
-            var result = target.Translate(0, 3) as SingleCellReference;
+            var result = target.Move(0, 3) as SingleCellReference;
 
             // Should still be a single cell            
             Assert.IsNotNull(result);
@@ -163,7 +163,7 @@
         public void Translate_NegativeRowsNotPastOrigin_ReturnsCorrectCell()
         {
             var target = new SingleCellReference("A4");
-            var result = target.Translate(-3, 0) as SingleCellReference;
+            var result = target.Move(-3, 0) as SingleCellReference;
 
             // Should still be a single cell            
             Assert.IsNotNull(result);
@@ -180,7 +180,7 @@
         public void Translate_NegativeRowsPastOrigin_ReturnsOrigin()
         {
             var target = new SingleCellReference("A4");
-            var result = target.Translate(-5, 0) as SingleCellReference;
+            var result = target.Move(-5, 0) as SingleCellReference;
 
             // Should still be a single cell            
             Assert.IsNotNull(result);
@@ -197,7 +197,7 @@
         public void Translate_NegativeColumnsNotPastOrigin_ReturnsCorrectCell()
         {
             var target = new SingleCellReference("D1");
-            var result = target.Translate(0, -3) as SingleCellReference;
+            var result = target.Move(0, -3) as SingleCellReference;
 
             // Should still be a single cell            
             Assert.IsNotNull(result);
@@ -214,7 +214,7 @@
         public void Translate_NegativeColumnsPastOrigin_ReturnsOrigin()
         {
             var target = new SingleCellReference("D1");
-            var result = target.Translate(0, -5) as SingleCellReference;
+            var result = target.Move(0, -5) as SingleCellReference;
 
             // Should still be a single cell            
             Assert.IsNotNull(result);
@@ -235,7 +235,7 @@
         public void Scale_Zero_NoChanges()
         {
             var target = new SingleCellReference("D4");
-            var result = target.Scale(0, 0);
+            var result = target.Resize(0, 0);
 
             Assert.IsNotNull(result);
             Assert.IsTrue(CellReference.ValueEquals(target, result));
@@ -245,7 +245,7 @@
         public void Scale_PositiveRows_ReturnsCorrectRange()
         {
             var target = new SingleCellReference("A1");
-            var result = target.Scale(3, 0) as RangeCellReference;
+            var result = target.Resize(3, 0) as RangeCellReference;
 
             // Should be a range
             Assert.IsNotNull(result);
@@ -267,7 +267,7 @@
         public void Scale_PositiveColumns_ReturnsCorrectRange()
         {
             var target = new SingleCellReference("A1");
-            var result = target.Scale(0, 3) as RangeCellReference;
+            var result = target.Resize(0, 3) as RangeCellReference;
 
             // Should be a range
             Assert.IsNotNull(result);
@@ -289,7 +289,7 @@
         public void Scale_NegativeRows_ReturnsCorrectRange()
         {
             var target = new SingleCellReference("A4");
-            var result = target.Scale(-3, 0) as RangeCellReference;
+            var result = target.Resize(-3, 0) as RangeCellReference;
 
             // Should be a range
             Assert.IsNotNull(result);
@@ -311,7 +311,7 @@
         public void Scale_NegativeRowsPastOrigin_ReturnsCorrectRange()
         {
             var target = new SingleCellReference("A4");
-            var result = target.Scale(-5, 0) as RangeCellReference;
+            var result = target.Resize(-5, 0) as RangeCellReference;
 
             // Should be a range
             Assert.IsNotNull(result);
@@ -333,7 +333,7 @@
         public void Scale_NegativeRowsAtOrigin_ReturnsOrigin()
         {
             var target = new SingleCellReference("A1");
-            var result = target.Scale(-1, 0) as SingleCellReference;
+            var result = target.Resize(-1, 0) as SingleCellReference;
 
             // Should be a single cell
             Assert.IsNotNull(result);
@@ -353,7 +353,7 @@
         public void Scale_NegativeColumns_ReturnsCorrectRange()
         {
             var target = new SingleCellReference("D1");
-            var result = target.Scale(0, -3) as RangeCellReference;
+            var result = target.Resize(0, -3) as RangeCellReference;
 
             // Should be a range
             Assert.IsNotNull(result);
@@ -375,7 +375,7 @@
         public void Scale_NegativeColumnsPastOrigin_ReturnsCorrectRange()
         {
             var target = new SingleCellReference("D1");
-            var result = target.Scale(0, -5) as RangeCellReference;
+            var result = target.Resize(0, -5) as RangeCellReference;
 
             // Should be a range
             Assert.IsNotNull(result);
@@ -397,7 +397,7 @@
         public void Scale_NegativeColumnsAtOrigin_ReturnsOrigin()
         {
             var target = new SingleCellReference("A1");
-            var result = target.Scale(0, -1) as SingleCellReference;
+            var result = target.Resize(0, -1) as SingleCellReference;
 
             // Should be a single cell
             Assert.IsNotNull(result);

@@ -125,7 +125,7 @@
         /// if you scale the single reference A1 by (2, 0) the result will be A1:A3. This works in both
         /// directions.
         /// </remarks>
-        public override ICellReference Scale(int row, int col)
+        public override ICellReference Resize(int row, int col)
         {
             var rowIdx = Math.Max(1, this.RowIndex + row);
             var colIdx = Math.Max(1, this.ColumnIndex + col);
@@ -155,7 +155,7 @@
         /// affect the type of cell reference. For example, translating the cell A1 by (2, 2) will result
         /// in C3.
         /// </remarks>
-        public override ICellReference Translate(int row, int col)
+        public override ICellReference Move(int row, int col)
         {
             var rowIdx = Math.Max(1, this.RowIndex + row);
             var colIdx = Math.Max(1, this.ColumnIndex + col);

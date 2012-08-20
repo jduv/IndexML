@@ -325,10 +325,10 @@
         public abstract bool ContainsOrSubsumes(ICellReference cellRef);
         
         /// <inheritdoc />
-        public abstract ICellReference Scale(int rows, int cols);                
+        public abstract ICellReference Resize(int rows, int cols);                
 
         /// <inheritdoc />
-        public abstract ICellReference Translate(int rows, int cols);        
+        public abstract ICellReference Move(int rows, int cols);        
 
         /// <summary>
         /// Checks to see if the value contained in one cell reference is exactly equal to the value contained in

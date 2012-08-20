@@ -34,7 +34,7 @@
         /// <param name="rows">The number of rows to scale by.</param>
         /// <param name="cols">The number of columns to scale by.</param>
         /// <returns>A scaled cell reference.</returns>
-        ICellReference Scale(int rows, int cols);
+        ICellReference Resize(int rows, int cols);
 
         /// <summary>
         /// Translates the cell reference by the target amounts in each direction.
@@ -42,7 +42,7 @@
         /// <param name="rows">The number of rows to translate by.</param>
         /// <param name="cols">The number of columns to translate by.</param>
         /// <returns>A translated cell reference.</returns>
-        ICellReference Translate(int rows, int cols);
+        ICellReference Move(int rows, int cols);
 
         #endregion
     }
