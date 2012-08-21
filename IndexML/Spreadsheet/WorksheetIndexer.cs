@@ -48,8 +48,11 @@
             var sheetData = toIndex.Worksheet.Descendants<SheetData>().FirstOrDefault();
             this.SheetData = new SheetDataIndexer(sheetData);
 
-            // Add teh validators.
+            // Add the validators.
             this.dataValidations = toIndex.Worksheet.Descendants<DataValidation>().ToList();
+
+            // Set the worksheet.
+            this.Worksheet = toIndex.Worksheet;
         }
 
         #endregion
@@ -60,6 +63,11 @@
         /// Gets a <see cref="SheetDataIndexer"/> for the worksheet.
         /// </summary>
         public SheetDataIndexer SheetData { get; private set; }
+
+        /// <summary>
+        /// Gets the worksheet part that's being indexed.
+        /// </summary>
+        public Worksheet Worksheet { get; private set; }
 
         /// <summary>
         /// Gets a list of data validation elements.
