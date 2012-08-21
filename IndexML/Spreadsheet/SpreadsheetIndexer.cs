@@ -174,12 +174,7 @@
                     {
                         // Eat it.
                     }
-                }
-
-                if (this.Data != null)
-                {
-                    this.Data.Close();
-                }                
+                }              
             }
         }
 
