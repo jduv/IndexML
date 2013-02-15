@@ -8,7 +8,8 @@
     using IndexML.Extensions;
 
     /// <summary>
-    /// OpenXml utility class for manipulating sheet data.
+    /// OpenXml utility class for manipulating sheet data. Uses an Array for fast indexing, but uses
+    /// much more memory.
     /// </summary>
     public class ArrayBasedSheetDataIndexer : ISheetDataIndexer
     {

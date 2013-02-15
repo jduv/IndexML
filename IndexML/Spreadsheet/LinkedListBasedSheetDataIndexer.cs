@@ -6,6 +6,10 @@
     using System.Text.RegularExpressions;
     using DocumentFormat.OpenXml.Spreadsheet;
 
+    /// <summary>
+    /// OpenXml utility class for manipulating sheet data. Uses a Linked-List to conserve memory but has slower
+    /// accesses.
+    /// </summary>
     public class LinkedListBasedSheetDataIndexer : ISheetDataIndexer
     {
         #region Fields & Constants
