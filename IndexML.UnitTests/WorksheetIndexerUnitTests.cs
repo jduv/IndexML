@@ -5,6 +5,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using DocumentFormat.OpenXml.Spreadsheet;
     using DocumentFormat.OpenXml.Packaging;
+    using IndexML.Spreadsheet;
 
     /// <summary>
     /// Unit tests for the <see cref="WorksheetIndexer"/> class.

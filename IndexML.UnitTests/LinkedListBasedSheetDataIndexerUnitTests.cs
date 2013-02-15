@@ -7,10 +7,10 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
-    /// Unit tests for the <see cref="ArrayBasedSheetDataIndexer"/> class.
+    /// Unit tests for the <see cref="LeanLeanSheetDataIndexer"/> class.
     /// </summary>
     [TestClass]
-    public class SheetDataIndexerUnitTests : OpenXmlIndexerTest
+    public class LinkedListBasedSheetDataIndexerUnitTests : OpenXmlIndexerTest
     {
         #region Test Methods
 
@@ -18,7 +18,7 @@
         [ExpectedException(typeof(ArgumentNullException))]
         public void Constructor_NullArgument_ExceptionThrown()
         {
-            var target = new ArrayBasedSheetDataIndexer(null);
+            var target = new LinkedListBasedSheetDataIndexer(null);
         }
 
         [TestMethod]
@@ -26,10 +26,10 @@
         public void Constructor_EmptySheetData_ValidEmptyState()
         {
             SafeExecuteTest(
-                EmptySheetPath,                
+                EmptySheetPath,
                 (sheetData) =>
                 {
-                    var target = new ArrayBasedSheetDataIndexer(sheetData);
+                    var target = new LinkedListBasedSheetDataIndexer(sheetData);
 
                     Assert.IsNotNull(target);
                     Assert.IsTrue(target.IsEmpty);
@@ -42,10 +42,10 @@
         public void Constructor_ValidSheetData_ValidState()
         {
             SafeExecuteTest(
-                RandomDataSheetSpath,                
+                RandomDataSheetSpath,
                 (sheetData) =>
                 {
-                    var target = new ArrayBasedSheetDataIndexer(sheetData);
+                    var target = new LinkedListBasedSheetDataIndexer(sheetData);
 
                     Assert.IsNotNull(target);
                     Assert.IsFalse(target.IsEmpty);
@@ -62,15 +62,15 @@
         public void Constructor_MaxExtents_ValidState()
         {
             SafeExecuteTest(
-                MaxExtentsSheetPath,                
+                MaxExtentsSheetPath,
                 (sheetData) =>
                 {
-                    var target = new ArrayBasedSheetDataIndexer(sheetData);
+                    var target = new LinkedListBasedSheetDataIndexer(sheetData);
 
                     Assert.IsNotNull(target);
                     Assert.IsFalse(target.IsEmpty);
                     Assert.AreEqual(2, target.Count);
-                    Assert.AreEqual(ArrayBasedSheetDataIndexer.Capacity, target.MaxRowIndex);
+                    Assert.AreEqual(LinkedListBasedSheetDataIndexer.Capacity, target.MaxRowIndex);
                     ValidateRowSequence(target);
                 });
         }
@@ -81,10 +81,10 @@
         public void AppendRow_MaxExtents_ThrowsException()
         {
             SafeExecuteTest(
-                MaxExtentsSheetPath,                
+                MaxExtentsSheetPath,
                 (sheetData) =>
                 {
-                    var target = new ArrayBasedSheetDataIndexer(sheetData);
+                    var target = new LinkedListBasedSheetDataIndexer(sheetData);
                     target.AppendRow(new Row());
                 });
         }
@@ -94,10 +94,10 @@
         public void AppendRow_EmptySpreadsheet_IncreasesCountByOne()
         {
             SafeExecuteTest(
-                EmptySheetPath,                
+                EmptySheetPath,
                 (sheetData) =>
                 {
-                    var target = new ArrayBasedSheetDataIndexer(sheetData);
+                    var target = new LinkedListBasedSheetDataIndexer(sheetData);
                     target.AppendRow(new Row());
 
                     Assert.IsFalse(target.IsEmpty);
@@ -113,10 +113,10 @@
         public void RemoveRow_NegativeIndex_ThrowsException()
         {
             SafeExecuteTest(
-                EmptySheetPath,                
+                EmptySheetPath,
                 (sheetData) =>
                 {
-                    var target = new ArrayBasedSheetDataIndexer(sheetData);
+                    var target = new LinkedListBasedSheetDataIndexer(sheetData);
                     target.RemoveRow(-1);
                 });
         }
@@ -127,23 +127,23 @@
         public void RemoveRow_OverCapacityIndex_ThrowsException()
         {
             SafeExecuteTest(
-                EmptySheetPath,                
+                EmptySheetPath,
                 (sheetData) =>
                 {
-                    var target = new ArrayBasedSheetDataIndexer(sheetData);
-                    target.RemoveRow(ArrayBasedSheetDataIndexer.Capacity + 2); // Row indices are one based, hence the +2 is needed
+                    var target = new LinkedListBasedSheetDataIndexer(sheetData);
+                    target.RemoveRow(LinkedListBasedSheetDataIndexer.Capacity + 2); // Row indices are one based, hence the +2 is needed
                 });
         }
 
         [TestMethod]
-        [DeploymentItem(EmptySheetPath, TestFilesDir)]        
+        [DeploymentItem(EmptySheetPath, TestFilesDir)]
         public void RemoveRow_EmptySpreadsheet_DoesNothing()
         {
             SafeExecuteTest(
-                EmptySheetPath,                
+                EmptySheetPath,
                 (sheetData) =>
                 {
-                    var target = new ArrayBasedSheetDataIndexer(sheetData);
+                    var target = new LinkedListBasedSheetDataIndexer(sheetData);
                     target.RemoveRow(0);
                 });
         }
@@ -153,10 +153,10 @@
         public void RemoveRow_NonExistentRow_ReturnsFalse()
         {
             SafeExecuteTest(
-                ExactlyFiveRowsSheetPath,                
+                ExactlyFiveRowsSheetPath,
                 (sheetData) =>
                 {
-                    var target = new ArrayBasedSheetDataIndexer(sheetData);
+                    var target = new LinkedListBasedSheetDataIndexer(sheetData);
                     Assert.IsFalse(target.RemoveRow(6));
                     ValidateRowSequence(target);
                 });
@@ -167,10 +167,10 @@
         public void RemoveRow_MaxRowNoShift_DecreasesCountByOne()
         {
             SafeExecuteTest(
-                ExactlyFiveRowsSheetPath,                
+                ExactlyFiveRowsSheetPath,
                 (sheetData) =>
                 {
-                    var target = new ArrayBasedSheetDataIndexer(sheetData);
+                    var target = new LinkedListBasedSheetDataIndexer(sheetData);
 
                     var oldCount = target.Count;
                     var oldMaxRowIndex = target.MaxRowIndex;
@@ -187,10 +187,10 @@
         public void RemoveRow_SequentialMiddleRowNoShiftUp_DecreasesCountAndMaxRowByOne()
         {
             SafeExecuteTest(
-                ExactlyFiveRowsSheetPath,                
+                ExactlyFiveRowsSheetPath,
                 (sheetData) =>
                 {
-                    var target = new ArrayBasedSheetDataIndexer(sheetData);
+                    var target = new LinkedListBasedSheetDataIndexer(sheetData);
 
                     var oldCount = target.Count;
                     var oldMaxRowIndex = target.MaxRowIndex;
@@ -207,10 +207,10 @@
         public void RemoveRow_MaxRowShift_DecreasesCountByOne()
         {
             SafeExecuteTest(
-                ExactlyFiveRowsSheetPath,                
+                ExactlyFiveRowsSheetPath,
                 (sheetData) =>
                 {
-                    var target = new ArrayBasedSheetDataIndexer(sheetData);
+                    var target = new LinkedListBasedSheetDataIndexer(sheetData);
 
                     var oldCount = target.Count;
                     var oldMaxRowIndex = target.MaxRowIndex;
@@ -227,10 +227,10 @@
         public void RemoveRow_SequentialMiddleRowShiftUp_DecreasesCountAndMaxRowByOne()
         {
             SafeExecuteTest(
-                ExactlyFiveRowsSheetPath,                
+                ExactlyFiveRowsSheetPath,
                 (sheetData) =>
                 {
-                    var target = new ArrayBasedSheetDataIndexer(sheetData);
+                    var target = new LinkedListBasedSheetDataIndexer(sheetData);
 
                     var oldCount = target.Count;
                     var oldMaxRowIndex = target.MaxRowIndex;
@@ -248,10 +248,10 @@
         public void InsertRow_NullRowArgument_ThrowsException()
         {
             SafeExecuteTest(
-                EmptySheetPath,                
+                EmptySheetPath,
                 (sheetData) =>
-                {                    
-                    var target = new ArrayBasedSheetDataIndexer(sheetData);
+                {
+                    var target = new LinkedListBasedSheetDataIndexer(sheetData);
                     target.InsertRow(null, 1);
                 });
         }
@@ -262,10 +262,10 @@
         public void InsertRow_NegativeIndex_ThrowsException()
         {
             SafeExecuteTest(
-                ExactlyFiveRowsSheetPath,                
+                ExactlyFiveRowsSheetPath,
                 (sheetData) =>
                 {
-                    var target = new ArrayBasedSheetDataIndexer(sheetData);
+                    var target = new LinkedListBasedSheetDataIndexer(sheetData);
                     target.InsertRow(new Row(), -1);
                 });
         }
@@ -276,11 +276,11 @@
         public void InsertRow_IndexOverCapacity_ThrowsException()
         {
             SafeExecuteTest(
-                ExactlyFiveRowsSheetPath,                
+                ExactlyFiveRowsSheetPath,
                 (sheetData) =>
                 {
-                    var target = new ArrayBasedSheetDataIndexer(sheetData);
-                    target.InsertRow(new Row(), ArrayBasedSheetDataIndexer.Capacity + 1);
+                    var target = new LinkedListBasedSheetDataIndexer(sheetData);
+                    target.InsertRow(new Row(), LinkedListBasedSheetDataIndexer.Capacity + 1);
                 });
         }
 
@@ -292,7 +292,7 @@
                 ExactlyFiveRowsSheetPath,
                 (sheetData) =>
                 {
-                    var target = new ArrayBasedSheetDataIndexer(sheetData);
+                    var target = new LinkedListBasedSheetDataIndexer(sheetData);
                     var halfway = target.Rows.ToList().Count / 2;
 
                     var oldCount = target.Count;
@@ -311,10 +311,10 @@
         public void InsertRow_SequentialMiddleRowShift_IncreasesCountAndMaxRowByOne()
         {
             SafeExecuteTest(
-                ExactlyFiveRowsSheetPath,                
+                ExactlyFiveRowsSheetPath,
                 (sheetData) =>
                 {
-                    var target = new ArrayBasedSheetDataIndexer(sheetData);
+                    var target = new LinkedListBasedSheetDataIndexer(sheetData);
                     var halfway = (target.Rows.ToList().Count / 2) + 1;
 
                     var oldCount = target.Count;
@@ -333,10 +333,10 @@
         public void InsertRow_SequentialMaxRowNoShift_IncreasesCountByOne()
         {
             SafeExecuteTest(
-                ExactlyFiveRowsSheetPath,                
+                ExactlyFiveRowsSheetPath,
                 (sheetData) =>
                 {
-                    var target = new ArrayBasedSheetDataIndexer(sheetData);
+                    var target = new LinkedListBasedSheetDataIndexer(sheetData);
 
                     var oldCount = target.Count;
                     var oldMaxRow = target.MaxRowIndex;
@@ -354,10 +354,10 @@
         public void InsertRow_SequentialMaxRowShift_IncreasesCountAndMaxRowByOne()
         {
             SafeExecuteTest(
-                ExactlyFiveRowsSheetPath,                
+                ExactlyFiveRowsSheetPath,
                 (sheetData) =>
                 {
-                    var target = new ArrayBasedSheetDataIndexer(sheetData);
+                    var target = new LinkedListBasedSheetDataIndexer(sheetData);
 
                     var oldCount = target.Count;
                     var oldMaxRow = target.MaxRowIndex;
@@ -378,12 +378,12 @@
                 FiveEvenRowsSheetPath,
                 (sheetData) =>
                 {
-                    var target = new ArrayBasedSheetDataIndexer(sheetData);
+                    var target = new LinkedListBasedSheetDataIndexer(sheetData);
 
                     var oldCount = target.Count;
                     var oldMaxRow = target.MaxRowIndex;
 
-                    target.InsertRow(new Row(), 1); // insert at an odd index, test file has only even rows
+                    target.InsertRow(new Row(), 3); // insert at an odd index, test file has only even rows
                     Assert.IsFalse(target.IsEmpty);
                     Assert.AreEqual(oldCount + 1, target.Count);
                     Assert.AreEqual(oldMaxRow, target.MaxRowIndex);
@@ -396,17 +396,59 @@
         public void InsertRow_NonExistingIndexShift_IncreasesCountAndMaxRow()
         {
             SafeExecuteTest(
-                FiveEvenRowsSheetPath,                
+                FiveEvenRowsSheetPath,
                 (sheetData) =>
                 {
-                    var target = new ArrayBasedSheetDataIndexer(sheetData);
+                    var target = new LinkedListBasedSheetDataIndexer(sheetData);
 
                     var oldCount = target.Count;
                     var oldMaxRow = target.MaxRowIndex;
 
-                    target.InsertRow(new Row(), 1, true); // insert at an odd index, test file has only even rows
+                    target.InsertRow(new Row(), 3, true); // insert at an odd index, test file has only even rows
                     Assert.IsFalse(target.IsEmpty);
                     Assert.AreEqual(oldCount + 1, target.Count);
+                    Assert.AreEqual(oldMaxRow + 1, target.MaxRowIndex);
+                    ValidateRowSequence(target);
+                });
+        }
+
+        [TestMethod]
+        [DeploymentItem(ExactlyFiveRowsSheetPath, TestFilesDir)]
+        public void InsertRow_FirstRowNoShift_IncreasesCountAndMaxRow()
+        {
+            SafeExecuteTest(
+                ExactlyFiveRowsSheetPath,
+                (sheetData) =>
+                {
+                    var target = new LinkedListBasedSheetDataIndexer(sheetData);
+
+                    var oldCount = target.Count;
+                    var oldMaxRow = target.MaxRowIndex;
+
+                    target.InsertRow(new Row(), 1);
+                    Assert.IsFalse(target.IsEmpty);
+                    Assert.AreEqual(oldCount, target.Count);
+                    Assert.AreEqual(oldMaxRow, target.MaxRowIndex);
+                    ValidateRowSequence(target);
+                });
+        }
+
+        [TestMethod]
+        [DeploymentItem(ExactlyFiveRowsSheetPath, TestFilesDir)]
+        public void InsertRow_FirstRowShift_IncreasesCountAndMaxRow()
+        {
+            SafeExecuteTest(
+                ExactlyFiveRowsSheetPath,
+                (sheetData) =>
+                {
+                    var target = new LinkedListBasedSheetDataIndexer(sheetData);
+
+                    var oldCount = target.Count;
+                    var oldMaxRow = target.MaxRowIndex;
+
+                    target.InsertRow(new Row(), 1, true);
+                    Assert.IsFalse(target.IsEmpty);
+                    Assert.AreEqual(oldCount +1, target.Count);
                     Assert.AreEqual(oldMaxRow + 1, target.MaxRowIndex);
                     ValidateRowSequence(target);
                 });
@@ -417,10 +459,10 @@
         public void RowsProperty_ExactlyFiveRows_NoNulls()
         {
             SafeExecuteTest(
-                ExactlyFiveRowsSheetPath,                
+                ExactlyFiveRowsSheetPath,
                 (sheetData) =>
                 {
-                    var target = new ArrayBasedSheetDataIndexer(sheetData);
+                    var target = new LinkedListBasedSheetDataIndexer(sheetData);
                     var rows = target.Rows.ToList();
 
                     Assert.AreEqual(5, rows.Count);
@@ -436,10 +478,10 @@
         public void MaxRowIndexProperty_EmptySheetData_ThrowsException()
         {
             SafeExecuteTest(
-                EmptySheetPath,                
+                EmptySheetPath,
                 (sheetData) =>
                 {
-                    var target = new ArrayBasedSheetDataIndexer(sheetData);
+                    var target = new LinkedListBasedSheetDataIndexer(sheetData);
 
                     Assert.IsNotNull(target);
                     Assert.IsTrue(target.IsEmpty);

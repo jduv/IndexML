@@ -1,4 +1,4 @@
-﻿namespace IndexML
+﻿namespace IndexML.Spreadsheet
 {
     using System;
     using System.IO;

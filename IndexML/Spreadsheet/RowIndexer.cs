@@ -1,4 +1,4 @@
-﻿namespace IndexML
+﻿namespace IndexML.Spreadsheet
 {
     using System;
     using System.Collections.Generic;
@@ -17,12 +17,12 @@
         private static readonly short Capacity = 1024 * 16;
 
         /// <summary>
-        /// An array of rows. This takes up a bit of memory.
+        /// A dictionary of cells. This can take up a bit of memory.
         /// </summary>        
         private IDictionary<long, CellIndexer> cells = new Dictionary<long, CellIndexer>();
 
         /// <summary>
-        /// The maximum column index for the indexer.
+        /// The maximum column index for the indexer. Zero based.
         /// </summary>
         private long maxColumnIndex = 0;
 
@@ -47,7 +47,7 @@
             foreach (var cell in row.Descendants<Cell>())
             {
                 var cellIndexer = new CellIndexer(cell);
-                columnIndex = cellIndexer.ColumnIndex - 1;
+                columnIndex = cellIndexer.ColumnIndex;
                 this.cells[columnIndex] = cellIndexer;
                 count++;
             }
@@ -73,7 +73,7 @@
         public long Count { get; private set; }
 
         /// <summary>
-        /// Gets or sets the index for this row.
+        /// Gets or sets the index for this row. This property is virtual for testing purposes.
         /// </summary>
         public virtual uint RowIndex
         {
@@ -145,9 +145,9 @@
                     throw new IndexOutOfRangeException("Column index out of range!");
                 }
 
-                if (this.cells.ContainsKey(colIndex - 1))
+                if (this.cells.ContainsKey(colIndex))
                 {
-                    return this.cells[colIndex - 1];
+                    return this.cells[colIndex];
                 }
 
                 return null;

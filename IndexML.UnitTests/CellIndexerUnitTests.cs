@@ -1,9 +1,10 @@
 ﻿namespace IndexML.UnitTests
 {
     using System;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using DocumentFormat.OpenXml.Spreadsheet;
     using DocumentFormat.OpenXml;
+    using DocumentFormat.OpenXml.Spreadsheet;
+    using IndexML.Spreadsheet;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class CellIndexerUnitTests

@@ -3,7 +3,7 @@
     using System;
     using System.IO;
     using System.Linq;
-    using DocumentFormat.OpenXml.Packaging;
+    using IndexML.Spreadsheet;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>

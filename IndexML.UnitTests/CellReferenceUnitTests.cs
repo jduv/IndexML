@@ -3,6 +3,7 @@
     using System;
     using DocumentFormat.OpenXml.Spreadsheet;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using IndexML.Spreadsheet;
 
     /// <summary>
     /// Unit tests for the <see cref="CellReference"/> class.

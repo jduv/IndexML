@@ -4,6 +4,7 @@
     using System.IO;
     using DocumentFormat.OpenXml.Packaging;
     using DocumentFormat.OpenXml.Spreadsheet;
+    using IndexML.Spreadsheet;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
@@ -90,7 +91,21 @@
             return null;
         }
 
-        protected static void ValidateRowSequence(SheetDataIndexer indexer)
+        protected static void ValidateRowSequence(LinkedListBasedSheetDataIndexer indexer)
+        {
+            Row previous = null;
+            foreach (var current in indexer.Rows)
+            {
+                if (previous != null)
+                {
+                    Assert.IsTrue(current.RowIndex > previous.RowIndex);
+                }
+
+                previous = current;
+            }
+        }
+
+        protected static void ValidateRowSequence(ArrayBasedSheetDataIndexer indexer)
         {
             Row previous = null;
             foreach (var current in indexer.Rows)

@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using DocumentFormat.OpenXml.Packaging;
     using DocumentFormat.OpenXml.Spreadsheet;
+    using IndexML.Spreadsheet;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>

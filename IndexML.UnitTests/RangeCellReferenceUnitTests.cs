@@ -1,6 +1,7 @@
 ﻿namespace IndexML.UnitTests
 {
     using System;
+    using IndexML.Spreadsheet;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
 

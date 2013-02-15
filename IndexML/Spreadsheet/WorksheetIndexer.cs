@@ -1,4 +1,4 @@
-﻿namespace IndexML
+﻿namespace IndexML.Spreadsheet
 {
     using System;
     using System.Collections.Generic;
@@ -46,7 +46,7 @@
 
             // Index the sheet data.
             var sheetData = toIndex.Worksheet.Descendants<SheetData>().FirstOrDefault();
-            this.SheetData = new SheetDataIndexer(sheetData);
+            this.SheetData = new ArrayBasedSheetDataIndexer(sheetData);
 
             // Add the validators.
             this.dataValidations = toIndex.Worksheet.Descendants<DataValidation>().ToList();
@@ -60,9 +60,9 @@
         #region Properties
 
         /// <summary>
-        /// Gets a <see cref="SheetDataIndexer"/> for the worksheet.
+        /// Gets a <see cref="ArrayBasedSheetDataIndexer"/> for the worksheet.
         /// </summary>
-        public SheetDataIndexer SheetData { get; private set; }
+        public ArrayBasedSheetDataIndexer SheetData { get; private set; }
 
         /// <summary>
         /// Gets the worksheet part that's being indexed.

@@ -1,4 +1,4 @@
-﻿namespace IndexML
+﻿namespace IndexML.Spreadsheet
 {
     using System;
     using System.Collections.Generic;
@@ -10,7 +10,7 @@
     /// <summary>
     /// OpenXml utility class for manipulating sheet data.
     /// </summary>
-    public class SheetDataIndexer
+    public class ArrayBasedSheetDataIndexer : ISheetDataIndexer
     {
         #region Fields & Constants
 
@@ -20,25 +20,30 @@
         public static readonly long Capacity = 1024 * 1024;
 
         /// <summary>
-        /// An array of rows.
+        /// An array of rows. This can take up a bit of memory.
         /// </summary>
         private RowIndexer[] rows = new RowIndexer[Capacity];
 
         /// <summary>
-        /// The maximum row index, zero based.
+        /// A dictionary of rows. 
         /// </summary>
-        private long maxRowIndex;
+        private IDictionary<long, RowIndexer> rows2 = new Dictionary<long, RowIndexer>();
+
+        /// <summary>
+        /// The maximum row index for the indexer. Zero based.
+        /// </summary>
+        private long maxRowIndex = 0;
 
         #endregion
 
         #region Constructors & Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SheetDataIndexer"/> class.
+        /// Initializes a new instance of the <see cref="ArrayBasedSheetDataIndexer"/> class.
         /// </summary>
         /// <param name="sheetData">The sheet data to index.</param>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="sheetData"/> is null.</exception>
-        public SheetDataIndexer(SheetData sheetData)
+        public ArrayBasedSheetDataIndexer(SheetData sheetData)
         {
             if (sheetData == null)
             {
@@ -70,20 +75,13 @@
 
         #region Properties
 
-        /// <summary>
-        /// Gets the object associated with this indexer. Changes made to the cell will not be reflected
-        /// to any dependent properties inside the indexer, so use this with care.
-        /// </summary>
+        /// <inheritdoc />
         public SheetData SheetData { get; private set; }
 
-        /// <summary>
-        /// Gets the number of rows in the indexer.
-        /// </summary>
+        /// <inheritdoc />
         public long Count { get; private set; }
 
-        /// <summary>
-        /// Gets a value indicating whether the indexer is empty or not.
-        /// </summary>
+        /// <inheritdoc />
         public bool IsEmpty
         {
             get
@@ -92,11 +90,7 @@
             }
         }
 
-        /// <summary>
-        /// Gets the maximum row index. This is based on the actual row index in the sheet data,
-        /// not the index into the internal representation. This is one-based.
-        /// </summary>
-        /// <exception cref="InvalidOperationException">Thrown if the indexer is empty.</exception>
+        /// <inheritdoc />
         public long MaxRowIndex
         {
             get
@@ -112,10 +106,7 @@
             }
         }
 
-        /// <summary>
-        /// Gets an enumeration of all the rows inside the indexer. Returns only valid rows,
-        /// no nulls.
-        /// </summary>
+        /// <inheritdoc />
         public IEnumerable<RowIndexer> Rows
         {
             get
@@ -130,13 +121,7 @@
             }
         }
 
-        /// <summary>
-        /// Gets the row at the target index.
-        /// </summary>
-        /// <param name="rowIndex">The index of the row to retrieve. This indexer assumes that you are passing
-        /// it the row index based on the row object--which is one based--not the internal array.</param>
-        /// <returns>The row at the given index.</returns>
-        /// <exception cref="IndexOutOfRangeException">Thrown if <paramref name="rowIndex"/> is out of bounds.</exception>
+        /// <inheritdoc />
         public RowIndexer this[long rowIndex]
         {
             get
@@ -155,16 +140,12 @@
         /// </summary>
         /// <param name="indexer">The indexer to convert.</param>
         /// <returns>The indexer's wrapped object.</returns>
-        public static implicit operator SheetData(SheetDataIndexer indexer)
+        public static implicit operator SheetData(ArrayBasedSheetDataIndexer indexer)
         {
             return indexer != null ? indexer.SheetData : null;
         }
 
-        /// <summary>
-        /// Creates a new <see cref="RowIndexer"/> for the target row and appends it to the
-        /// end of this indexer. Null arguments will be ignored.
-        /// </summary>
-        /// <param name="toAppend">The row to append.</param>
+        /// <inheritdoc />
         public void AppendRow(Row toAppend)
         {
             if (toAppend != null)
@@ -173,10 +154,7 @@
             }
         }
 
-        /// <summary>
-        /// Adds a <see cref="RowIndexer"/> to the end of this indexer. Null arguments will be ignored.
-        /// </summary>
-        /// <param name="toAppend">The row to append.</param>
+        /// <inheritdoc />
         public void AppendRow(RowIndexer toAppend)
         {
             if (toAppend != null)
@@ -186,17 +164,7 @@
             }
         }
 
-        /// <summary>
-        /// Creates a new <see cref="RowIndexer"/> for the target row and inserts it at the given index. 
-        /// Null arguments will be ignored.
-        /// </summary>
-        /// <param name="toInsert">The row to insert.</param>
-        /// <param name="rowIndex">The index to insert the row at.</param>
-        /// <param name="shiftRowsDown">Should all rows be shifted down after the insert?</param>
-        /// <exception cref="IndexOutOfRangeException">Thrown if <paramref name="rowIndex"/>
-        /// is out of range.</exception>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="toInsert"/> is null.
-        /// </exception>
+        /// <inheritdoc />
         public void InsertRow(Row toInsert, long rowIndex, bool shiftRowsDown = false)
         {
             // Check for out of bounds and over capacity
@@ -213,16 +181,7 @@
             this.InsertRow(new RowIndexer(toInsert), rowIndex, shiftRowsDown);
         }
 
-        /// <summary>
-        /// Inserts a <see cref="RowIndexer"/> at the given index. Null arguments will be ignored.
-        /// </summary>
-        /// <param name="toInsert">The row to insert.</param>
-        /// <param name="rowIndex">The index to insert the row at.</param>
-        /// <param name="shiftRowsDown">Should all rows be shifted down after the insert?</param>
-        /// <exception cref="IndexOutOfRangeException">Thrown if <paramref name="rowIndex"/>
-        /// is out of range.</exception>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="toInsert"/> is null.
-        /// </exception>
+        /// <inheritdoc />
         public void InsertRow(RowIndexer toInsert, long rowIndex, bool shiftRowsDown = false)
         {
             // Check for out of bounds and over capacity
@@ -301,14 +260,7 @@
             }
         }
 
-        /// <summary>
-        /// Deletes the row at the target index.
-        /// </summary>
-        /// <param name="rowIndex">The row index of the row to delete.</param>
-        /// <param name="shiftRowsUp">Should all rows be shifted up after the removal?</param>
-        /// <returns>True if deletion was successful, false otherwise.</returns>
-        /// <exception cref="IndexOutOfRangeException">Thrown if <paramref name="rowIndex"/> is
-        /// out of bounds.</exception>
+        /// <inheritdoc />
         public bool RemoveRow(long rowIndex, bool shiftRowsUp = false)
         {
             // Check for out of bounds
@@ -358,11 +310,7 @@
             return false;
         }
 
-        /// <summary>
-        /// Clones the row at the target index and returns a <see cref="RowIndexer"/> for it.
-        /// </summary>
-        /// <param name="rowIndex">The index of the row to clone.</param>
-        /// <returns>An indexer for the newly cloned row.</returns>
+        /// <inheritdoc />
         public RowIndexer CloneRow(int rowIndex)
         {
             var indexerToCopy = this[rowIndex];
