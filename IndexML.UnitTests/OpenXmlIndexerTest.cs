@@ -91,21 +91,7 @@
             return null;
         }
 
-        protected static void ValidateRowSequence(LinkedListBasedSheetDataIndexer indexer)
-        {
-            Row previous = null;
-            foreach (var current in indexer.Rows)
-            {
-                if (previous != null)
-                {
-                    Assert.IsTrue(current.RowIndex > previous.RowIndex);
-                }
-
-                previous = current;
-            }
-        }
-
-        protected static void ValidateRowSequence(ArrayBasedSheetDataIndexer indexer)
+        protected static void ValidateRowSequence(ISheetDataIndexer indexer)
         {
             Row previous = null;
             foreach (var current in indexer.Rows)

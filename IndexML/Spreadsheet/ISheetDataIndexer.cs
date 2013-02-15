@@ -3,6 +3,9 @@
     using System.Collections.Generic;
     using DocumentFormat.OpenXml.Spreadsheet;
 
+    /// <summary>
+    /// Defines a basic set of behaviors for SheetDataIndexer implementations.
+    /// </summary>
     public interface ISheetDataIndexer
     {
         #region Interface Methods
