@@ -144,7 +144,7 @@
                 (sheetData) =>
                 {
                     var target = new LinkedListBasedSheetDataIndexer(sheetData);
-                    target.RemoveRow(0);
+                    target.RemoveRow(1);
                 });
         }
 
