@@ -172,7 +172,7 @@
         public void InsertRow(RowIndexer toInsert, long rowIndex, bool shiftRowsDown = false)
         {
             // Check for out of bounds and over capacity
-            if (rowIndex < 0 || rowIndex > Capacity || this.Count + 1 > Capacity)
+            if (rowIndex < 1 || rowIndex > Capacity || this.Count + 1 > Capacity)
             {
                 throw new IndexOutOfRangeException("The requested row index is out of bounds!");
             }
@@ -200,7 +200,7 @@
             }
             else
             {
-                LinkedListNode<RowIndexer> afterOrAtIndex = this.FindAfterBeforeOrAt(rowIndex);
+                LinkedListNode<RowIndexer> afterOrAtIndex = this.FindElementAfterOrAt(rowIndex);
                 if (afterOrAtIndex.Value.RowIndex == rowIndex)
                 {
                     // caught the node at the index, replace
@@ -220,12 +220,38 @@
         public bool RemoveRow(long rowIndex, bool shiftRowsUp = false)
         {
             // Check for out of bounds
-            if (rowIndex < 0 || rowIndex > Capacity)
+            if (rowIndex < 1 || rowIndex > Capacity)
             {
                 throw new IndexOutOfRangeException("The requested row index is out of bounds!");
             }
 
-            throw new NotImplementedException();
+            bool success = false;
+            if (!this.IsEmpty)
+            {
+                if (shiftRowsUp)
+                {
+                    this.RemoveAndShiftRowsUp(rowIndex);
+                    success = true;
+                }
+                else
+                {
+                    // Simple removal case. No shifting.
+                    LinkedListNode<RowIndexer> toRemove = this.FindElementAtOrNull(rowIndex);
+                    if (toRemove != null)
+                    {
+                        this.SheetData.RemoveChild<Row>(toRemove.Value);
+                        this.rows.Remove(toRemove);
+                        success = true;
+                    }
+                }
+
+                if (success)
+                {
+                    this.maxRowIndex = this.rows.Last.Value.RowIndex;
+                }
+            }
+
+            return success;
         }
 
         /// <inheritdoc />
@@ -305,7 +331,7 @@
         /// <param name="rowIndex">The index to retrieve.</param>
         /// <returns>The row at the target index, if it exists, or the node immediately
         /// before it in the index sequence.</returns>
-        private LinkedListNode<RowIndexer> FindAfterBeforeOrAt(long rowIndex)
+        private LinkedListNode<RowIndexer> FindElementAfterOrAt(long rowIndex)
         {
             LinkedListNode<RowIndexer> target = null;
             for (target = this.rows.First; target != null; target = target.Next)
@@ -313,6 +339,27 @@
                 if (target.Value.RowIndex >= rowIndex)
                 {
                     // break and return target.
+                    break;
+                }
+            }
+
+            return target;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="rowIndex"></param>
+        /// <returns></returns>
+        private LinkedListNode<RowIndexer> FindElementAtOrNull(long rowIndex)
+        {
+            LinkedListNode<RowIndexer> target = null;
+            for (target = this.rows.First; target != null; target = target.Next)
+            {
+                if (target.Value.RowIndex >= rowIndex)
+                {
+                    // break and return target.
+                    target = target.Value.RowIndex == rowIndex ? target : null;
                     break;
                 }
             }
@@ -350,6 +397,25 @@
             }
 
             this.maxRowIndex++;
+        }
+
+        /// <summary>
+        /// Removes a row at the target index and shifts all the previous indices up by one.
+        /// </summary>
+        /// <param name="rowIndex">The index of the row to delete.</param>
+        /// <returns>True if removal was successful, false otherwise.</returns>
+        private void RemoveAndShiftRowsUp(long rowIndex)
+        {
+            var current = this.rows.Last;
+            while (current.Value.RowIndex >= rowIndex && current != this.rows.First)
+            {
+                current.Value.RowIndex--;
+                SyncCellReferencesToRowIndex(current.Value);
+                current = current.Previous;
+            }
+
+            this.SheetData.RemoveChild<Row>(current.Value);
+            this.rows.Remove(current);
         }
 
         #endregion
