@@ -58,6 +58,7 @@
     <Compile Include="Spreadsheet\CellIndexerUnitTests.cs" />
     <Compile Include="Spreadsheet\CellReferenceUnitTests.cs" />
     <Compile Include="Spreadsheet\DataValidationIndexerUnitTests.cs" />
+    <Compile Include="Wordprocessing\WordprocessingDocumentIndexerUnitTests.cs" />
     <Compile Include="Wordprocessing\WordprocessingDocumentTest.cs" />
     <Compile Include="Spreadsheet\LinkedListBasedSheetDataIndexerUnitTests.cs" />
     <Compile Include="Spreadsheet\SpreadsheetTest.cs" />
@@ -80,6 +81,9 @@
     </None>
     <None Include="TestFiles\ColumnValidations.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="TestFiles\Empty.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="TestFiles\Empty.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

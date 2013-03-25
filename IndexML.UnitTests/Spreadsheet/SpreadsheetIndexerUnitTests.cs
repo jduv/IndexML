@@ -54,6 +54,7 @@
                     Assert.IsNotNull(target);
                     Assert.IsNotNull(target.Workbook);
                     Assert.IsTrue(target.Workbook.Worksheets.Count() == 1);
+                    Assert.IsFalse(target.Disposed);
                 }
             }
         }
@@ -71,6 +72,7 @@
                     Assert.IsNotNull(target.Workbook);
                     Assert.IsTrue(target.Workbook.Worksheets.Count() == 1);
                     Assert.AreEqual(spreadsheetBytes.Length, target.Bytes.Length);
+                    Assert.IsFalse(target.Disposed);
                 }
             }
         }
@@ -87,6 +89,7 @@
                     Assert.IsNotNull(target);
                     Assert.IsNotNull(target.Workbook);
                     Assert.IsTrue(target.Workbook.Worksheets.Count() == 3);
+                    Assert.IsFalse(target.Disposed);
                 }
             }
         }
@@ -103,6 +106,7 @@
                     Assert.IsNotNull(target);
                     Assert.IsNotNull(target.Workbook);
                     Assert.IsTrue(target.Workbook.Worksheets.Count() == 3);
+                    Assert.IsFalse(target.Disposed);
                 }
             }
         }
@@ -117,6 +121,7 @@
                 Assert.IsNotNull(target);
                 Assert.IsNotNull(target.Workbook);
                 Assert.IsTrue(target.Workbook.Worksheets.Count() == 1);
+                Assert.IsFalse(target.Disposed);
             }
         }
 
@@ -130,6 +135,7 @@
                 Assert.IsNotNull(target);
                 Assert.IsNotNull(target.Workbook);
                 Assert.IsTrue(target.Workbook.Worksheets.Count() == 1);
+                Assert.IsFalse(target.Disposed);
             }
         }
 
@@ -143,6 +149,7 @@
                 Assert.IsNotNull(target);
                 Assert.IsNotNull(target.Workbook);
                 Assert.IsTrue(target.Workbook.Worksheets.Count() == 3);
+                Assert.IsFalse(target.Disposed);
             }
         }
 
@@ -156,6 +163,7 @@
                 Assert.IsNotNull(target);
                 Assert.IsNotNull(target.Workbook);
                 Assert.IsTrue(target.Workbook.Worksheets.Count() == 3);
+                Assert.IsFalse(target.Disposed);
             }
         }
 

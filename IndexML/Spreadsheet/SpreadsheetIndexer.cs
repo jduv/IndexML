@@ -45,6 +45,7 @@
                 throw new ArgumentException("Cannot create an indexer for a document with an empty or unreadable stream!", "toIndex");
             }
 
+            this.Disposed = false;
             this.documentStream = new MemoryStream();
             StreamExtensions.Copy(toIndex, this.documentStream);
             this.Initialize(SpreadsheetDocument.Open(this.Data, true));
@@ -68,6 +69,7 @@
                 throw new ArgumentException("Cannot create an indexer for an empty byte array!", "toIndex");
             }
 
+            this.Disposed = false;
             var memoryStream = new MemoryStream();
             memoryStream.Write(toIndex, 0, toIndex.Length);
             this.documentStream = memoryStream;

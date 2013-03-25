@@ -72,6 +72,7 @@
     <Compile Include="Spreadsheet\WorkbookIndexer.cs" />
     <Compile Include="Spreadsheet\WorksheetIndexer.cs" />
     <Compile Include="Extensions\StreamExtensions.cs" />
+    <Compile Include="Wordprocessing\DocumentIndexer.cs" />
     <Compile Include="Wordprocessing\WordprocessingDocumentIndexer.cs" />
   </ItemGroup>
   <ItemGroup>

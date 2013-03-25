@@ -43,6 +43,7 @@
                 throw new ArgumentException("Cannot create an indexer for a document with an empty or unreadable stream!", "toIndex");
             }
 
+            this.Disposed = false;
             this.documentStream = new MemoryStream();
             StreamExtensions.Copy(toIndex, this.documentStream);
             this.Initialize(WordprocessingDocument.Open(this.Data, true));
@@ -66,6 +67,7 @@
                 throw new ArgumentException("Cannot create an indexer for an empty byte array!", "toIndex");
             }
 
+            this.Disposed = false;
             var memoryStream = new MemoryStream();
             memoryStream.Write(toIndex, 0, toIndex.Length);
             this.documentStream = memoryStream;
@@ -85,7 +87,12 @@
         /// Gets the word processing document the indexer manages. Be careful when making changes to this outside of
         /// using the other indexers; it's easy for them to get out of sync.
         /// </summary>
-        public WordprocessingDocument Document { get; private set; }
+        public WordprocessingDocument WordprocessingDocument { get; private set; }
+
+        /// <summary>
+        /// Gets the document indexer.
+        /// </summary>
+        public DocumentIndexer Document { get; private set; }
 
         /// <summary>
         /// Gets the beginning of the stream containing all the document's information.
@@ -132,7 +139,7 @@
         /// <returns>The indexer's wrapped object.</returns>
         public static implicit operator WordprocessingDocument(WordprocessingDocumentIndexer indexer)
         {
-            return indexer != null ? indexer.Document : null;
+            return indexer != null ? indexer.WordprocessingDocument : null;
         }
 
         /// <inheritdoc />
@@ -149,7 +156,7 @@
         {
             if (!this.Disposed)
             {
-                this.Document.Close();
+                this.WordprocessingDocument.Close();
                 this.Dispose();
             }
         }
@@ -162,7 +169,7 @@
         {
             if (!this.Disposed)
             {
-                this.Document.Close();
+                this.WordprocessingDocument.Close();
                 this.Initialize(WordprocessingDocument.Open(this.Data, true));
             }
         }
@@ -184,7 +191,7 @@
                 {
                     try
                     {
-                        this.Document.Close();
+                        this.WordprocessingDocument.Close();
                     }
                     catch (Exception)
                     {
@@ -207,7 +214,8 @@
         /// <param name="doc">The document to initialize with.</param>
         private void Initialize(WordprocessingDocument doc)
         {
-            this.Document = doc;
+            this.WordprocessingDocument = doc;
+            this.Document = new DocumentIndexer(doc.MainDocumentPart);
         }
 
         #endregion

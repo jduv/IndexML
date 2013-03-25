@@ -10,6 +10,12 @@
     /// </summary>
     public abstract class WordprocessingDocumentTest : Test
     {
+        #region Fields & Constants
+
+        protected const string EmptyDocPath = TestFilesDir + "Empty.docx";
+
+        #endregion
+
         #region Protected Methods
 
         protected static WordprocessingDocument LoadTestDoc(string path)
