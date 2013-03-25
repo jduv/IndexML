@@ -5,7 +5,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
-    class DocumentIndexerUnitTests : WordprocessingDocumentTest
+    public class DocumentIndexerUnitTests : WordprocessingDocumentTest
     {
         #region Test Methods
 
@@ -28,6 +28,9 @@
                     Assert.IsNotNull(target);
                     Assert.IsNotNull(target.Document);
                     Assert.IsNotNull(target.Body);
+
+                    // Check references
+                    Assert.AreSame(doc.MainDocumentPart.Document, target.Document);
                 });
         }
 

@@ -55,6 +55,11 @@
                     Assert.IsNotNull(target.Workbook);
                     Assert.IsTrue(target.Workbook.Worksheets.Count() == 1);
                     Assert.IsFalse(target.Disposed);
+
+                    // Check properties
+                    Assert.IsNotNull(target.Data);
+                    Assert.IsTrue(target.Data.Length > 0);
+                    Assert.IsTrue(target.Bytes.Length > 0);
                 }
             }
         }
@@ -73,6 +78,11 @@
                     Assert.IsTrue(target.Workbook.Worksheets.Count() == 1);
                     Assert.AreEqual(spreadsheetBytes.Length, target.Bytes.Length);
                     Assert.IsFalse(target.Disposed);
+
+                    // Check properties
+                    Assert.IsNotNull(target.Data);
+                    Assert.IsTrue(target.Data.Length > 0);
+                    Assert.IsTrue(target.Bytes.Length > 0);
                 }
             }
         }
@@ -90,6 +100,11 @@
                     Assert.IsNotNull(target.Workbook);
                     Assert.IsTrue(target.Workbook.Worksheets.Count() == 3);
                     Assert.IsFalse(target.Disposed);
+
+                    // Check properties
+                    Assert.IsNotNull(target.Data);
+                    Assert.IsTrue(target.Data.Length > 0);
+                    Assert.IsTrue(target.Bytes.Length > 0);
                 }
             }
         }
@@ -107,6 +122,11 @@
                     Assert.IsNotNull(target.Workbook);
                     Assert.IsTrue(target.Workbook.Worksheets.Count() == 3);
                     Assert.IsFalse(target.Disposed);
+
+                    // Check properties
+                    Assert.IsNotNull(target.Data);
+                    Assert.IsTrue(target.Data.Length > 0);
+                    Assert.IsTrue(target.Bytes.Length > 0);
                 }
             }
         }
@@ -123,6 +143,11 @@
                 Assert.IsNotNull(target.Workbook);
                 Assert.IsTrue(target.Workbook.Worksheets.Count() == 1);
                 Assert.IsFalse(target.Disposed);
+
+                // Check properties
+                Assert.IsNotNull(target.Data);
+                Assert.IsTrue(target.Data.Length > 0);
+                Assert.IsTrue(target.Bytes.Length > 0);
             }
         }
 
@@ -138,6 +163,11 @@
                 Assert.IsNotNull(target.Workbook);
                 Assert.IsTrue(target.Workbook.Worksheets.Count() == 1);
                 Assert.IsFalse(target.Disposed);
+
+                // Check properties
+                Assert.IsNotNull(target.Data);
+                Assert.IsTrue(target.Data.Length > 0);
+                Assert.IsTrue(target.Bytes.Length > 0);
             }
         }
 
@@ -153,6 +183,11 @@
                 Assert.IsNotNull(target.Workbook);
                 Assert.IsTrue(target.Workbook.Worksheets.Count() == 3);
                 Assert.IsFalse(target.Disposed);
+
+                // Check properties
+                Assert.IsNotNull(target.Data);
+                Assert.IsTrue(target.Data.Length > 0);
+                Assert.IsTrue(target.Bytes.Length > 0);
             }
         }
 
@@ -168,6 +203,11 @@
                 Assert.IsNotNull(target.Workbook);
                 Assert.IsTrue(target.Workbook.Worksheets.Count() == 3);
                 Assert.IsFalse(target.Disposed);
+
+                // Check properties
+                Assert.IsNotNull(target.Data);
+                Assert.IsTrue(target.Data.Length > 0);
+                Assert.IsTrue(target.Bytes.Length > 0);
             }
         }
 

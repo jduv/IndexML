@@ -53,6 +53,11 @@
                     Assert.IsNotNull(target);
                     Assert.IsNotNull(target.Document);
                     Assert.IsFalse(target.Disposed);
+
+                    // Check properties
+                    Assert.IsNotNull(target.Data);
+                    Assert.IsTrue(target.Data.Length > 0);
+                    Assert.IsTrue(target.Bytes.Length > 0);
                 }
             }
         }
