@@ -15,7 +15,7 @@
         #region Fields & Constants
 
         /// <summary>
-        /// The document stream for the spread sheet.
+        /// A memory stream for the document.
         /// </summary>
         private MemoryStream documentStream;
 
@@ -53,9 +53,10 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="SpreadsheetIndexer"/> class.
         /// </summary>
-        /// <param name="toIndex">The spreadsheet document to initialize the indexer with.</param>
+        /// <param name="toIndex">The byte array to initialize the indexer with.</param>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="toIndex"/> is null.</exception>
-        public SpreadsheetIndexer(byte[] toIndex)            
+        /// <exception cref="ArgumentException">Thrown if <paramref name="toIndex"/> is empty.</exception>
+        public SpreadsheetIndexer(byte[] toIndex)
         {
             if (toIndex == null)
             {
@@ -69,14 +70,18 @@
 
             var memoryStream = new MemoryStream();
             memoryStream.Write(toIndex, 0, toIndex.Length);
-
-            this.documentStream = memoryStream;            
+            this.documentStream = memoryStream;
             this.Initialize(SpreadsheetDocument.Open(this.Data, true));
         }
 
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// Gets a value indicating whether this object has been disposed or not.
+        /// </summary>
+        public bool Disposed { get; private set; }
 
         /// <summary>
         /// Gets the Spreadsheet that the indexer manages. Be careful when making changes to this outside of
@@ -96,8 +101,29 @@
         {
             get
             {
+                if (this.Disposed)
+                {
+                    throw new ObjectDisposedException("SpreadsheetIndexer");
+                }
+
                 this.documentStream.Seek(0, SeekOrigin.Begin);
                 return this.documentStream;
+            }
+        }
+
+        /// <summary>[
+        /// Gets the raw bytes for the spreadsheet document the indexer wraps.
+        /// </summary>
+        public byte[] Bytes
+        {
+            get
+            {
+                if (this.Disposed)
+                {
+                    throw new ObjectDisposedException("SpreadsheetIndexer");
+                }
+
+                return this.Data.ToArray();
             }
         }
 
@@ -124,20 +150,15 @@
         }
 
         /// <summary>
-        /// Gets the bytes of this indexer.
-        /// </summary>
-        /// <returns>A byte array of the data inside this indexer.</returns>
-        public byte[] GetBytes()
-        {
-            return this.Data.ToArray();
-        }
-
-        /// <summary>
         /// Closes the spreadsheet indexer.
         /// </summary>
         public void SaveAndClose()
         {
-            this.Spreadsheet.Close();
+            if (!this.Disposed)
+            {
+                this.Spreadsheet.Close();
+                this.Dispose();
+            }
         }
 
         /// <summary>
@@ -146,8 +167,11 @@
         /// </summary>
         public void SaveAndReopen()
         {
-            this.Spreadsheet.Close();
-            this.Initialize(SpreadsheetDocument.Open(this.Data, true));
+            if (!this.Disposed)
+            {
+                this.Spreadsheet.Close();
+                this.Initialize(SpreadsheetDocument.Open(this.Data, true));
+            }
         }
 
         #endregion
@@ -162,7 +186,7 @@
         protected virtual void OnDispose(bool disposing)
         {
             // If we're disposing, then we've likely got all our handles.
-            if (disposing)
+            if (!this.Disposed && disposing)
             {
                 if (this.Spreadsheet != null)
                 {
@@ -174,7 +198,10 @@
                     {
                         // Eat it.
                     }
-                }              
+                }
+
+                this.documentStream = null;
+                this.Disposed = true;
             }
         }
 

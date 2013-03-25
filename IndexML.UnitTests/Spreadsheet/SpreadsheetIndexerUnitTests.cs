@@ -70,7 +70,7 @@
                     Assert.IsNotNull(target);
                     Assert.IsNotNull(target.Workbook);
                     Assert.IsTrue(target.Workbook.Worksheets.Count() == 1);
-                    Assert.AreEqual(spreadsheetBytes.Length, target.GetBytes().Length);
+                    Assert.AreEqual(spreadsheetBytes.Length, target.Bytes.Length);
                 }
             }
         }
@@ -157,6 +157,54 @@
                 Assert.IsNotNull(target.Workbook);
                 Assert.IsTrue(target.Workbook.Worksheets.Count() == 3);
             }
+        }
+
+        [TestMethod]
+        [DeploymentItem(RandomDataThreeSheetSpath, TestFilesDir)]
+        public void SaveAndClose_DisposesIndexer()
+        {
+            AssertFileExists(RandomDataThreeSheetSpath);
+            var target = new SpreadsheetIndexer(File.Open(RandomDataThreeSheetSpath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite));
+            target.SaveAndClose();
+
+            Assert.IsTrue(target.Disposed);
+        }
+
+        [TestMethod]
+        [DeploymentItem(RandomDataThreeSheetSpath, TestFilesDir)]
+        public void SaveAndReopen_DoesNotDisposeIndexer()
+        {
+            AssertFileExists(RandomDataThreeSheetSpath);
+            var target = new SpreadsheetIndexer(File.Open(RandomDataThreeSheetSpath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite));
+            target.SaveAndReopen();
+
+            Assert.IsFalse(target.Disposed);
+        }
+
+        [TestMethod]
+        [DeploymentItem(RandomDataThreeSheetSpath, TestFilesDir)]
+        [ExpectedException(typeof(ObjectDisposedException))]
+        public void DataProperty_DisposedObject()
+        {
+            AssertFileExists(RandomDataThreeSheetSpath);
+            var target = new SpreadsheetIndexer(File.Open(RandomDataThreeSheetSpath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite));
+            target.SaveAndClose();
+
+            Assert.IsTrue(target.Disposed);
+            var data = target.Data;
+        }
+
+        [TestMethod]
+        [DeploymentItem(RandomDataThreeSheetSpath, TestFilesDir)]
+        [ExpectedException(typeof(ObjectDisposedException))]
+        public void BytesProperty_DisposedObject()
+        {
+            AssertFileExists(RandomDataThreeSheetSpath);
+            var target = new SpreadsheetIndexer(File.Open(RandomDataThreeSheetSpath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite));
+            target.SaveAndClose();
+
+            Assert.IsTrue(target.Disposed);
+            var data = target.Bytes;
         }
 
         #endregion
