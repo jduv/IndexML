@@ -1,6 +1,8 @@
 ﻿namespace IndexML.UnitTests
 {
+    using System;
     using System.IO;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
     /// A base test class. Defines some re-usable logic.
@@ -14,6 +16,30 @@
         #endregion
 
         #region Protected Methods
+
+        protected static void AssertFileExists(string path)
+        {
+            if (!File.Exists(path))
+            {
+                Assert.Inconclusive("Test inconclusive. A required file was not found! Path: " + path);
+            }
+        }
+
+        protected static byte[] LoadTestFileBytes(string path)
+        {
+            AssertFileExists(path);
+
+            try
+            {
+                return ReadAllBytes(path);
+            }
+            catch (Exception exc)
+            {
+                Assert.Inconclusive("Test inconclusive. Unable to read the document at path " + path + ". Exception: " + exc.Message);
+            }
+
+            return null;
+        }
 
         protected static byte[] ReadAllBytes(string path)
         {

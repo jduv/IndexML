@@ -1,4 +1,4 @@
-﻿namespace IndexML.UnitTests
+﻿namespace IndexML.UnitTests.Spreadsheet
 {
     using System;
     using System.IO;
@@ -8,9 +8,9 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
-    /// A base test class for all OpenXml indexers. Holds file paths and utility methods and whatnot.
+    /// A base test class for testing spreadsheet indexers.
     /// </summary>
-    public abstract class OpenXmlSpreadsheetIndexerTest : Test
+    public abstract class SpreadsheetTest : Test
     {
         #region Fields & Constants
 
@@ -42,14 +42,6 @@
 
         #region Protected Methods
 
-        protected static void AssertFileExists(string path)
-        {
-            if (!File.Exists(path))
-            {
-                Assert.Inconclusive("Test inconclusive. A required file was not found! Path: " + path);
-            }
-        }
-
         protected static SpreadsheetDocument LoadTestSpreadSheet(string path)
         {
             AssertFileExists(path);
@@ -62,27 +54,10 @@
                     CopyStream(fileStream, memory);      // Copy the stream to memory so we can do whatever we want with it
                     return SpreadsheetDocument.Open(memory, true);
                 }
-
             }
             catch (Exception exc)
             {
-                Assert.Inconclusive("Test inconclusive. Unable to open the spreadsheet at path " + path + ". Exception: " + exc.Message);
-            }
-
-            return null;
-        }
-
-        protected static byte[] LoadTestSpreadSheetBytes(string path)
-        {
-            AssertFileExists(path);
-
-            try
-            {
-                return ReadAllBytes(path);
-            }
-            catch (Exception exc)
-            {
-                Assert.Inconclusive("Test inconclusive. Unable to read the spreadsheet at path " + path + ". Exception: " + exc.Message);
+                Assert.Inconclusive("Test inconclusive. Unable to open the document at path " + path + ". Exception: " + exc.Message);
             }
 
             return null;
@@ -123,7 +98,9 @@
             }
         }
 
-        protected static void SafeExecuteTest(string spreadsheetPath, Action<SpreadsheetDocument> testToPerform)
+        protected static void SafeExecuteTest(
+            string spreadsheetPath, 
+            Action<SpreadsheetDocument> testToPerform)
         {
             if (testToPerform == null)
             {

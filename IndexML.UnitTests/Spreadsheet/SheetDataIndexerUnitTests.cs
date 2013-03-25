@@ -1,4 +1,4 @@
-﻿namespace IndexML.UnitTests
+﻿namespace IndexML.UnitTests.Spreadsheet
 {
     using System;
     using System.Linq;
@@ -10,7 +10,7 @@
     /// Unit tests for the <see cref="ArrayBasedSheetDataIndexer"/> class.
     /// </summary>
     [TestClass]
-    public class SheetDataIndexerUnitTests : OpenXmlSpreadsheetIndexerTest
+    public class SheetDataIndexerUnitTests : SpreadsheetTest
     {
         #region Test Methods
 

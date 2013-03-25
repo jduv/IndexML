@@ -10,7 +10,6 @@
     {
         #region Interface Methods
 
-
         /// <summary>
         /// Creates a new <see cref="RowIndexer"/> for the target row and appends it to the
         /// end of this indexer. Null arguments will be ignored.

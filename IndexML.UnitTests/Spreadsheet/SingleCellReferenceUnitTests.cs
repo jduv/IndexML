@@ -1,4 +1,4 @@
-﻿namespace IndexML.UnitTests
+﻿namespace IndexML.UnitTests.Spreadsheet
 {
     using System;
     using IndexML.Spreadsheet;
@@ -8,7 +8,7 @@
     /// Unit tests for the <see cref="SingleCellReference"/> class.
     /// </summary>
     [TestClass]
-    public class SingleCellReferenceUnitTests : OpenXmlSpreadsheetIndexerTest
+    public class SingleCellReferenceUnitTests : SpreadsheetTest
     {
         #region Test Methods
 

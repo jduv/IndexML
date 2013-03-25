@@ -1,17 +1,17 @@
-﻿namespace IndexML.UnitTests
+﻿namespace IndexML.UnitTests.Spreadsheet
 {
     using System;
     using System.Linq;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using DocumentFormat.OpenXml.Spreadsheet;
     using DocumentFormat.OpenXml.Packaging;
+    using DocumentFormat.OpenXml.Spreadsheet;
     using IndexML.Spreadsheet;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
     /// Unit tests for the <see cref="WorksheetIndexer"/> class.
     /// </summary>
     [TestClass]
-    public class WorksheetIndexerUnitTests : OpenXmlSpreadsheetIndexerTest
+    public class WorksheetIndexerUnitTests : SpreadsheetTest
     {
         #region Test Methods
 

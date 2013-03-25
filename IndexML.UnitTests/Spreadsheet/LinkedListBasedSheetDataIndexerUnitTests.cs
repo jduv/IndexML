@@ -1,4 +1,4 @@
-﻿namespace IndexML.UnitTests
+﻿namespace IndexML.UnitTests.Spreadsheet
 {
     using System;
     using System.Linq;
@@ -10,7 +10,7 @@
     /// Unit tests for the <see cref="LeanLeanSheetDataIndexer"/> class.
     /// </summary>
     [TestClass]
-    public class LinkedListBasedSheetDataIndexerUnitTests : OpenXmlSpreadsheetIndexerTest
+    public class LinkedListBasedSheetDataIndexerUnitTests : SpreadsheetTest
     {
         #region Test Methods
 
@@ -448,7 +448,7 @@
 
                     target.InsertRow(new Row(), 1, true);
                     Assert.IsFalse(target.IsEmpty);
-                    Assert.AreEqual(oldCount +1, target.Count);
+                    Assert.AreEqual(oldCount + 1, target.Count);
                     Assert.AreEqual(oldMaxRow + 1, target.MaxRowIndex);
                     ValidateRowSequence(target);
                 });

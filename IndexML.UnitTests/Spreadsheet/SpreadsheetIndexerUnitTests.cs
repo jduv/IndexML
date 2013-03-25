@@ -1,4 +1,4 @@
-﻿namespace IndexML.UnitTests
+﻿namespace IndexML.UnitTests.Spreadsheet
 {
     using System;
     using System.IO;
@@ -10,7 +10,7 @@
     /// Unit tests for the <see cref="SpreadsheetIndexer"/> class.
     /// </summary>
     [TestClass]
-    public class SpreadsheetIndexerUnitTests : OpenXmlSpreadsheetIndexerTest
+    public class SpreadsheetIndexerUnitTests : SpreadsheetTest
     {
         #region Test Methods
 
@@ -49,7 +49,7 @@
         [DeploymentItem(EmptySheetPath, TestFilesDir)]
         public void Constructor_EmptySheet_ValidState()
         {
-            var spreadsheetBytes = LoadTestSpreadSheetBytes(EmptySheetPath);
+            var spreadsheetBytes = LoadTestFileBytes(EmptySheetPath);
             if (spreadsheetBytes != null)
             {
                 using (var target = new SpreadsheetIndexer(spreadsheetBytes))
@@ -65,7 +65,7 @@
         [DeploymentItem(RandomDataSheetSpath, TestFilesDir)]
         public void Constructor_RandomData_ValidState()
         {
-            var spreadsheetBytes = LoadTestSpreadSheetBytes(RandomDataSheetSpath);
+            var spreadsheetBytes = LoadTestFileBytes(RandomDataSheetSpath);
             if (spreadsheetBytes != null)
             {
                 using (var target = new SpreadsheetIndexer(spreadsheetBytes))
@@ -82,7 +82,7 @@
         [DeploymentItem(EmptyThreeSheetsPath, TestFilesDir)]
         public void Constructor_EmptyMultiSheets_ValidState()
         {
-            var spreadsheetBytes = LoadTestSpreadSheetBytes(EmptyThreeSheetsPath);
+            var spreadsheetBytes = LoadTestFileBytes(EmptyThreeSheetsPath);
             if (spreadsheetBytes != null)
             {
                 using (var target = new SpreadsheetIndexer(spreadsheetBytes))
@@ -98,7 +98,7 @@
         [DeploymentItem(RandomDataThreeSheetSpath, TestFilesDir)]
         public void Constructor_RandomDataMultiSheets_ValidState()
         {
-            var spreadsheetBytes = LoadTestSpreadSheetBytes(RandomDataThreeSheetSpath);
+            var spreadsheetBytes = LoadTestFileBytes(RandomDataThreeSheetSpath);
             if (spreadsheetBytes != null)
             {
                 using (var target = new SpreadsheetIndexer(spreadsheetBytes))

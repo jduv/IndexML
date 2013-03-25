@@ -1,4 +1,4 @@
-﻿namespace IndexML.UnitTests
+﻿namespace IndexML.UnitTests.Spreadsheet
 {
     using System;
     using DocumentFormat.OpenXml;
@@ -50,7 +50,7 @@
         {
             var cell = new Cell()
             {
-                CellReference = new StringValue() {  Value = "A#@%!1" }
+                CellReference = new StringValue() { Value = "A#@%!1" }
             };
 
             var target = new CellIndexer(cell);

@@ -1,4 +1,4 @@
-﻿namespace IndexML.UnitTests
+﻿namespace IndexML.UnitTests.Spreadsheet
 {
     using System;
     using System.Collections.Generic;
@@ -11,7 +11,7 @@
     /// Unit tests for the <see cref="DataValidationIndexer"/> class.
     /// </summary>
     [TestClass]
-    public class DataValidationIndexerUnitTests : OpenXmlSpreadsheetIndexerTest
+    public class DataValidationIndexerUnitTests : SpreadsheetTest
     {
         #region Fields & Constants
 
@@ -349,7 +349,7 @@
 
         private static void SafeExecuteTest(string spreadsheetPath, Action<IEnumerable<DataValidation>> test)
         {
-            OpenXmlSpreadsheetIndexerTest.SafeExecuteTest<IEnumerable<DataValidation>>(
+            SpreadsheetTest.SafeExecuteTest<IEnumerable<DataValidation>>(
                 spreadsheetPath,
                 x => x.WorkbookPart.WorksheetParts.SelectMany(w => w.Worksheet.Descendants<DataValidation>()),
                 test);

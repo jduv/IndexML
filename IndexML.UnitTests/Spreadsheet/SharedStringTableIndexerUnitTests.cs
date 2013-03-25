@@ -1,4 +1,4 @@
-﻿namespace IndexML.UnitTests
+﻿namespace IndexML.UnitTests.Spreadsheet
 {
     using System;
     using System.Collections.Generic;
@@ -11,7 +11,7 @@
     /// Unit tests for the <see cref="SharedStringTableIndexer"/> class.
     /// </summary>
     [TestClass]
-    public class SharedStringTableIndexerUnitTests : OpenXmlSpreadsheetIndexerTest
+    public class SharedStringTableIndexerUnitTests : SpreadsheetTest
     {
         #region Test Methods
 

@@ -1,9 +1,5 @@
-﻿namespace IndexML.UnitTests
+﻿namespace IndexML.UnitTests.Spreadsheet
 {
-    using System;
-    using System.Text;
-    using System.Collections.Generic;
-    using System.Linq;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
@@ -13,9 +9,6 @@
     public class RowIndexerUnitTests
     {
         #region Test Methods
-      
-
-
         #endregion
     }
 }

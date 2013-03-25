@@ -1,15 +1,15 @@
-﻿namespace IndexML.UnitTests
+﻿namespace IndexML.UnitTests.Spreadsheet
 {
     using System;
     using DocumentFormat.OpenXml.Spreadsheet;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using IndexML.Spreadsheet;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
     /// Unit tests for the <see cref="CellReference"/> class.
     /// </summary>
     [TestClass]
-    public class CellReferenceUnitTests : OpenXmlSpreadsheetIndexerTest
+    public class CellReferenceUnitTests : SpreadsheetTest
     {
         #region Test Methods
 
@@ -143,11 +143,11 @@
         [TestMethod]
         public void GetColumnName_ValidColumnIndex_CorrectName()
         {
-            var A = CellReference.GetColumnName(1);
-            Assert.AreEqual("A", A, true);
+            var a = CellReference.GetColumnName(1);
+            Assert.AreEqual("A", a, true);
 
-            var AA = CellReference.GetColumnName(27);
-            Assert.AreEqual("AA", AA, true);
+            var aa = CellReference.GetColumnName(27);
+            Assert.AreEqual("AA", aa, true);
         }
 
         [TestMethod]
