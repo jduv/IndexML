@@ -89,7 +89,7 @@
         /// Gets the Spreadsheet that the indexer manages. Be careful when making changes to this outside of
         /// using the other indexers; it's easy for them to get out of sync.
         /// </summary>
-        public SpreadsheetDocument Spreadsheet { get; private set; }
+        public SpreadsheetDocument SpreadsheetDocument { get; private set; }
 
         /// <summary>
         /// Gets a <see cref="WorkbookIndexer"/> for the document's workbook.
@@ -141,7 +141,7 @@
         /// <returns>The indexer's wrapped object.</returns>
         public static implicit operator SpreadsheetDocument(SpreadsheetIndexer indexer)
         {
-            return indexer != null ? indexer.Spreadsheet : null;
+            return indexer != null ? indexer.SpreadsheetDocument : null;
         }
 
         /// <inheritdoc />
@@ -158,7 +158,7 @@
         {
             if (!this.Disposed)
             {
-                this.Spreadsheet.Close();
+                this.SpreadsheetDocument.Close();
                 this.Dispose();
             }
         }
@@ -171,7 +171,7 @@
         {
             if (!this.Disposed)
             {
-                this.Spreadsheet.Close();
+                this.SpreadsheetDocument.Close();
                 this.Initialize(SpreadsheetDocument.Open(this.Data, true));
             }
         }
@@ -190,11 +190,11 @@
             // If we're disposing, then we've likely got all our handles.
             if (!this.Disposed && disposing)
             {
-                if (this.Spreadsheet != null)
+                if (this.SpreadsheetDocument != null)
                 {
                     try
                     {
-                        this.Spreadsheet.Close();
+                        this.SpreadsheetDocument.Close();
                     }
                     catch (Exception)
                     {
@@ -217,7 +217,7 @@
         /// <param name="spreadsheet">The spreadsheet to initialize with.</param>
         private void Initialize(SpreadsheetDocument spreadsheet)
         {
-            this.Spreadsheet = spreadsheet;
+            this.SpreadsheetDocument = spreadsheet;
             this.Workbook = new WorkbookIndexer(spreadsheet.WorkbookPart);
         }
 

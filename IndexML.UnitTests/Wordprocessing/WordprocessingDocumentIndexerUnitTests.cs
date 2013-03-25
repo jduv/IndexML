@@ -2,6 +2,7 @@
 {
     using System;
     using System.IO;
+    using DocumentFormat.OpenXml.Packaging;
     using IndexML.Wordprocessing;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -79,11 +80,12 @@
         public void SaveAndReopen_DoesNotDisposeIndexer()
         {
             AssertFileExists(EmptyDocPath);
-            var target = new WordprocessingDocumentIndexer(
-                File.Open(EmptyDocPath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite));
-            target.SaveAndReopen();
-
-            Assert.IsFalse(target.Disposed);
+            using (var target = new WordprocessingDocumentIndexer(
+                File.Open(EmptyDocPath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite)))
+            {
+                target.SaveAndReopen();
+                Assert.IsFalse(target.Disposed);
+            }
         }
 
         [TestMethod]
@@ -112,6 +114,21 @@
 
             Assert.IsTrue(target.Disposed);
             var data = target.Bytes;
+        }
+
+
+        [TestMethod]
+        [DeploymentItem(EmptyDocPath, TestFilesDir)]
+        public void ImplicitCast_ValidIndexerSameReference()
+        {
+            AssertFileExists(EmptyDocPath);
+            using (var target = new WordprocessingDocumentIndexer(
+                File.Open(EmptyDocPath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite)))
+            {
+                WordprocessingDocument doc = (WordprocessingDocument)target;
+                Assert.IsNotNull(doc);
+                Assert.AreSame(target.WordprocessingDocument, doc);
+            }
         }
 
         #endregion

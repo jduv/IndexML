@@ -3,6 +3,7 @@
     using System;
     using System.IO;
     using System.Linq;
+    using DocumentFormat.OpenXml.Packaging;
     using IndexML.Spreadsheet;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -228,11 +229,12 @@
         public void SaveAndReopen_DoesNotDisposeIndexer()
         {
             AssertFileExists(RandomDataThreeSheetSpath);
-            var target = new SpreadsheetIndexer(
-                File.Open(RandomDataThreeSheetSpath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite));
-            target.SaveAndReopen();
-
-            Assert.IsFalse(target.Disposed);
+            using (var target = new SpreadsheetIndexer(
+                File.Open(RandomDataThreeSheetSpath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite)))
+            {
+                target.SaveAndReopen();
+                Assert.IsFalse(target.Disposed);
+            }
         }
 
         [TestMethod]
@@ -261,6 +263,20 @@
 
             Assert.IsTrue(target.Disposed);
             var data = target.Bytes;
+        }
+
+        [TestMethod]
+        [DeploymentItem(RandomDataThreeSheetSpath, TestFilesDir)]
+        public void ImplicitCast_ValidIndexerSameReference()
+        {
+            AssertFileExists(RandomDataThreeSheetSpath);
+            using (var target = new SpreadsheetIndexer(
+                File.Open(RandomDataThreeSheetSpath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite)))
+            {
+                SpreadsheetDocument spreadsheet = (SpreadsheetDocument)target;
+                Assert.IsNotNull(spreadsheet);
+                Assert.AreSame(target.SpreadsheetDocument, spreadsheet);
+            }
         }
 
         #endregion
