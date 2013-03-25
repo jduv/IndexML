@@ -10,7 +10,7 @@
     /// Unit tests for the <see cref="SpreadsheetIndexer"/> class.
     /// </summary>
     [TestClass]
-    public class SpreadsheetIndexerUnitTests : OpenXmlIndexerTest
+    public class SpreadsheetIndexerUnitTests : OpenXmlSpreadsheetIndexerTest
     {
         #region Test Methods
 

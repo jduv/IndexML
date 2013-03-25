@@ -11,7 +11,7 @@
     /// A base test class for all OpenXml indexers. Holds file paths and utility methods and
     /// whatnot.
     /// </summary>
-    public abstract class OpenXmlIndexerTest
+    public abstract class OpenXmlSpreadsheetIndexerTest
     {
         #region Fields & Constants
 
@@ -81,7 +81,7 @@
 
             try
             {
-                return ReadAllBytesAndSharingIsCaring(path);
+                return ReadAllBytes(path);
             }
             catch (Exception exc)
             {
@@ -147,7 +147,7 @@
 
         #region Private Methods
 
-        private static byte[] ReadAllBytesAndSharingIsCaring(string path)
+        private static byte[] ReadAllBytes(string path)
         {
             // Helper method, assumes the file exists.
             var memory = new MemoryStream();
@@ -162,7 +162,7 @@
         private static void CopyStream(Stream source, Stream target)
         {
             // Helper method, assumes source and target are not null.
-            using (source) // close the source once we're done.
+            using (source)
             {
                 var buffer = new byte[32768];
                 int bytesRead;

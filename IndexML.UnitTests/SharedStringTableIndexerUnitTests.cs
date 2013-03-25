@@ -11,7 +11,7 @@
     /// Unit tests for the <see cref="SharedStringTableIndexer"/> class.
     /// </summary>
     [TestClass]
-    public class SharedStringTableIndexerUnitTests : OpenXmlIndexerTest
+    public class SharedStringTableIndexerUnitTests : OpenXmlSpreadsheetIndexerTest
     {
         #region Test Methods
 

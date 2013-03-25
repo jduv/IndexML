@@ -9,7 +9,7 @@
     /// Unit tests for the <see cref="CellReference"/> class.
     /// </summary>
     [TestClass]
-    public class CellReferenceUnitTests : OpenXmlIndexerTest
+    public class CellReferenceUnitTests : OpenXmlSpreadsheetIndexerTest
     {
         #region Test Methods
 

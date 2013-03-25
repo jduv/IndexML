@@ -11,7 +11,7 @@
     /// Unit tests for the <see cref="DataValidationIndexer"/> class.
     /// </summary>
     [TestClass]
-    public class DataValidationIndexerUnitTests : OpenXmlIndexerTest
+    public class DataValidationIndexerUnitTests : OpenXmlSpreadsheetIndexerTest
     {
         #region Fields & Constants
 
@@ -349,7 +349,7 @@
 
         private static void SafeExecuteTest(string spreadsheetPath, Action<IEnumerable<DataValidation>> test)
         {
-            OpenXmlIndexerTest.SafeExecuteTest<IEnumerable<DataValidation>>(
+            OpenXmlSpreadsheetIndexerTest.SafeExecuteTest<IEnumerable<DataValidation>>(
                 spreadsheetPath,
                 x => x.WorkbookPart.WorksheetParts.SelectMany(w => w.Worksheet.Descendants<DataValidation>()),
                 test);

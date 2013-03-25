@@ -9,7 +9,7 @@
     /// Unit tests for the <see cref="WorkbookIndexer"/> class.
     /// </summary>
     [TestClass]
-    public class WorkbookIndexerUnitTests : OpenXmlIndexerTest
+    public class WorkbookIndexerUnitTests : OpenXmlSpreadsheetIndexerTest
     {
         #region Test Methods
 

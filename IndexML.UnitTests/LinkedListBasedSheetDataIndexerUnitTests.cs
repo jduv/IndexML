@@ -10,7 +10,7 @@
     /// Unit tests for the <see cref="LeanLeanSheetDataIndexer"/> class.
     /// </summary>
     [TestClass]
-    public class LinkedListBasedSheetDataIndexerUnitTests : OpenXmlIndexerTest
+    public class LinkedListBasedSheetDataIndexerUnitTests : OpenXmlSpreadsheetIndexerTest
     {
         #region Test Methods
 
