@@ -59,7 +59,7 @@
     <Compile Include="CellReferenceUnitTests.cs" />
     <Compile Include="DataValidationIndexerUnitTests.cs" />
     <Compile Include="LinkedListBasedSheetDataIndexerUnitTests.cs" />
-    <Compile Include="OpenXmlIndexerTest.cs" />
+    <Compile Include="OpenXmlSpreadsheetIndexerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RangeCellReferenceUnitTests.cs" />
     <Compile Include="RowIndexerUnitTests.cs" />
@@ -67,6 +67,7 @@
     <Compile Include="SheetDataIndexerUnitTests.cs" />
     <Compile Include="SingleCellReferenceUnitTests.cs" />
     <Compile Include="SpreadsheetIndexerUnitTests.cs" />
+    <Compile Include="Test.cs" />
     <Compile Include="WorkbookIndexerUnitTests.cs" />
     <Compile Include="WorksheetIndexerUnitTests.cs" />
   </ItemGroup>
