@@ -7,9 +7,6 @@
     using IndexML.Spreadsheet;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    /// <summary>
-    /// Unit tests for the <see cref="SharedStringTableIndexer"/> class.
-    /// </summary>
     [TestClass]
     public class SharedStringTableIndexerUnitTests : SpreadsheetTest
     {

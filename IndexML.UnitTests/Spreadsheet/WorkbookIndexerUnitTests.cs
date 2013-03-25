@@ -5,9 +5,6 @@
     using IndexML.Spreadsheet;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    /// <summary>
-    /// Unit tests for the <see cref="WorkbookIndexer"/> class.
-    /// </summary>
     [TestClass]
     public class WorkbookIndexerUnitTests : SpreadsheetTest
     {

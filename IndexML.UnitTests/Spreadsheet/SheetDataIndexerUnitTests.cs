@@ -6,9 +6,6 @@
     using IndexML.Spreadsheet;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    /// <summary>
-    /// Unit tests for the <see cref="ArrayBasedSheetDataIndexer"/> class.
-    /// </summary>
     [TestClass]
     public class SheetDataIndexerUnitTests : SpreadsheetTest
     {

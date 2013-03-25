@@ -4,9 +4,6 @@
     using IndexML.Spreadsheet;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    /// <summary>
-    /// Unit tests for the <see cref="SingleCellReference"/> class.
-    /// </summary>
     [TestClass]
     public class SingleCellReferenceUnitTests : SpreadsheetTest
     {

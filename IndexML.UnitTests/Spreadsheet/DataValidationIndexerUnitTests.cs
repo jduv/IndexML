@@ -7,9 +7,6 @@
     using IndexML.Spreadsheet;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    /// <summary>
-    /// Unit tests for the <see cref="DataValidationIndexer"/> class.
-    /// </summary>
     [TestClass]
     public class DataValidationIndexerUnitTests : SpreadsheetTest
     {

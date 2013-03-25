@@ -3,6 +3,7 @@
     using System;
     using System.IO;
     using DocumentFormat.OpenXml.Packaging;
+    using IndexML.Extensions;
 
     /// <summary>
     /// OpenXml utility class for performing common operations on a spreadsheet document including
@@ -45,8 +46,7 @@
             }
 
             this.documentStream = new MemoryStream();
-            CopyStream(toIndex, this.documentStream);
-            
+            StreamExtensions.Copy(toIndex, this.documentStream);
             this.Initialize(SpreadsheetDocument.Open(this.Data, true));
         }
 
@@ -181,24 +181,6 @@
         #endregion
 
         #region Private Methods
-
-        /// <summary>
-        /// Copies the source stream into the target.
-        /// </summary>
-        /// <param name="source">The source stream.</param>
-        /// <param name="target">The target stream.</param>
-        private static void CopyStream(Stream source, Stream target)
-        {
-            using (source)
-            {
-                var buffer = new byte[32768];
-                int bytesRead;
-                while ((bytesRead = source.Read(buffer, 0, buffer.Length)) > 0)
-                {
-                    target.Write(buffer, 0, bytesRead);
-                }
-            }
-        }
 
         /// <summary>
         /// Initializes the indexer.

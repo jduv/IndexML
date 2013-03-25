@@ -71,12 +71,14 @@
     <Compile Include="Spreadsheet\SpreadsheetIndexer.cs" />
     <Compile Include="Spreadsheet\WorkbookIndexer.cs" />
     <Compile Include="Spreadsheet\WorksheetIndexer.cs" />
+    <Compile Include="Extensions\StreamExtensions.cs" />
+    <Compile Include="Wordprocessing\WordprocessingDocumentIndexer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Wordprocessing\" />
+    <Folder Include="Util\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
