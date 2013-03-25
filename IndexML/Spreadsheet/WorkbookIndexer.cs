@@ -22,7 +22,7 @@
         #region Constructors & Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WorkbookPart"/> class.
+        /// Initializes a new instance of the <see cref="WorkbookIndexer"/> class.
         /// </summary>
         /// <param name="toIndex">The workbook part to index.</param>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="toIndex"/> is null.</exception>
@@ -42,7 +42,7 @@
                 }
             }
 
-            // BMK: This should be modified to create the shared string table part instead of just bailing on an empty worksheet.
+            // TODO: This should be modified to create the shared string table part instead of just bailing on an empty worksheet.
             this.SharedStringTable = toIndex.SharedStringTablePart != null ? 
                 new SharedStringTableIndexer(toIndex.SharedStringTablePart) :
                 null;

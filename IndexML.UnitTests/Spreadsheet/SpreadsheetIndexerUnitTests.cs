@@ -116,7 +116,8 @@
         public void Constructor_EmptySheetStream_ValidState()
         {
             AssertFileExists(EmptySheetPath);
-            using (var target = new SpreadsheetIndexer(File.Open(EmptySheetPath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite)))
+            using (var target = new SpreadsheetIndexer(
+                File.Open(EmptySheetPath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite)))
             {
                 Assert.IsNotNull(target);
                 Assert.IsNotNull(target.Workbook);
@@ -130,7 +131,8 @@
         public void Constructor_RandomDataStream_ValidState()
         {
             AssertFileExists(RandomDataSheetSpath);
-            using (var target = new SpreadsheetIndexer(File.Open(RandomDataSheetSpath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite)))
+            using (var target = new SpreadsheetIndexer(
+                File.Open(RandomDataSheetSpath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite)))
             {
                 Assert.IsNotNull(target);
                 Assert.IsNotNull(target.Workbook);
@@ -144,7 +146,8 @@
         public void Constructor_EmptyMultiSheetsStream_ValidState()
         {
             AssertFileExists(EmptyThreeSheetsPath);
-            using (var target = new SpreadsheetIndexer(File.Open(EmptyThreeSheetsPath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite)))
+            using (var target = new SpreadsheetIndexer(
+                File.Open(EmptyThreeSheetsPath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite)))
             {
                 Assert.IsNotNull(target);
                 Assert.IsNotNull(target.Workbook);
@@ -158,7 +161,8 @@
         public void Constructor_RandomDataMultiSheetsStream_ValidState()
         {
             AssertFileExists(RandomDataThreeSheetSpath);
-            using (var target = new SpreadsheetIndexer(File.Open(RandomDataThreeSheetSpath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite)))
+            using (var target = new SpreadsheetIndexer(
+                File.Open(RandomDataThreeSheetSpath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite)))
             {
                 Assert.IsNotNull(target);
                 Assert.IsNotNull(target.Workbook);
@@ -172,7 +176,8 @@
         public void SaveAndClose_DisposesIndexer()
         {
             AssertFileExists(RandomDataThreeSheetSpath);
-            var target = new SpreadsheetIndexer(File.Open(RandomDataThreeSheetSpath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite));
+            var target = new SpreadsheetIndexer(
+                File.Open(RandomDataThreeSheetSpath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite));
             target.SaveAndClose();
 
             Assert.IsTrue(target.Disposed);
@@ -183,7 +188,8 @@
         public void SaveAndReopen_DoesNotDisposeIndexer()
         {
             AssertFileExists(RandomDataThreeSheetSpath);
-            var target = new SpreadsheetIndexer(File.Open(RandomDataThreeSheetSpath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite));
+            var target = new SpreadsheetIndexer(
+                File.Open(RandomDataThreeSheetSpath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite));
             target.SaveAndReopen();
 
             Assert.IsFalse(target.Disposed);
@@ -195,7 +201,8 @@
         public void DataProperty_DisposedObject()
         {
             AssertFileExists(RandomDataThreeSheetSpath);
-            var target = new SpreadsheetIndexer(File.Open(RandomDataThreeSheetSpath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite));
+            var target = new SpreadsheetIndexer(
+                File.Open(RandomDataThreeSheetSpath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite));
             target.SaveAndClose();
 
             Assert.IsTrue(target.Disposed);
@@ -208,7 +215,8 @@
         public void BytesProperty_DisposedObject()
         {
             AssertFileExists(RandomDataThreeSheetSpath);
-            var target = new SpreadsheetIndexer(File.Open(RandomDataThreeSheetSpath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite));
+            var target = new SpreadsheetIndexer(
+                File.Open(RandomDataThreeSheetSpath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite));
             target.SaveAndClose();
 
             Assert.IsTrue(target.Disposed);
