@@ -111,7 +111,7 @@
             }
         }
 
-        /// <summary>[
+        /// <summary>
         /// Gets the raw bytes for the spreadsheet document the indexer wraps.
         /// </summary>
         public byte[] Bytes
@@ -150,7 +150,7 @@
         }
 
         /// <summary>
-        /// Closes the spreadsheet indexer.
+        /// Closes the indexer and saves all changes. Also, this call disposes the indexer.
         /// </summary>
         public void SaveAndClose()
         {
