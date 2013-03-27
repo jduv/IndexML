@@ -150,6 +150,13 @@
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void GetColumnName_NullArgument_ThrowsException()
+        {
+            var target = CellIndexer.GetColumnName(null);
+        }
+
+        [TestMethod]
         public void ImplicitCast_ValidIndexer_SameReference()
         {
             var expected = new Cell()

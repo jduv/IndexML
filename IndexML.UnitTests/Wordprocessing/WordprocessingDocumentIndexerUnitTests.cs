@@ -89,7 +89,7 @@
         [TestMethod]
         [DeploymentItem(EmptyDocPath, TestFilesDir)]
         [ExpectedException(typeof(ObjectDisposedException))]
-        public void DataProperty_DisposedObject()
+        public void Data_DisposedObject()
         {
             AssertFileExists(EmptyDocPath);
             var target = new WordprocessingDocumentIndexer(OpenFileReadWrite(EmptyDocPath));
@@ -102,7 +102,7 @@
         [TestMethod]
         [DeploymentItem(EmptyDocPath, TestFilesDir)]
         [ExpectedException(typeof(ObjectDisposedException))]
-        public void BytesProperty_DisposedObject()
+        public void Bytes_DisposedObject()
         {
             AssertFileExists(EmptyDocPath);
             var target = new WordprocessingDocumentIndexer(OpenFileReadWrite(EmptyDocPath));

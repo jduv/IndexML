@@ -239,7 +239,7 @@
         [TestMethod]
         [DeploymentItem(RandomDataThreeSheetSpath, TestFilesDir)]
         [ExpectedException(typeof(ObjectDisposedException))]
-        public void DataProperty_DisposedObject()
+        public void Data_DisposedObject()
         {
             AssertFileExists(RandomDataThreeSheetSpath);
             var target = new SpreadsheetIndexer(
@@ -253,7 +253,7 @@
         [TestMethod]
         [DeploymentItem(RandomDataThreeSheetSpath, TestFilesDir)]
         [ExpectedException(typeof(ObjectDisposedException))]
-        public void BytesProperty_DisposedObject()
+        public void Bytes_DisposedObject()
         {
             AssertFileExists(RandomDataThreeSheetSpath);
             var target = new SpreadsheetIndexer(
