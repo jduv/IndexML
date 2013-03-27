@@ -66,7 +66,6 @@
     <Compile Include="Spreadsheet\SpreadsheetTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Spreadsheet\RangeCellReferenceUnitTests.cs" />
-    <Compile Include="Spreadsheet\RowIndexerUnitTests.cs" />
     <Compile Include="Spreadsheet\SharedStringTableIndexerUnitTests.cs" />
     <Compile Include="Spreadsheet\SheetDataIndexerUnitTests.cs" />
     <Compile Include="Spreadsheet\SingleCellReferenceUnitTests.cs" />
