@@ -1,6 +1,7 @@
 ﻿namespace IndexML.UnitTests.Wordprocessing
 {
     using System;
+    using DocumentFormat.OpenXml.Wordprocessing;
     using IndexML.Wordprocessing;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -32,6 +33,30 @@
                     // Check references
                     Assert.AreSame(doc.MainDocumentPart.Document, target.Document);
                 });
+        }
+
+        [TestMethod]
+        public void ImplicitCast_ValidIndexer_SameReference()
+        {
+            SafeExecuteTest(
+               EmptyDocPath,
+               (doc) =>
+               {
+                   var expected = doc.MainDocumentPart.Document;
+                   var indexer = new DocumentIndexer(doc.MainDocumentPart);
+                   var target = (Document)indexer;
+
+                   // Check references
+                   Assert.AreSame(expected, target);
+               });
+        }
+
+        [TestMethod]
+        public void ImplicitCast_Null_IsNull()
+        {
+            DocumentIndexer indexer = null;
+            var target = (Document)indexer;
+            Assert.IsNull(target);
         }
 
         #endregion

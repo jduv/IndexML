@@ -278,6 +278,14 @@
             }
         }
 
+        [TestMethod]
+        public void ImplicitCast_Null_IsNull()
+        {
+            SpreadsheetIndexer indexer = null;
+            var target = (SpreadsheetDocument)indexer;
+            Assert.IsNull(target);
+        }
+
         #endregion
     }
 }

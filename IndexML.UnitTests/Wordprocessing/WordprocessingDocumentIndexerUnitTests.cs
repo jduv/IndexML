@@ -125,6 +125,14 @@
             }
         }
 
+        [TestMethod]
+        public void ImplicitCast_Null_IsNull()
+        {
+            WordprocessingDocumentIndexer indexer = null;
+            var target = (WordprocessingDocument)indexer;
+            Assert.IsNull(target);
+        }
+
         #endregion
     }
 }

@@ -116,7 +116,7 @@
         /// <returns>The element that the indexer wraps, or null if <paramref name="indexer"/> is null.</returns>
         public static implicit operator Body(BodyIndexer indexer)
         {
-            return indexer == null ? null : indexer.Body;
+            return indexer != null ? indexer.Body : null;
         }
 
         #endregion

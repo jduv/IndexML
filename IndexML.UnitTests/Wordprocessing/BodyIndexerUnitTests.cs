@@ -67,7 +67,7 @@
 
         [TestMethod]
         [DeploymentItem(StandardDocPath, TestFilesDir)]
-        public void ImplicitCast_ValidIndexerSameReference()
+        public void ImplicitCast_ValidIndexer_SameReference()
         {
             AssertFileExists(StandardDocPath);
             using (var target = new WordprocessingDocumentIndexer(OpenFileReadWrite(StandardDocPath)))
@@ -76,6 +76,14 @@
                 Assert.IsNotNull(doc);
                 Assert.AreSame(target.WordprocessingDocument, doc);
             }
+        }
+
+        [TestMethod]
+        public void ImplicitCast_Null_IsNull()
+        {
+            BodyIndexer indexer = null;
+            var target = (Body)indexer;
+            Assert.IsNull(target);
         }
 
         #endregion

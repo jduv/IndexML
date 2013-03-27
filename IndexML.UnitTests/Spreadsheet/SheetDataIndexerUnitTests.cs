@@ -445,6 +445,27 @@
                 });
         }
 
+        [TestMethod]
+        public void ImplicitCast_ValidIndexer_SameReference()
+        {
+            SafeExecuteTest(
+                EmptySheetPath,
+                (sheetData) =>
+                {
+                    var indexer = new ArrayBasedSheetDataIndexer(sheetData);
+                    var target = (SheetData)indexer;
+                    Assert.AreSame(sheetData, target);
+                });
+        }
+
+        [TestMethod]
+        public void ImplicitCast_Null_IsNull()
+        {
+            ArrayBasedSheetDataIndexer indexer = null;
+            var target = (SheetData)indexer;
+            Assert.IsNull(target);
+        }
+
         #endregion
 
         #region Private Methods

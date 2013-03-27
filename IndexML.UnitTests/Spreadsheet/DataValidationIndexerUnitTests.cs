@@ -340,6 +340,31 @@
                 });
         }
 
+        [TestMethod]
+        [DeploymentItem(RowValidationsSheetPath, TestFilesDir)]
+        public void ImplicitCast_ValidIndexer_SameReference()
+        {
+            SafeExecuteTest(
+              RowValidationsSheetPath,
+              (validations) =>
+              {
+                  var expected = validations.First();
+                  var indexer = new DataValidationIndexer(expected);
+                  var target = (DataValidation)indexer;
+
+                  Assert.IsNotNull(target);
+                  Assert.AreSame(expected, target);
+              });
+        }
+
+        [TestMethod]
+        public void ImplicitCast_Null_IsNull()
+        {
+            DataValidationIndexer indexer = null;
+            var target = (DataValidation)indexer;
+            Assert.IsNull(target);
+        }
+
         #endregion
 
         #region Private Methods

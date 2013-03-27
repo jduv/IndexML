@@ -9,8 +9,6 @@
     {
         #region Test Methods
 
-        #region Constructor
-
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void Constructor_NullArgument_ThrowsException()
@@ -78,10 +76,6 @@
             Assert.AreEqual("A", target.ColumnName, true);
             Assert.AreEqual("A1", target.Value, true);
         }
-
-        #endregion
-
-        #region ContainsOrSubsumes
         
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
@@ -108,10 +102,6 @@
 
             Assert.IsTrue(target.ContainsOrSubsumes(other));
         }
-
-        #endregion
-
-        #region Translate
 
         [TestMethod]
         public void Translate_Zero_NoChanges()
@@ -224,10 +214,6 @@
             Assert.AreEqual(1, result.ColumnIndex);
             Assert.AreEqual("A", result.ColumnName, true);
         }
-
-        #endregion
-
-        #region Scale
 
         [TestMethod]
         public void Scale_Zero_NoChanges()
@@ -410,8 +396,6 @@
             Assert.AreEqual(target.ColumnName, result.ColumnName, true);
             Assert.AreEqual(target.ColumnIndex, result.ColumnIndex);
         }
-
-        #endregion
 
         #endregion
     }

@@ -164,6 +164,14 @@
             Assert.AreSame(expected, target);
         }
 
+        [TestMethod]
+        public void ImplicitCast_Null_IsNull()
+        {
+            CellIndexer indexer = null;
+            var target = (Cell)indexer;
+            Assert.IsNull(target);
+        }
+
         #endregion
     }
 }

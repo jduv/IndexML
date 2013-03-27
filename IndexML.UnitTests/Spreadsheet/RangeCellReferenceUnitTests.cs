@@ -10,8 +10,6 @@
     {
         #region Test Methods
 
-        #region Constructor
-
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void Constructor_NullArgument_ThrowsException()
@@ -68,10 +66,6 @@
             var target = new RangeCellReference(new SingleCellReference("A1"), null);
         }
 
-        #endregion
-
-        #region Properties
-
         [TestMethod]
         public void Rows_ValidCellRange_CorrectNumber()
         {
@@ -85,10 +79,6 @@
             var target = new RangeCellReference("A1:C1");
             Assert.AreEqual(3, target.Columns);
         }
-
-        #endregion
-
-        #region ContainsOrSubsumes
 
         [TestMethod]
         public void ContainsOrSubsumes_SingleCellRef_NotContained()
@@ -144,10 +134,6 @@
             // Must be a known type
             Assert.IsFalse(target.ContainsOrSubsumes(mock.Object));
         }
-
-        #endregion
-
-        #region Translate
 
         [TestMethod]
         public void Translate_Zero_ReturnsOriginalRange()
@@ -278,10 +264,6 @@
             Assert.AreEqual(1, result.StartingCellReference.ColumnIndex);
             Assert.AreEqual(3, result.EndingCellReference.ColumnIndex);
         }
-        
-        #endregion
-
-        #region Scale
 
         [TestMethod]
         public void Scale_Zero_ReturnsOriginalRange()
@@ -498,8 +480,6 @@
             Assert.AreEqual(1, result.ColumnIndex);
             Assert.AreEqual(1, result.RowIndex);
         }
-
-        #endregion
 
         #endregion
     }

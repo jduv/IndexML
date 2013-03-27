@@ -250,6 +250,29 @@
                 });
         }
 
+        [TestMethod]
+        public void ImplicitCast_ValidIndexer_SameReference()
+        {
+            SafeExecuteTest(
+                RandomDataSheetSpath,
+                (spreadsheet) =>
+                {
+                    var expected = spreadsheet.WorkbookPart.SharedStringTablePart.SharedStringTable;
+                    var indexer = new SharedStringTableIndexer(spreadsheet.WorkbookPart.SharedStringTablePart);
+                    var target = (SharedStringTable)indexer;
+
+                    Assert.AreSame(expected, target);
+                });
+        }
+
+        [TestMethod]
+        public void ImplicitCast_Null_IsNull()
+        {
+            SharedStringTableIndexer indexer = null;
+            var target = (SharedStringTable)indexer;
+            Assert.IsNull(target);
+        }
+
         #endregion
     }
 }

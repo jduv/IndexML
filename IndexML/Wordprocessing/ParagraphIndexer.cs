@@ -41,5 +41,20 @@
         public ParagraphProperties Properties { get; private set; }
 
         #endregion
+
+        #region Public Methods
+
+        /// <summary>
+        /// Casts the indexer to a Paragraph element. Any changes made to the raw element will not
+        /// be reflected in the indexer.
+        /// </summary>
+        /// <param name="indexer">The indexer to cast.</param>
+        /// <returns>The element that the indexer wraps, or null if <paramref name="indexer"/> is null.</returns>
+        public static implicit operator Paragraph(ParagraphIndexer indexer)
+        {
+            return indexer != null ? indexer.Paragraph : null;
+        }
+
+        #endregion
     }
 }

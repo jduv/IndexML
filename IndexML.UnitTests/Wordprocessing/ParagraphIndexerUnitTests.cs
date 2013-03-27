@@ -37,6 +37,29 @@
                 });
         }
 
+        [TestMethod]
+        public void ImplicitCast_ValidIndexer_SameReference()
+        {
+            SafeExecuteTest(
+                StandardDocPath,
+                (doc) =>
+                {
+                    var expected = doc.MainDocumentPart.Document.Body.Elements<Paragraph>().FirstOrDefault();
+                    var indexer = new ParagraphIndexer(expected);
+                    var target = (Paragraph)indexer;
+
+                    Assert.AreSame(expected, target);
+                });
+        }
+
+        [TestMethod]
+        public void ImplicitCast_Null_IsNull()
+        {
+            ParagraphIndexer indexer = null;
+            var target = (Paragraph)indexer;
+            Assert.IsNull(target);
+        }
+
         #endregion
     }
 }
