@@ -488,6 +488,7 @@
         }
 
         [TestMethod]
+        [DeploymentItem(EmptySheetPath, TestFilesDir)]
         public void ImplicitCast_ValidIndexer_SameReference()
         {
             SafeExecuteTest(

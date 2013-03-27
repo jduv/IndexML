@@ -251,6 +251,7 @@
         }
 
         [TestMethod]
+        [DeploymentItem(RandomDataSheetSpath, TestFilesDir)]
         public void ImplicitCast_ValidIndexer_SameReference()
         {
             SafeExecuteTest(

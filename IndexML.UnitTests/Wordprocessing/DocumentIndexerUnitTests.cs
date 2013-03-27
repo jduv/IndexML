@@ -36,6 +36,7 @@
         }
 
         [TestMethod]
+        [DeploymentItem(EmptyDocPath, TestFilesDir)]
         public void ImplicitCast_ValidIndexer_SameReference()
         {
             SafeExecuteTest(
