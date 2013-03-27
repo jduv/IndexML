@@ -1,18 +1,21 @@
 ﻿namespace IndexML.Wordprocessing
 {
+    using System;
     using DocumentFormat.OpenXml.Wordprocessing;
 
     /// <summary>
-    /// TODO: Implement me.
+    /// OpenXml utilty class for indexing tables.
     /// </summary>
     public class TableIndexer
     {
         private Table table;
 
-        public TableIndexer(Table table)
+        public TableIndexer(Table toIndex)
         {
-            // TODO: Complete member initialization
-            this.table = table;
+            if (toIndex == null)
+            {
+                throw new ArgumentNullException("toIndex");
+            }
         }
     }
 }

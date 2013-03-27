@@ -14,16 +14,16 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="ParagraphIndexer"/> class.
         /// </summary>
-        /// <param name="paragraph">The paragraph to parse.</param>
-        public ParagraphIndexer(Paragraph paragraph)
+        /// <param name="toIndex">The paragraph to parse.</param>
+        public ParagraphIndexer(Paragraph toIndex)
         {
-            if (paragraph == null)
+            if (toIndex == null)
             {
                 throw new ArgumentNullException("paragraph");
             }
 
-            this.Paragraph = paragraph;
-            this.Properties = paragraph.Elements<ParagraphProperties>().FirstOrDefault();
+            this.Paragraph = toIndex;
+            this.Properties = toIndex.Elements<ParagraphProperties>().FirstOrDefault();
         }
 
         #endregion
