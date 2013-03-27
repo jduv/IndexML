@@ -14,6 +14,8 @@
 
         protected const string EmptyDocPath = TestFilesDir + "Empty.docx";
 
+        protected const string StandardDocPath = TestFilesDir + "Standard.docx";
+
         #endregion
 
         #region Protected Methods
@@ -24,7 +26,7 @@
 
             try
             {
-                using (var fileStream = new FileStream(path, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite))
+                using (var fileStream = OpenFileReadWrite(path))
                 {
                     var memory = new MemoryStream(); // Make the stream expandable by using default ctor
                     CopyStream(fileStream, memory);      // Copy the stream to memory so we can do whatever we want with it

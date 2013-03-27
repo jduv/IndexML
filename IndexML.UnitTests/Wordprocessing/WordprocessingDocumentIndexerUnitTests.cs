@@ -68,8 +68,7 @@
         public void SaveAndClose_DisposesIndexer()
         {
             AssertFileExists(EmptyDocPath);
-            var target = new WordprocessingDocumentIndexer(
-                File.Open(EmptyDocPath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite));
+            var target = new WordprocessingDocumentIndexer(OpenFileReadWrite(EmptyDocPath));
             target.SaveAndClose();
 
             Assert.IsTrue(target.Disposed);
@@ -80,8 +79,7 @@
         public void SaveAndReopen_DoesNotDisposeIndexer()
         {
             AssertFileExists(EmptyDocPath);
-            using (var target = new WordprocessingDocumentIndexer(
-                File.Open(EmptyDocPath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite)))
+            using (var target = new WordprocessingDocumentIndexer(OpenFileReadWrite(EmptyDocPath)))
             {
                 target.SaveAndReopen();
                 Assert.IsFalse(target.Disposed);
@@ -94,8 +92,7 @@
         public void DataProperty_DisposedObject()
         {
             AssertFileExists(EmptyDocPath);
-            var target = new WordprocessingDocumentIndexer(
-                File.Open(EmptyDocPath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite));
+            var target = new WordprocessingDocumentIndexer(OpenFileReadWrite(EmptyDocPath));
             target.SaveAndClose();
 
             Assert.IsTrue(target.Disposed);
@@ -108,22 +105,19 @@
         public void BytesProperty_DisposedObject()
         {
             AssertFileExists(EmptyDocPath);
-            var target = new WordprocessingDocumentIndexer(
-                File.Open(EmptyDocPath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite));
+            var target = new WordprocessingDocumentIndexer(OpenFileReadWrite(EmptyDocPath));
             target.SaveAndClose();
 
             Assert.IsTrue(target.Disposed);
             var data = target.Bytes;
         }
 
-
         [TestMethod]
         [DeploymentItem(EmptyDocPath, TestFilesDir)]
         public void ImplicitCast_ValidIndexerSameReference()
         {
             AssertFileExists(EmptyDocPath);
-            using (var target = new WordprocessingDocumentIndexer(
-                File.Open(EmptyDocPath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite)))
+            using (var target = new WordprocessingDocumentIndexer(OpenFileReadWrite(EmptyDocPath)))
             {
                 WordprocessingDocument doc = (WordprocessingDocument)target;
                 Assert.IsNotNull(doc);

@@ -45,7 +45,7 @@
         {
             // Helper method, assumes the file exists.
             var memory = new MemoryStream();
-            using (var fileStream = File.Open(path, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite))
+            using (var fileStream = OpenFileReadWrite(path))
             {
                 CopyStream(fileStream, memory);
             }
@@ -65,6 +65,12 @@
                     target.Write(buffer, 0, bytesRead);
                 }
             }
+        }
+
+        protected static FileStream OpenFileReadWrite(string path)
+        {
+            // Opens a file in Read/Write state.
+            return File.Open(path, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite);
         }
 
         #endregion
