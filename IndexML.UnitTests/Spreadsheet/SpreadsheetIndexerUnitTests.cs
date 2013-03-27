@@ -266,7 +266,7 @@
 
         [TestMethod]
         [DeploymentItem(RandomDataThreeSheetSpath, TestFilesDir)]
-        public void ImplicitCast_ValidIndexerSameReference()
+        public void ImplicitCast_ValidIndexer_SameReference()
         {
             AssertFileExists(RandomDataThreeSheetSpath);
             using (var target = new SpreadsheetIndexer(

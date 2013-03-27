@@ -1,18 +1,45 @@
 ﻿namespace IndexML.Wordprocessing
 {
+    using System.Linq;
+    using System;
     using DocumentFormat.OpenXml.Wordprocessing;
 
     /// <summary>
-    /// TODO: Implement me.
+    /// OpenXml utiltiy class for indexing paragraph entities.
     /// </summary>
     public class ParagraphIndexer
     {
-        private Paragraph paragraph;
+        #region Constructors & Destructors
 
-        public ParagraphIndexer(DocumentFormat.OpenXml.Wordprocessing.Paragraph x)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ParagraphIndexer"/> class.
+        /// </summary>
+        /// <param name="paragraph">The paragraph to parse.</param>
+        public ParagraphIndexer(Paragraph paragraph)
         {
-            // TODO: Complete member initialization
-            this.paragraph = x;
+            if (paragraph == null)
+            {
+                throw new ArgumentNullException("paragraph");
+            }
+
+            this.Paragraph = paragraph;
+            this.Properties = paragraph.Elements<ParagraphProperties>().FirstOrDefault();
         }
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Gets the wrapped paragraph.
+        /// </summary>
+        public Paragraph Paragraph { get; private set; }
+
+        /// <summary>
+        /// Gets the paragraph's properties.
+        /// </summary>
+        public ParagraphProperties Properties { get; private set; }
+
+        #endregion
     }
 }

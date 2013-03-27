@@ -114,7 +114,7 @@
 
         [TestMethod]
         [DeploymentItem(EmptyDocPath, TestFilesDir)]
-        public void ImplicitCast_ValidIndexerSameReference()
+        public void ImplicitCast_ValidIndexer_SameReference()
         {
             AssertFileExists(EmptyDocPath);
             using (var target = new WordprocessingDocumentIndexer(OpenFileReadWrite(EmptyDocPath)))

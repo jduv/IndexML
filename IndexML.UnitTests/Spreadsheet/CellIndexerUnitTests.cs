@@ -149,6 +149,21 @@
             Assert.AreEqual(26, result);
         }
 
+        [TestMethod]
+        public void ImplicitCast_ValidIndexer_SameReference()
+        {
+            var expected = new Cell()
+            {
+                CellReference = new StringValue() { Value = "A1" }
+            };
+
+            var indexer = new CellIndexer(expected);
+            var target = (Cell)indexer;
+
+            Assert.IsNotNull(target);
+            Assert.AreSame(expected, target);
+        }
+
         #endregion
     }
 }

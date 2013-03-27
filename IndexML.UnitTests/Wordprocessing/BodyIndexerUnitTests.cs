@@ -2,6 +2,7 @@
 {
     using System;
     using System.Linq;
+    using DocumentFormat.OpenXml.Packaging;
     using DocumentFormat.OpenXml.Wordprocessing;
     using IndexML.Wordprocessing;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -62,6 +63,19 @@
                         doc.MainDocumentPart.Document.Body.Elements<SectionProperties>().FirstOrDefault(),
                         target.FinalSectionProperties);
                 });
+        }
+
+        [TestMethod]
+        [DeploymentItem(StandardDocPath, TestFilesDir)]
+        public void ImplicitCast_ValidIndexerSameReference()
+        {
+            AssertFileExists(StandardDocPath);
+            using (var target = new WordprocessingDocumentIndexer(OpenFileReadWrite(StandardDocPath)))
+            {
+                WordprocessingDocument doc = (WordprocessingDocument)target;
+                Assert.IsNotNull(doc);
+                Assert.AreSame(target.WordprocessingDocument, doc);
+            }
         }
 
         #endregion

@@ -37,6 +37,7 @@
                 throw new ArgumentNullException("toIndex");
             }
 
+            this.Body = toIndex;
             this.paragraphs = new List<ParagraphIndexer>();
             this.tables = new List<TableIndexer>();
 
@@ -72,6 +73,11 @@
         #region Properties
 
         /// <summary>
+        /// Gets the body element the indexer is wrapping.
+        /// </summary>
+        public Body Body { get; private set; }
+
+        /// <summary>
         /// Gets the final section properties for the body.
         /// </summary>
         public SectionProperties FinalSectionProperties { get; private set; }
@@ -96,6 +102,21 @@
             {
                 return this.tables;
             }
+        }
+
+        #endregion
+
+        #region Public Methods
+
+        /// <summary>
+        /// Casts the indexer to a Body element. Any changes made to the raw element will not
+        /// be reflected in the indexer.
+        /// </summary>
+        /// <param name="indexer">The indexer to cast.</param>
+        /// <returns>The element that the indexer wraps, or null if <paramref name="indexer"/> is null.</returns>
+        public static implicit operator Body(BodyIndexer indexer)
+        {
+            return indexer == null ? null : indexer.Body;
         }
 
         #endregion
