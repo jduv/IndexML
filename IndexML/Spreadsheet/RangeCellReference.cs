@@ -9,10 +9,6 @@
     {
         #region Constructors & Destructors
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="RangeCellReference"/> class.
-        /// </summary>
-        /// <param name="cellRef">The cell to create the reference for.</param>
         public RangeCellReference(string cellRef)
             : base(cellRef)
         {
@@ -30,13 +26,6 @@
             }
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="RangeCellReference"/> class.
-        /// </summary>
-        /// <param name="startingCell">The starging cell.</param>
-        /// <param name="endingCell">The ending cell.</param>
-        /// <exception cref="ArgumentNullException">Thrown if either <paramref name="startingCell"/> or 
-        /// <paramref name="endingCell"/> is null.</exception>
         public RangeCellReference(SingleCellReference startingCell, SingleCellReference endingCell)
         {
             if (startingCell == null)

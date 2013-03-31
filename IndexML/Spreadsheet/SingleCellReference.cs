@@ -28,10 +28,6 @@
 
         #region Constructors & Destructors
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SingleCellReference"/> class.
-        /// </summary>
-        /// <param name="cellRef">The cell reference to create the reference for.</param>
         public SingleCellReference(string cellRef)
             : base(cellRef)
         {
@@ -44,11 +40,6 @@
             }
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SingleCellReference"/> class.
-        /// </summary>
-        /// <param name="row">The row index to initialize with.</param>
-        /// <param name="column">The column index to initialize with.</param>
         public SingleCellReference(long row, long column)
         {
             if (column <= 0)

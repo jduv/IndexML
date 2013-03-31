@@ -23,16 +23,6 @@
 
         #region Constructors & Destructors
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SpreadsheetIndexer"/> class.
-        /// </summary>
-        /// <param name="toIndex">A stream to the existing document to initialize with. Note that this stream must
-        /// have the correct permissions already set on it--that is Read/Write access, in order for the indexer to
-        /// be able to access it. Invalid stream modes will throw exceptions when the indexer attempts to create
-        /// the spread sheet document.</param>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="toIndex"/> is null.</exception>
-        /// <exception cref="ArgumentException">Thrown if <paramref name="toIndex"/> is an empty or
-        /// unreadable stream.</exception>
         public SpreadsheetIndexer(Stream toIndex)
         {
             if (toIndex == null)
@@ -51,12 +41,6 @@
             this.Initialize(SpreadsheetDocument.Open(this.Data, true));
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SpreadsheetIndexer"/> class.
-        /// </summary>
-        /// <param name="toIndex">The byte array to initialize the indexer with.</param>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="toIndex"/> is null.</exception>
-        /// <exception cref="ArgumentException">Thrown if <paramref name="toIndex"/> is empty.</exception>
         public SpreadsheetIndexer(byte[] toIndex)
         {
             if (toIndex == null)

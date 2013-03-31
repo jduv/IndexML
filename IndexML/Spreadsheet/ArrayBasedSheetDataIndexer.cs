@@ -39,11 +39,6 @@
 
         #region Constructors & Destructors
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ArrayBasedSheetDataIndexer"/> class.
-        /// </summary>
-        /// <param name="sheetData">The sheet data to index.</param>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="sheetData"/> is null.</exception>
         public ArrayBasedSheetDataIndexer(SheetData sheetData)
         {
             if (sheetData == null)

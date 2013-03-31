@@ -10,10 +10,6 @@
     {
         #region Constructors & Destructors
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TableIndexer"/> class.
-        /// </summary>
-        /// <param name="toIndex">The table to index.</param>
         public TableIndexer(Table toIndex)
         {
             if (toIndex == null)

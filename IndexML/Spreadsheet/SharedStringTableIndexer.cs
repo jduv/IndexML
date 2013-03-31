@@ -33,14 +33,6 @@
 
         #region Constructors & Destructors
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SharedStringTableIndexer"/> class. If the 
-        /// target shared string table part doesn't have a string table initialized, one will be created 
-        /// and appended to the part.
-        /// </summary>
-        /// <param name="toIndex">The shared string table part instance to index.</param>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="toIndex"/> is null.
-        /// </exception>
         public SharedStringTableIndexer(SharedStringTablePart toIndex)
         {
             // Handle parameter checking in ctor.
@@ -63,12 +55,6 @@
             this.Initialize(toIndex.SharedStringTable);
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SharedStringTableIndexer"/> class.
-        /// </summary>
-        /// <param name="toIndex">The string table to index.</param>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="toIndex"/> is null.
-        /// </exception>
         public SharedStringTableIndexer(SharedStringTable toIndex)
         {
             // Handle parameter checking in ctor.

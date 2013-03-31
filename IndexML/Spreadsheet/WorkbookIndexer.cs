@@ -21,11 +21,6 @@
 
         #region Constructors & Destructors
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="WorkbookIndexer"/> class.
-        /// </summary>
-        /// <param name="toIndex">The workbook part to index.</param>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="toIndex"/> is null.</exception>
         public WorkbookIndexer(WorkbookPart toIndex)
         {
             if (toIndex == null)

@@ -1,7 +1,7 @@
 ﻿namespace IndexML.Wordprocessing
 {
-    using System.Linq;
     using System;
+    using System.Linq;
     using DocumentFormat.OpenXml.Wordprocessing;
 
     /// <summary>
@@ -11,10 +11,6 @@
     {
         #region Constructors & Destructors
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ParagraphIndexer"/> class.
-        /// </summary>
-        /// <param name="toIndex">The paragraph to parse.</param>
         public ParagraphIndexer(Paragraph toIndex)
         {
             if (toIndex == null)

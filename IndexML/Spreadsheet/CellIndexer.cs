@@ -10,11 +10,6 @@
     {
         #region Constructors & Destructors
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CellIndexer"/> class.
-        /// </summary>
-        /// <param name="cell">The cell to initialize with.</param>
-        /// <exception cref="ArgumentNullException">Thrown if <see cref="cell"/> is null.</exception>
         public CellIndexer(Cell cell)
         {
             if (cell == null)
