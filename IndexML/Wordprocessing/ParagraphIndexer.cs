@@ -1,6 +1,7 @@
 ﻿namespace IndexML.Wordprocessing
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using DocumentFormat.OpenXml.Wordprocessing;
 
@@ -9,6 +10,12 @@
     /// </summary>
     public class ParagraphIndexer
     {
+        #region Fields & Constants
+
+        public IList<RunIndexer> runs;
+
+        #endregion
+
         #region Constructors & Destructors
 
         public ParagraphIndexer(Paragraph toIndex)
@@ -35,6 +42,28 @@
         /// Gets the paragraph's properties.
         /// </summary>
         public ParagraphProperties Properties { get; private set; }
+
+        /// <summary>
+        /// Gets the list of runs inside this paragraph.
+        /// </summary>
+        public IEnumerable<RunIndexer> Runs
+        {
+            get
+            {
+                return this.runs;
+            }
+        }
+
+        /// <summary>
+        /// Gets the text for the paragraph--no markup included.
+        /// </summary>
+        public string Text
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
 
         #endregion
 

@@ -61,6 +61,7 @@
     <Compile Include="Wordprocessing\BodyIndexerUnitTests.cs" />
     <Compile Include="Wordprocessing\DocumentIndexerUnitTests.cs" />
     <Compile Include="Wordprocessing\ParagraphIndexerUnitTests.cs" />
+    <Compile Include="Wordprocessing\RunIndexerUnitTests.cs" />
     <Compile Include="Wordprocessing\TableIndexerUnitTests.cs" />
     <Compile Include="Wordprocessing\WordprocessingDocumentIndexerUnitTests.cs" />
     <Compile Include="Wordprocessing\WordprocessingDocumentTest.cs" />
