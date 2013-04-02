@@ -27,13 +27,6 @@
 
         #region Constructors & Destructors
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="WorksheetIndexer"/> class.
-        /// </summary>
-        /// <param name="toIndex">The worksheet part to initialize with.</param>
-        /// <param name="sheet">The sheet to associate with the worksheet. Sheet objects contain some extra metadata
-        /// about the worksheet, so if passed the indexer will reflect this extra data.</param>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="toIndex"/> is null.</exception>
         public WorksheetIndexer(WorksheetPart toIndex, Sheet sheet)
         {
             if (toIndex == null)

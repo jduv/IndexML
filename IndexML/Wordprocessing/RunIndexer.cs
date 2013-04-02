@@ -4,20 +4,18 @@
     using DocumentFormat.OpenXml.Wordprocessing;
 
     /// <summary>
-    /// OpenXml utilty class for indexing tables.
+    /// OpenXml utility class for performing operations on text runs.
     /// </summary>
-    public class TableIndexer
+    public class RunIndexer
     {
         #region Constructors & Destructors
 
-        public TableIndexer(Table toIndex)
+        public RunIndexer(Run toIndex)
         {
             if (toIndex == null)
             {
                 throw new ArgumentNullException("toIndex");
             }
-
-            this.Table = toIndex;
         }
 
         #endregion
@@ -25,23 +23,23 @@
         #region Properties
 
         /// <summary>
-        /// Gets the table element the indexer wraps.
+        /// Gets the contained run.
         /// </summary>
-        public Table Table { get; private set; }
+        public Run Run { get; private set; }
 
         #endregion
 
         #region Public Methods
 
         /// <summary>
-        /// Casts the indexer to a Table element. Any changes made to the raw element will not
+        /// Casts the indexer to a Run element. Any changes made to the raw element will not
         /// be reflected in the indexer.
         /// </summary>
         /// <param name="indexer">The indexer to cast.</param>
         /// <returns>The element that the indexer wraps, or null if <paramref name="indexer"/> is null.</returns>
-        public static implicit operator Table(TableIndexer indexer)
+        public static implicit operator Run(RunIndexer indexer)
         {
-            return indexer != null ? indexer.Table : null;
+            return indexer != null ? indexer.Run : null;
         }
 
         #endregion

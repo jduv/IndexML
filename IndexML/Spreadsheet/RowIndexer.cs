@@ -30,11 +30,6 @@
 
         #region Constructors & Destructors
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="RowIndexer"/> class.
-        /// </summary>
-        /// <param name="row">The row to index.</param>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="row"/> is null.</exception>
         public RowIndexer(Row row)
         {
             if (row == null)

@@ -57,21 +57,10 @@
 
         #region Constructors & Destructors
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CellReference"/> class. This is a default instance
-        /// with no extra initialization performed on the values contained inside--it is the subclasses
-        /// responsibility to ensure that the Value property is correctly set.
-        /// </summary>
         protected CellReference()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CellReference"/> class.
-        /// </summary>
-        /// <param name="cellRef">The cell to initialize with.</param>
-        /// <exception cref="ArgumentException">Thrown if <paramref name="cellRef"/> is null, empty,
-        /// or invalid.</exception>
         protected CellReference(string cellRef)
         {
             if (string.IsNullOrEmpty(cellRef))

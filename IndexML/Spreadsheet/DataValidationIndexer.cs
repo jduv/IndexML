@@ -22,11 +22,6 @@
 
         #region Constructors & Destructors
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DataValidationIndexer"/> class.
-        /// </summary>
-        /// <param name="toIndex">The validator to index.</param>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="toIndex"/> is null.</exception>
         public DataValidationIndexer(DataValidation toIndex)
         {
             if (toIndex == null)

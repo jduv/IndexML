@@ -11,11 +11,6 @@
     {
         #region Constructors & Destructors
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DocumentIndexer"/> class.
-        /// </summary>
-        /// <param name="toIndex">The document part to index.</param>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="toIndex"/> is null.</exception>
         public DocumentIndexer(MainDocumentPart toIndex)
         {
             if (toIndex == null)
