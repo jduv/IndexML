@@ -12,7 +12,7 @@
     {
         #region Fields & Constants
 
-        public IList<RunIndexer> runs;
+        private IList<RunIndexer> runs = new List<RunIndexer>();
 
         #endregion
 
