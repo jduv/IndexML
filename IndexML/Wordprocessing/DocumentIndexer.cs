@@ -41,6 +41,11 @@
         /// </summary>
         public BodyIndexer Body { get; private set; }
 
+        /// <summary>
+        /// Gets the numbering indexer
+        /// </summary>
+        public NumberingIndexer Numbering { get; private set; }
+
         #endregion
 
         #region Public Methods

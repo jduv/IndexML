@@ -16,6 +16,10 @@
 
         protected const string StandardDocPath = TestFilesDir + "Standard.docx";
 
+        protected const string NumberedDocPath = TestFilesDir + "Numbered.docx";
+
+        protected const string BulletedDocPath = TestFilesDir + "Bulleted.docx";
+
         #endregion
 
         #region Protected Methods

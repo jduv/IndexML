@@ -60,6 +60,7 @@
     <Compile Include="Spreadsheet\DataValidationIndexerUnitTests.cs" />
     <Compile Include="Wordprocessing\BodyIndexerUnitTests.cs" />
     <Compile Include="Wordprocessing\DocumentIndexerUnitTests.cs" />
+    <Compile Include="Wordprocessing\NumberingIndexerUnitTests.cs" />
     <Compile Include="Wordprocessing\ParagraphIndexerUnitTests.cs" />
     <Compile Include="Wordprocessing\TableIndexerUnitTests.cs" />
     <Compile Include="Wordprocessing\WordprocessingDocumentIndexerUnitTests.cs" />
@@ -82,6 +83,9 @@
     <None Include="TestFiles\AllValidations.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="TestFiles\Bulleted.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="TestFiles\ColumnValidations.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -102,6 +106,9 @@
     </None>
     <None Include="TestFiles\MaxExtents.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="TestFiles\Numbered.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="TestFiles\OneValidationCellA2.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -1,13 +1,16 @@
 ﻿namespace IndexML.UnitTests.Wordprocessing
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Text;
+    using DocumentFormat.OpenXml.Packaging;
     using DocumentFormat.OpenXml.Wordprocessing;
     using IndexML.Wordprocessing;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
-    public class TableIndexerUnitTests : WordprocessingDocumentTest
+    public class NumberingIndexerUnitTests : WordprocessingDocumentTest
     {
         #region Test Methods
 
@@ -15,20 +18,20 @@
         [ExpectedException(typeof(ArgumentNullException))]
         public void Constructor_NullArgument_ThrowsException()
         {
-            var target = new TableIndexer(null);
+            var target = new NumberingIndexer(null);
         }
 
         [TestMethod]
-        [DeploymentItem(StandardDocPath, TestFilesDir)]
+        [DeploymentItem(NumberedDocPath, TestFilesDir)]
         public void ImplicitCast_ValidIndexer_SameReference()
         {
             SafeExecuteTest(
-               StandardDocPath,
+               NumberedDocPath,
                (doc) =>
                {
-                   var expected = doc.MainDocumentPart.Document.Body.Descendants<Table>().FirstOrDefault();
-                   var indexer = new TableIndexer(expected);
-                   var target = (Table)indexer;
+                   var expected = doc.MainDocumentPart.NumberingDefinitionsPart.Numbering;
+                   var indexer = new NumberingIndexer(doc.MainDocumentPart.NumberingDefinitionsPart);
+                   var target = (Numbering)indexer;
 
                    // Check references
                    Assert.AreSame(expected, target);
@@ -38,8 +41,8 @@
         [TestMethod]
         public void ImplicitCast_Null_IsNull()
         {
-            TableIndexer indexer = null;
-            var target = (Table)indexer;
+            NumberingIndexer indexer = null;
+            var target = (Numbering)indexer;
             Assert.IsNull(target);
         }
 
