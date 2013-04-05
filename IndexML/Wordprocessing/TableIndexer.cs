@@ -1,8 +1,8 @@
 ﻿namespace IndexML.Wordprocessing
 {
     using System;
-    using System.Linq;
     using System.Collections.Generic;
+    using System.Linq;
     using DocumentFormat.OpenXml.Wordprocessing;
 
     /// <summary>
@@ -36,11 +36,10 @@
 
             // Fill out the rows.
             this.tableRows = new List<TableRowIndexer>();
-            foreach(var row in toIndex.Elements<TableRow>())
+            foreach (var row in toIndex.Elements<TableRow>())
             {
                 this.tableRows.Add(new TableRowIndexer(row));
             }
-            
         }
 
         #endregion

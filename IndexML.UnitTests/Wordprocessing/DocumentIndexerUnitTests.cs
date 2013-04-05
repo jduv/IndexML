@@ -49,8 +49,6 @@
                    // Check references
                    Assert.AreSame(expected, target);
                });
-
-
         }
 
         [TestMethod]
