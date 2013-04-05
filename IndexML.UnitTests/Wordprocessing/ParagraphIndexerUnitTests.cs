@@ -7,7 +7,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
-    [DeploymentItem(@"TestFiles\", @"TestFiles\")]
+    [DeploymentItem(@"IndexML.TestFiles\", @"IndexML.TestFiles\")]
     public class ParagraphIndexerUnitTests : WordprocessingDocumentTest
     {
         #region Test Methods
@@ -34,6 +34,23 @@
                     Assert.AreSame(expected, target.Paragraph);
                     Assert.IsNotNull(target.Properties);
                     Assert.AreSame(expected.Elements<ParagraphProperties>().FirstOrDefault(), target.Properties);
+                });
+        }
+
+        [TestMethod]
+        public void Constructor_FamousOneLiner_ValidElements()
+        {
+            SafeExecuteTest(
+                FamousOneLinerDocPath,
+                (doc) =>
+                {
+                    var expected = doc.MainDocumentPart.Document.Body.Elements<Paragraph>().FirstOrDefault();
+                    var target = new ParagraphIndexer(expected);
+
+                    Assert.IsNotNull(target.Paragraph);
+                    Assert.AreSame(expected, target.Paragraph);
+                    Assert.AreEqual("The quick fox jumped over the lazy dog.", target.Text);
+                    Assert.IsTrue(target.Runs.Count() > 0);
                 });
         }
 

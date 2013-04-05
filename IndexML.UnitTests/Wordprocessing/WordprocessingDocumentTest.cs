@@ -22,6 +22,8 @@
 
         protected const string FourRowsThreeColumnsDocPath = TestFilesDir + "FourRowThreeColumnTable.docx";
 
+        protected const string FamousOneLinerDocPath = TestFilesDir + "FamousOneLiner.docx";
+
         #endregion
 
         #region Protected Methods

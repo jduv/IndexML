@@ -27,6 +27,12 @@
 
             this.Paragraph = toIndex;
             this.Properties = toIndex.Elements<ParagraphProperties>().FirstOrDefault();
+
+            // Process runs.
+            foreach (var run in toIndex.Elements<Run>())
+            {
+                this.runs.Add(new RunIndexer(run));
+            }
         }
 
         #endregion
@@ -61,7 +67,7 @@
         {
             get
             {
-                throw new NotImplementedException();
+                return this.Paragraph.InnerText;
             }
         }
 

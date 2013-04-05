@@ -8,6 +8,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
+    [DeploymentItem(@"IndexML.TestFiles\", @"IndexML.TestFiles\")]
     public class SharedStringTableIndexerUnitTests : SpreadsheetTest
     {
         #region Test Methods
@@ -27,7 +28,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(EmptySheetPath, TestFilesDir)]
         public void Constructor_NullStringTableOnPart_CreatesEmptyIndexer()
         {
             SafeExecuteTest(
@@ -44,7 +44,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(RandomDataSheetSpath, TestFilesDir)]
         public void Constructor_SharedStringTablePartWithData_NonEmptyIndexer()
         {
             SafeExecuteTest(
@@ -59,7 +58,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(RandomDataSheetSpath, TestFilesDir)]
         [ExpectedException(typeof(ArgumentNullException))]
         public void Add_NullString_ThrowsException()
         {
@@ -73,7 +71,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(RandomDataSheetSpath, TestFilesDir)]
         public void Add_NonEmptyStringTwice_AddedAtReturnedIndexNoDuplicates()
         {
             SafeExecuteTest(
@@ -94,7 +91,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(RandomDataSheetSpath, TestFilesDir)]
         public void Add_NonEmptyValue_AddedAtReturnedIndex()
         {
             SafeExecuteTest(
@@ -113,7 +109,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(RandomDataSheetSpath, TestFilesDir)]
         [ExpectedException(typeof(ArgumentNullException))]
         public void AddAll_NullArgument_ThrowsException()
         {
@@ -131,7 +126,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(RandomDataSheetSpath, TestFilesDir)]
         public void AddAll_EmptyList_NoChange()
         {
             SafeExecuteTest(
@@ -148,7 +142,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(RandomDataSheetSpath, TestFilesDir)]
         public void AddAll_ValidList_AddedAtReturnedIndices()
         {
             SafeExecuteTest(
@@ -178,7 +171,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(RandomDataSheetSpath, TestFilesDir)]
         public void Contains_NonExistantStringAndIndex_ReturnsFalse()
         {
             SafeExecuteTest(
@@ -192,7 +184,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(RandomDataSheetSpath, TestFilesDir)]
         public void Contains_ExistingStringAndIndex_ReturnsFalse()
         {
             SafeExecuteTest(
@@ -209,7 +200,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(RandomDataSheetSpath, TestFilesDir)]
         [ExpectedException(typeof(ArgumentNullException))]
         public void Indexer_NullString_ThrowsException()
         {
@@ -223,7 +213,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(RandomDataSheetSpath, TestFilesDir)]
         [ExpectedException(typeof(KeyNotFoundException))]
         public void Indexer_NonExistingString_ThrowsException()
         {
@@ -237,7 +226,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(RandomDataSheetSpath, TestFilesDir)]
         [ExpectedException(typeof(KeyNotFoundException))]
         public void Indexer_NegativeIndex_ThrowsException()
         {
@@ -251,7 +239,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(RandomDataSheetSpath, TestFilesDir)]
         public void ImplicitCast_ValidIndexer_SameReference()
         {
             SafeExecuteTest(

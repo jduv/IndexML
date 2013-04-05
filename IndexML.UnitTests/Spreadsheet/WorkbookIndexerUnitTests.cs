@@ -6,6 +6,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
+    [DeploymentItem(@"IndexML.TestFiles\", @"IndexML.TestFiles\")]
     public class WorkbookIndexerUnitTests : SpreadsheetTest
     {
         #region Test Methods
@@ -18,7 +19,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(EmptySheetPath, TestFilesDir)]
         public void Constructor_EmptySheet_HasOneSheet()
         {
             SafeExecuteTest(
@@ -33,7 +33,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(RandomDataSheetSpath, TestFilesDir)]
         public void Constructor_RandomData_ValidState()
         {
             SafeExecuteTest(
@@ -48,7 +47,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(EmptyThreeSheetsPath, TestFilesDir)]
         public void Constructor_EmptyMultiSheets_HasThreeSheets()
         {
             SafeExecuteTest(
@@ -63,7 +61,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(RandomDataThreeSheetSpath, TestFilesDir)]
         public void Constructor_RandomDataMultiSheets_HasThreeSheets()
         {
             SafeExecuteTest(

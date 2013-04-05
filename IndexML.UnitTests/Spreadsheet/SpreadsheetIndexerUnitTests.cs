@@ -8,6 +8,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
+    [DeploymentItem(@"IndexML.TestFiles\", @"IndexML.TestFiles\")]
     public class SpreadsheetIndexerUnitTests : SpreadsheetTest
     {
         #region Test Methods
@@ -44,7 +45,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(EmptySheetPath, TestFilesDir)]
         public void Constructor_EmptySheet_ValidState()
         {
             var spreadsheetBytes = LoadTestFileBytes(EmptySheetPath);
@@ -66,7 +66,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(RandomDataSheetSpath, TestFilesDir)]
         public void Constructor_RandomData_ValidState()
         {
             var spreadsheetBytes = LoadTestFileBytes(RandomDataSheetSpath);
@@ -89,7 +88,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(EmptyThreeSheetsPath, TestFilesDir)]
         public void Constructor_EmptyMultiSheets_ValidState()
         {
             var spreadsheetBytes = LoadTestFileBytes(EmptyThreeSheetsPath);
@@ -111,7 +109,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(RandomDataThreeSheetSpath, TestFilesDir)]
         public void Constructor_RandomDataMultiSheets_ValidState()
         {
             var spreadsheetBytes = LoadTestFileBytes(RandomDataThreeSheetSpath);
@@ -133,7 +130,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(EmptySheetPath, TestFilesDir)]
         public void Constructor_EmptySheetStream_ValidState()
         {
             AssertFileExists(EmptySheetPath);
@@ -152,7 +148,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(RandomDataSheetSpath, TestFilesDir)]
         public void Constructor_RandomDataStream_ValidState()
         {
             AssertFileExists(RandomDataSheetSpath);
@@ -172,7 +167,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(EmptyThreeSheetsPath, TestFilesDir)]
         public void Constructor_EmptyMultiSheetsStream_ValidState()
         {
             AssertFileExists(EmptyThreeSheetsPath);
@@ -192,7 +186,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(RandomDataThreeSheetSpath, TestFilesDir)]
         public void Constructor_RandomDataMultiSheetsStream_ValidState()
         {
             AssertFileExists(RandomDataThreeSheetSpath);
@@ -212,7 +205,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(RandomDataThreeSheetSpath, TestFilesDir)]
         public void SaveAndClose_DisposesIndexer()
         {
             AssertFileExists(RandomDataThreeSheetSpath);
@@ -224,7 +216,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(RandomDataThreeSheetSpath, TestFilesDir)]
         public void SaveAndReopen_DoesNotDisposeIndexer()
         {
             AssertFileExists(RandomDataThreeSheetSpath);
@@ -237,7 +228,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(RandomDataThreeSheetSpath, TestFilesDir)]
         [ExpectedException(typeof(ObjectDisposedException))]
         public void Data_DisposedObject()
         {
@@ -251,7 +241,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(RandomDataThreeSheetSpath, TestFilesDir)]
         [ExpectedException(typeof(ObjectDisposedException))]
         public void Bytes_DisposedObject()
         {
@@ -265,7 +254,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(RandomDataThreeSheetSpath, TestFilesDir)]
         public void ImplicitCast_ValidIndexer_SameReference()
         {
             AssertFileExists(RandomDataThreeSheetSpath);

@@ -8,6 +8,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
+    [DeploymentItem(@"IndexML.TestFiles\", @"IndexML.TestFiles\")]
     public class DataValidationIndexerUnitTests : SpreadsheetTest
     {
         #region Fields & Constants
@@ -36,7 +37,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(StaggeredValidationsSheetPath, TestFilesDir)]
         public void Constructor_StaggeredSingleCellValidations_CorrectCellReferences()
         {
             SafeExecuteTest(
@@ -54,7 +54,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(AllValidationsSheetPath, TestFilesDir)]
         public void Add_NullCell_Ignored()
         {
             SafeExecuteTest(
@@ -65,7 +64,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(AllValidationsSheetPath, TestFilesDir)]
         public void Add_NullCellReference_Ignored()
         {
             SafeExecuteTest(
@@ -83,7 +81,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(OneValidationA2SheetPath, TestFilesDir)]
         public void Add_EmptyCellreference_Ignored()
         {
             SafeExecuteTest(
@@ -101,7 +98,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(OneValidationA2SheetPath, TestFilesDir)]
         [ExpectedException(typeof(ArgumentException))]
         public void Add_MalformedCellReference_ExceptionThrown()
         {
@@ -120,7 +116,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(OneValidationA2SheetPath, TestFilesDir)]
         public void Add_ExistingSingleCellReference_NotAdded()
         {
             SafeExecuteTest(
@@ -136,7 +131,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(RowValidationsSheetPath, TestFilesDir)]
         public void Add_NewSingleCellToRowRangeValidator_ReferenceListIncludesCell()
         {
             SafeExecuteTest(
@@ -152,7 +146,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(ColumnValidationsSheetPath, TestFilesDir)]
         public void Add_NewSingleCellToColumnRangeValidator_ReferenceListIncludesCell()
         {
             SafeExecuteTest(
@@ -168,7 +161,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(ColumnValidationsSheetPath, TestFilesDir)]
         public void Add_SingleCellReferenceCollidesWithRangeValidator_NotAdded()
         {
             SafeExecuteTest(
@@ -184,7 +176,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(StaggeredValidationsSheetPath, TestFilesDir)]
         public void Clear_StaggeredValidations_NoItems()
         {
             SafeExecuteTest(
@@ -200,7 +191,6 @@
         }
 
         ////[TestMethod]
-        ////[DeploymentItem(ColumnValidationsSheetPath, TestFilesDir)]
         ////public void Remove_SingleCellReferenceNonExisting_NotRemoved()
         ////{
         ////    var aa1 = new Cell()
@@ -222,7 +212,6 @@
         ////}
 
         ////[TestMethod]
-        ////[DeploymentItem(StaggeredValidationsSheetPath, TestFilesDir)]
         ////public void Remove_SingleCellReferenceExisting_Removed()
         ////{
         ////    var a2 = new Cell()
@@ -243,7 +232,6 @@
         ////}
 
         ////[TestMethod]
-        ////[DeploymentItem(ColumnValidationsSheetPath, TestFilesDir)]
         ////public void Remove_SingleCellReferenceExistingRangeCollision_RangeSplit()
         ////{
         ////    var b2 = new Cell()
@@ -265,7 +253,6 @@
         ////}
 
         ////[TestMethod]
-        ////[DeploymentItem(ColumnValidationsSheetPath, TestFilesDir)]
         ////public void Remove_SingleCellReferenceExistingRangeNoCollision_NoChange()
         ////{
         ////    var aa1 = new Cell()
@@ -287,7 +274,6 @@
         ////}
 
         [TestMethod]
-        [DeploymentItem(StaggeredValidationsSheetPath, TestFilesDir)]
         public void Contains_ExistingSingleCellRefs_ReturnsTrue()
         {
             SafeExecuteTest(
@@ -302,7 +288,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(StaggeredValidationsSheetPath, TestFilesDir)]
         public void Contains_NonExistantSingleCellRef_ReturnsFalse()
         {
             SafeExecuteTest(
@@ -315,7 +300,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(RowValidationsSheetPath, TestFilesDir)]
         public void Contains_Range_Collision_ReturnsTrue()
         {
             SafeExecuteTest(
@@ -328,7 +312,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(RowValidationsSheetPath, TestFilesDir)]
         public void Contains_RangeNoCollision_ReturnsFalse()
         {
             SafeExecuteTest(
@@ -341,7 +324,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(RowValidationsSheetPath, TestFilesDir)]
         public void ImplicitCast_ValidIndexer_SameReference()
         {
             SafeExecuteTest(

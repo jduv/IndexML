@@ -7,6 +7,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
+    [DeploymentItem(@"IndexML.TestFiles\", @"IndexML.TestFiles\")]
     public class SheetDataIndexerUnitTests : SpreadsheetTest
     {
         #region Test Methods
@@ -19,7 +20,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(EmptySheetPath, TestFilesDir)]
         public void Constructor_EmptySheetData_ValidEmptyState()
         {
             SafeExecuteTest(
@@ -35,7 +35,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(RandomDataSheetSpath, TestFilesDir)]
         public void Constructor_ValidSheetData_ValidState()
         {
             SafeExecuteTest(
@@ -55,7 +54,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(MaxExtentsSheetPath, TestFilesDir)]
         public void Constructor_MaxExtents_ValidState()
         {
             SafeExecuteTest(
@@ -73,7 +71,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(MaxExtentsSheetPath, TestFilesDir)]
         [ExpectedException(typeof(IndexOutOfRangeException))]
         public void AppendRow_MaxExtents_ThrowsException()
         {
@@ -87,7 +84,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(EmptySheetPath, TestFilesDir)]
         public void AppendRow_EmptySpreadsheet_IncreasesCountByOne()
         {
             SafeExecuteTest(
@@ -105,7 +101,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(EmptySheetPath, TestFilesDir)]
         [ExpectedException(typeof(IndexOutOfRangeException))]
         public void RemoveRow_NegativeIndex_ThrowsException()
         {
@@ -119,7 +114,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(EmptySheetPath, TestFilesDir)]
         [ExpectedException(typeof(IndexOutOfRangeException))]
         public void RemoveRow_OverCapacityIndex_ThrowsException()
         {
@@ -132,8 +126,7 @@
                 });
         }
 
-        [TestMethod]
-        [DeploymentItem(EmptySheetPath, TestFilesDir)]        
+        [TestMethod]   
         public void RemoveRow_EmptySpreadsheet_DoesNothing()
         {
             SafeExecuteTest(
@@ -146,7 +139,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(ExactlyFiveRowsSheetPath, TestFilesDir)]
         public void RemoveRow_NonExistentRow_ReturnsFalse()
         {
             SafeExecuteTest(
@@ -160,7 +152,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(ExactlyFiveRowsSheetPath, TestFilesDir)]
         public void RemoveRow_MaxRowNoShift_DecreasesCountByOne()
         {
             SafeExecuteTest(
@@ -180,7 +171,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(ExactlyFiveRowsSheetPath, TestFilesDir)]
         public void RemoveRow_SequentialMiddleRowNoShiftUp_DecreasesCountAndMaxRowByOne()
         {
             SafeExecuteTest(
@@ -200,7 +190,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(ExactlyFiveRowsSheetPath, TestFilesDir)]
         public void RemoveRow_MaxRowShift_DecreasesCountByOne()
         {
             SafeExecuteTest(
@@ -220,7 +209,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(ExactlyFiveRowsSheetPath, TestFilesDir)]
         public void RemoveRow_SequentialMiddleRowShiftUp_DecreasesCountAndMaxRowByOne()
         {
             SafeExecuteTest(
@@ -240,7 +228,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(EmptySheetPath, TestFilesDir)]
         [ExpectedException(typeof(ArgumentNullException))]
         public void InsertRow_NullRowArgument_ThrowsException()
         {
@@ -254,7 +241,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(ExactlyFiveRowsSheetPath, TestFilesDir)]
         [ExpectedException(typeof(IndexOutOfRangeException))]
         public void InsertRow_NegativeIndex_ThrowsException()
         {
@@ -268,7 +254,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(ExactlyFiveRowsSheetPath, TestFilesDir)]
         [ExpectedException(typeof(IndexOutOfRangeException))]
         public void InsertRow_IndexOverCapacity_ThrowsException()
         {
@@ -282,7 +267,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(ExactlyFiveRowsSheetPath, TestFilesDir)]
         public void InsertRow_SequentialMiddleRowNoShift_DoesNotIncreaseCountOrMaxRow()
         {
             SafeExecuteTest(
@@ -304,7 +288,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(ExactlyFiveRowsSheetPath, TestFilesDir)]
         public void InsertRow_SequentialMiddleRowShift_IncreasesCountAndMaxRowByOne()
         {
             SafeExecuteTest(
@@ -326,7 +309,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(ExactlyFiveRowsSheetPath, TestFilesDir)]
         public void InsertRow_SequentialMaxRowNoShift_IncreasesCountByOne()
         {
             SafeExecuteTest(
@@ -347,7 +329,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(ExactlyFiveRowsSheetPath, TestFilesDir)]
         public void InsertRow_SequentialMaxRowShift_IncreasesCountAndMaxRowByOne()
         {
             SafeExecuteTest(
@@ -368,7 +349,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(FiveEvenRowsSheetPath, TestFilesDir)]
         public void InsertRow_NonExistingIndexNoShift_IncreasesCountButNotMaxRow()
         {
             SafeExecuteTest(
@@ -389,7 +369,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(FiveEvenRowsSheetPath, TestFilesDir)]
         public void InsertRow_NonExistingIndexShift_IncreasesCountAndMaxRow()
         {
             SafeExecuteTest(
@@ -410,7 +389,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(ExactlyFiveRowsSheetPath, TestFilesDir)]
         public void RowsProperty_ExactlyFiveRows_NoNulls()
         {
             SafeExecuteTest(
@@ -428,7 +406,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(EmptySheetPath, TestFilesDir)]
         [ExpectedException(typeof(InvalidOperationException))]
         public void MaxRowIndexProperty_EmptySheetData_ThrowsException()
         {
@@ -446,7 +423,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(EmptySheetPath, TestFilesDir)]
         public void ImplicitCast_ValidIndexer_SameReference()
         {
             SafeExecuteTest(

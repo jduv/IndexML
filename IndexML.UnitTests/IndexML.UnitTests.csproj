@@ -80,6 +80,9 @@
     <Compile Include="Spreadsheet\WorksheetIndexerUnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="IndexML.TestFiles\FamousOneLiner.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Settings.StyleCop" />
     <None Include="IndexML.TestFiles\AllValidations.xlsx">

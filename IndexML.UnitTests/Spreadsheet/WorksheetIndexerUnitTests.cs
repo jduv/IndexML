@@ -20,7 +20,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(EmptySheetPath, TestFilesDir)]
         public void Constructor_EmptySheet_ValidState()
         {
             SafeExecuteTest(
@@ -37,7 +36,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(ExactlyFiveRowsSheetPath, TestFilesDir)]
         public void Constructor_NonEmptySheet_ValidState()
         {
             SafeExecuteTest(
@@ -54,7 +52,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(ExactlyFiveRowsSheetPath, TestFilesDir)]
         public void Constructor_NonEmptyWithSheetName_ValidState()
         {
             SafeExecuteTest(

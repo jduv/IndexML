@@ -11,7 +11,7 @@
     {
         #region Fields & Constants
 
-        protected const string TestFilesDir = @"TestFiles\";
+        protected const string TestFilesDir = @"IndexML.TestFiles\";
 
         #endregion
 
