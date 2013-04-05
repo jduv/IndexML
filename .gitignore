@@ -164,4 +164,7 @@ pip-log.txt
 .DS_Store
 
 #CodeMap
-.vs10x
+*.vs10x
+
+#GitHub debug file
+debug.log
