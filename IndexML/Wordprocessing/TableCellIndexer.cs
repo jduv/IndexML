@@ -2,8 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using DocumentFormat.OpenXml.Wordprocessing;
 
     /// <summary>
@@ -11,6 +9,13 @@
     /// </summary>
     public class TableCellIndexer
     {
+        #region Fields & Constants
+
+        private readonly IList<TableIndexer> childTables;
+        private readonly IList<ParagraphIndexer> paragraphs;
+
+        #endregion
+
         #region Constructors & Destructors
 
         public TableCellIndexer(TableCell toIndex)
@@ -21,6 +26,26 @@
             }
 
             this.Cell = toIndex;
+            this.childTables = new List<TableIndexer>();
+            this.paragraphs = new List<ParagraphIndexer>();
+
+            // Again, we forgo linq here for performance reasons. One time
+            // through the loop should be enough.
+            foreach (var element in toIndex.Elements())
+            {
+                if (element != null)
+                {
+                    if (element is Paragraph)
+                    {
+                        this.paragraphs.Add(new ParagraphIndexer(element as Paragraph));
+                    }
+                    else if (element is Table)
+                    {
+                        // This could get nasty with lots of nested stuff.
+                        this.childTables.Add(new TableIndexer(element as Table));
+                    }
+                }
+            }
         }
 
         #endregion
@@ -31,6 +56,16 @@
         /// Gets the wrapped cell.
         /// </summary>
         public TableCell Cell { get; private set; }
+
+        /// <summary>
+        /// Gets an enumeration of the paragraphs inside the cell.
+        /// </summary>
+        public IEnumerable<ParagraphIndexer> Paragraphs { get; private set; }
+
+        /// <summary>
+        /// Gets an enumeration of the child tables inside the cell
+        /// </summary>
+        public IEnumerable<TableIndexer> Tables { get; private set; }
 
         #endregion
 

@@ -1,7 +1,6 @@
 ﻿namespace IndexML.Wordprocessing
 {
     using System;
-    using DocumentFormat.OpenXml.Packaging;
     using DocumentFormat.OpenXml.Wordprocessing;
 
     /// <summary>

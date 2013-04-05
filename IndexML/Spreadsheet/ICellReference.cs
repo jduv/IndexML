@@ -1,7 +1,6 @@
 ﻿namespace IndexML.Spreadsheet
 {
     using System;
-    using DocumentFormat.OpenXml.Spreadsheet;
 
     /// <summary>
     /// Defines behavior for a cell reference implementation. A cell reference is a simple wrapper around

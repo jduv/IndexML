@@ -1,10 +1,6 @@
 ﻿namespace IndexML.UnitTests.Wordprocessing
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using DocumentFormat.OpenXml.Packaging;
     using DocumentFormat.OpenXml.Wordprocessing;
     using IndexML.Wordprocessing;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
