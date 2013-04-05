@@ -67,13 +67,11 @@
         [TestMethod]
         public void ImplicitCast_ValidIndexer_SameReference()
         {
-            AssertFileExists(StandardDocPath);
-            using (var target = new WordprocessingDocumentIndexer(OpenFileReadWrite(StandardDocPath)))
-            {
-                WordprocessingDocument doc = (WordprocessingDocument)target;
-                Assert.IsNotNull(doc);
-                Assert.AreSame(target.WordprocessingDocument, doc);
-            }
+            var expected = new Body();
+            var indexer = new BodyIndexer(expected);
+            var target = (Body)indexer;
+
+            Assert.AreSame(expected, target);
         }
 
         [TestMethod]

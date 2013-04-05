@@ -64,6 +64,7 @@
     <Compile Include="Wordprocessing\ParagraphIndexerUnitTests.cs" />
     <Compile Include="Wordprocessing\RunIndexerUnitTests.cs" />
     <Compile Include="Wordprocessing\TableIndexerUnitTests.cs" />
+    <Compile Include="Wordprocessing\TableRowIndexerUnitTests.cs" />
     <Compile Include="Wordprocessing\WordprocessingDocumentIndexerUnitTests.cs" />
     <Compile Include="Wordprocessing\WordprocessingDocumentTest.cs" />
     <Compile Include="Spreadsheet\LinkedListBasedSheetDataIndexerUnitTests.cs" />
@@ -104,6 +105,9 @@
     </None>
     <None Include="TestFiles\FiveEvenRows.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="TestFiles\FourRowThreeColumnTable.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="TestFiles\MaxExtents.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

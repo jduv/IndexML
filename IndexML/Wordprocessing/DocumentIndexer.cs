@@ -11,14 +11,14 @@
     {
         #region Constructors & Destructors
 
-        public DocumentIndexer(MainDocumentPart toIndex)
+        public DocumentIndexer(Document toIndex)
         {
             if (toIndex == null)
             {
                 throw new ArgumentNullException("doc");
             }
 
-            this.Document = toIndex.Document;
+            this.Document = toIndex;
             this.Body = new BodyIndexer(this.Document.Body);
         }
 

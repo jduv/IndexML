@@ -20,6 +20,8 @@
 
         protected const string BulletedDocPath = TestFilesDir + "Bulleted.docx";
 
+        protected const string FourRowsThreeColumnsDocPath = TestFilesDir + "FourRowsThreeColumnsTable.docx";
+
         #endregion
 
         #region Protected Methods

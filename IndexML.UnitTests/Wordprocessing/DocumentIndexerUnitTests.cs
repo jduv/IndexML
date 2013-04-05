@@ -25,7 +25,7 @@
                 EmptyDocPath,
                 (doc) => 
                 {
-                    var target = new DocumentIndexer(doc.MainDocumentPart);
+                    var target = new DocumentIndexer(doc.MainDocumentPart.Document);
                     Assert.IsNotNull(target);
                     Assert.IsNotNull(target.Document);
                     Assert.IsNotNull(target.Body);
@@ -43,12 +43,14 @@
                (doc) =>
                {
                    var expected = doc.MainDocumentPart.Document;
-                   var indexer = new DocumentIndexer(doc.MainDocumentPart);
+                   var indexer = new DocumentIndexer(expected);
                    var target = (Document)indexer;
 
                    // Check references
                    Assert.AreSame(expected, target);
                });
+
+
         }
 
         [TestMethod]

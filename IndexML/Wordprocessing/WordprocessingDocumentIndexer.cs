@@ -199,7 +199,7 @@
         private void Initialize(WordprocessingDocument doc)
         {
             this.WordprocessingDocument = doc;
-            this.Document = new DocumentIndexer(doc.MainDocumentPart);
+            this.Document = new DocumentIndexer(doc.MainDocumentPart.Document);
         }
 
         #endregion

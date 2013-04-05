@@ -20,6 +20,20 @@
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Constructor_NoTableGrid_ThrowsException()
+        {
+            SafeExecuteTest(
+               StandardDocPath,
+               (doc) =>
+               {
+                   var expected = doc.MainDocumentPart.Document.Body.Descendants<Table>().FirstOrDefault();
+                   expected.RemoveAllChildren<TableGrid>(); // renders the table invalid.
+                   var indexer = new TableIndexer(expected); // boom
+                });
+        }
+
+        [TestMethod]
         public void ImplicitCast_ValidIndexer_SameReference()
         {
             SafeExecuteTest(
