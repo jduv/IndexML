@@ -2,7 +2,6 @@
 {
     using System;
     using System.Linq;
-    using DocumentFormat.OpenXml.Packaging;
     using DocumentFormat.OpenXml.Wordprocessing;
     using IndexML.Wordprocessing;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
