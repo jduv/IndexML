@@ -60,12 +60,24 @@
         /// <summary>
         /// Gets an enumeration of the paragraphs inside the cell.
         /// </summary>
-        public IEnumerable<ParagraphIndexer> Paragraphs { get; private set; }
+        public IEnumerable<ParagraphIndexer> Paragraphs
+        {
+            get
+            {
+                return this.paragraphs;
+            }
+        }
 
         /// <summary>
         /// Gets an enumeration of the child tables inside the cell
         /// </summary>
-        public IEnumerable<TableIndexer> Tables { get; private set; }
+        public IEnumerable<TableIndexer> Tables
+        {
+            get
+            {
+                return this.childTables;
+            }
+        }
 
         #endregion
 

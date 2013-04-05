@@ -24,6 +24,8 @@
 
         protected const string FamousOneLinerDocPath = TestFilesDir + "FamousOneLiner.docx";
 
+        protected const string ComplexSingleTableCell = TestFilesDir + "ComplexSingleTableCell.docx";
+
         #endregion
 
         #region Protected Methods

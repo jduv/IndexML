@@ -81,6 +81,9 @@
     <Compile Include="Spreadsheet\WorksheetIndexerUnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="IndexML.TestFiles\ComplexSingleTableCell.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="IndexML.TestFiles\FamousOneLiner.docx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
