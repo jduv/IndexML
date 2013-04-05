@@ -78,6 +78,7 @@
     <Compile Include="Wordprocessing\ParagraphIndexer.cs" />
     <Compile Include="Wordprocessing\RunIndexer.cs" />
     <Compile Include="Wordprocessing\TableIndexer.cs" />
+    <Compile Include="Wordprocessing\TableRowIndexer.cs" />
     <Compile Include="Wordprocessing\WordprocessingDocumentIndexer.cs" />
   </ItemGroup>
   <ItemGroup>

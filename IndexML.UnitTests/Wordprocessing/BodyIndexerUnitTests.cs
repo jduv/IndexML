@@ -8,6 +8,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
+    [DeploymentItem(@"TestFiles\", @"TestFiles\")]
     public class BodyIndexerUnitTests : WordprocessingDocumentTest
     {
         #region Test Methods
@@ -20,7 +21,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(EmptyDocPath, TestFilesDir)]
         public void Constructor_EmptyDocument_ValidState()
         {
             SafeExecuteTest(
@@ -43,7 +43,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(StandardDocPath, TestFilesDir)]
         public void Constructor_StandardDocument_ValidState()
         {
             SafeExecuteTest(
@@ -66,7 +65,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(StandardDocPath, TestFilesDir)]
         public void ImplicitCast_ValidIndexer_SameReference()
         {
             AssertFileExists(StandardDocPath);

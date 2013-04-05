@@ -7,6 +7,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
+    [DeploymentItem(@"TestFiles\", @"TestFiles\")]
     public class WordprocessingDocumentIndexerUnitTests : WordprocessingDocumentTest
     {
         #region Test Methods
@@ -43,7 +44,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(EmptyDocPath, TestFilesDir)]
         public void Constructor_EmptyDoc_ValidState()
         {
             var docBytes = LoadTestFileBytes(EmptyDocPath);
@@ -64,7 +64,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(EmptyDocPath, TestFilesDir)]
         public void SaveAndClose_DisposesIndexer()
         {
             AssertFileExists(EmptyDocPath);
@@ -75,7 +74,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(EmptyDocPath, TestFilesDir)]
         public void SaveAndReopen_DoesNotDisposeIndexer()
         {
             AssertFileExists(EmptyDocPath);
@@ -87,7 +85,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(EmptyDocPath, TestFilesDir)]
         [ExpectedException(typeof(ObjectDisposedException))]
         public void Data_DisposedObject()
         {
@@ -100,7 +97,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(EmptyDocPath, TestFilesDir)]
         [ExpectedException(typeof(ObjectDisposedException))]
         public void Bytes_DisposedObject()
         {
@@ -113,7 +109,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(EmptyDocPath, TestFilesDir)]
         public void ImplicitCast_ValidIndexer_SameReference()
         {
             AssertFileExists(EmptyDocPath);

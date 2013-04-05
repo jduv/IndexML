@@ -1,6 +1,8 @@
 ﻿namespace IndexML.Wordprocessing
 {
     using System;
+    using System.Linq;
+    using System.Collections.Generic;
     using DocumentFormat.OpenXml.Wordprocessing;
 
     /// <summary>
@@ -8,6 +10,13 @@
     /// </summary>
     public class TableIndexer
     {
+        #region Fields & Constants
+
+        private IList<TableRowIndexer> tableRows;
+        private TableGrid tableGrid;
+
+        #endregion
+
         #region Constructors & Destructors
 
         public TableIndexer(Table toIndex)
@@ -17,7 +26,21 @@
                 throw new ArgumentNullException("toIndex");
             }
 
+            this.tableGrid = toIndex.Elements<TableGrid>().FirstOrDefault();
+            if (this.tableGrid == null)
+            {
+                throw new ArgumentException("Invalid table structure! Unable to locate the table grid element.");
+            }
+
             this.Table = toIndex;
+
+            // Fill out the rows.
+            this.tableRows = new List<TableRowIndexer>();
+            foreach(var row in toIndex.Elements<TableRow>())
+            {
+                this.tableRows.Add(new TableRowIndexer(row));
+            }
+            
         }
 
         #endregion
@@ -28,6 +51,28 @@
         /// Gets the table element the indexer wraps.
         /// </summary>
         public Table Table { get; private set; }
+
+        /// <summary>
+        /// Gets the columns.
+        /// </summary>
+        public IEnumerable<GridColumn> Columns
+        {
+            get
+            {
+                return this.tableGrid.Elements<GridColumn>();
+            }
+        }
+
+        /// <summary>
+        /// Gets the rows.
+        /// </summary>
+        public IEnumerable<TableRowIndexer> Rows
+        {
+            get 
+            {
+                return this.tableRows;
+            }
+        }
 
         #endregion
 

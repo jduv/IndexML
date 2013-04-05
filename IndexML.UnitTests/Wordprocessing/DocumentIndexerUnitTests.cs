@@ -6,6 +6,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
+    [DeploymentItem(@"TestFiles\", @"TestFiles\")]
     public class DocumentIndexerUnitTests : WordprocessingDocumentTest
     {
         #region Test Methods
@@ -18,7 +19,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(EmptyDocPath, TestFilesDir)]
         public void Constructor_EmptyDocument_ValidState()
         {
             SafeExecuteTest(
@@ -36,7 +36,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(EmptyDocPath, TestFilesDir)]
         public void ImplicitCast_ValidIndexer_SameReference()
         {
             SafeExecuteTest(

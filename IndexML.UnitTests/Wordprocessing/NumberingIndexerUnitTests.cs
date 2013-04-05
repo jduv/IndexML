@@ -10,6 +10,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
+    [DeploymentItem(@"TestFiles\", @"TestFiles\")]
     public class NumberingIndexerUnitTests : WordprocessingDocumentTest
     {
         #region Test Methods
@@ -22,7 +23,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(NumberedDocPath, TestFilesDir)]
         public void ImplicitCast_ValidIndexer_SameReference()
         {
             SafeExecuteTest(

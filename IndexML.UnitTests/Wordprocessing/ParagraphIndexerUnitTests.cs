@@ -7,6 +7,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
+    [DeploymentItem(@"TestFiles\", @"TestFiles\")]
     public class ParagraphIndexerUnitTests : WordprocessingDocumentTest
     {
         #region Test Methods
@@ -19,7 +20,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(StandardDocPath, TestFilesDir)]
         public void Constructor_StandardDoc_ValidElements()
         {
             SafeExecuteTest(
@@ -38,7 +38,6 @@
         }
 
         [TestMethod]
-        [DeploymentItem(StandardDocPath, TestFilesDir)]
         public void ImplicitCast_ValidIndexer_SameReference()
         {
             SafeExecuteTest(
