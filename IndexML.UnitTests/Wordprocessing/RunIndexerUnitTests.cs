@@ -31,8 +31,8 @@
         [TestMethod]
         public void ImplicitCast_Null_IsNull()
         {
-            ParagraphIndexer indexer = null;
-            var target = (Paragraph)indexer;
+            RunIndexer indexer = null;
+            var target = (Run)indexer;
             Assert.IsNull(target);
         }
 

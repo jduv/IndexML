@@ -14,9 +14,16 @@
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void Constructor_NullArgument_ThrowsException()
+        public void Constructor_NullByteArray_ThrowsException()
         {
             var target = new WordprocessingDocumentIndexer((byte[])null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Constructor_EmptyByteArray_ThrowsException()
+        {
+            var target = new WordprocessingDocumentIndexer(new byte[0]);
         }
 
         [TestMethod]
