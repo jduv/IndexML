@@ -82,55 +82,55 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Settings.StyleCop" />
-    <None Include="TestFiles\AllValidations.xlsx">
+    <None Include="IndexML.TestFiles\AllValidations.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="TestFiles\Bulleted.docx">
+    <None Include="IndexML.TestFiles\Bulleted.docx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestFiles\ColumnValidations.xlsx">
+    <None Include="IndexML.TestFiles\ColumnValidations.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="TestFiles\Empty.docx">
+    <None Include="IndexML.TestFiles\Empty.docx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestFiles\Empty.xlsx">
+    <None Include="IndexML.TestFiles\Empty.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="TestFiles\EmptyThreeSheet.xlsx">
+    <None Include="IndexML.TestFiles\EmptyThreeSheet.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="TestFiles\ExactlyFiveRows.xlsx">
+    <None Include="IndexML.TestFiles\ExactlyFiveRows.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="TestFiles\FiveEvenRows.xlsx">
+    <None Include="IndexML.TestFiles\FiveEvenRows.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="TestFiles\FourRowThreeColumnTable.docx">
+    <None Include="IndexML.TestFiles\FourRowThreeColumnTable.docx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestFiles\MaxExtents.xlsx">
+    <None Include="IndexML.TestFiles\MaxExtents.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="TestFiles\Numbered.docx">
+    <None Include="IndexML.TestFiles\Numbered.docx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestFiles\OneValidationCellA2.xlsx">
+    <None Include="IndexML.TestFiles\OneValidationCellA2.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="TestFiles\RandomTestData.xlsx">
+    <None Include="IndexML.TestFiles\RandomTestData.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="TestFiles\RandomTestDataThreeSheet.xlsx">
+    <None Include="IndexML.TestFiles\RandomTestDataThreeSheet.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="TestFiles\RowValidations.xlsx">
+    <None Include="IndexML.TestFiles\RowValidations.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="TestFiles\StaggeredValidations.xlsx">
+    <None Include="IndexML.TestFiles\StaggeredValidations.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="TestFiles\Standard.docx">
+    <None Include="IndexML.TestFiles\Standard.docx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
