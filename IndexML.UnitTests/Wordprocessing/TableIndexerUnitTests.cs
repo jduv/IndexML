@@ -34,6 +34,22 @@
         }
 
         [TestMethod]
+        public void Constructor_FourRowThreeColumnTable_ValidIndexer()
+        {
+            SafeExecuteTest(
+               FourRowsThreeColumnsDocPath,
+               (doc) =>
+               {
+                   var expected = doc.MainDocumentPart.Document.Body.Descendants<Table>().FirstOrDefault();
+                   var indexer = new TableIndexer(expected);
+
+                   Assert.IsNotNull(indexer.Table);
+                   Assert.AreEqual(indexer.Columns.Count(), 3);
+                   Assert.AreEqual(indexer.Rows.Count(), 4);
+               });
+        }
+
+        [TestMethod]
         public void ImplicitCast_ValidIndexer_SameReference()
         {
             SafeExecuteTest(
