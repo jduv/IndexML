@@ -79,6 +79,24 @@
             }
         }
 
+        /// <summary>
+        /// Gets the text for the cell. This simply concatenates the text of all enclosed
+        /// paragraphs. Tables are ignored.
+        /// </summary>
+        public string Text
+        {
+            get
+            {
+                string text = string.Empty;
+                foreach (var p in this.Paragraphs)
+                {
+                    text += p.Text;
+                }
+
+                return text;
+            }
+        }
+
         #endregion
 
         #region Public Methods
