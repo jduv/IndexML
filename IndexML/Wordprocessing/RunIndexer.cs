@@ -79,6 +79,17 @@
             }
         }
 
+        /// <summary>
+        /// Gets the text for the run.
+        /// </summary>
+        public string Text
+        {
+            get
+            {
+                return this.Run.InnerText;
+            }
+        }
+
         #endregion
 
         #region Public Methods
