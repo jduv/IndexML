@@ -18,6 +18,7 @@
             }
 
             this.Run = toIndex;
+            this.Properties = toIndex.RunProperties;
         }
 
         #endregion
@@ -28,6 +29,11 @@
         /// Gets the contained run.
         /// </summary>
         public Run Run { get; private set; }
+
+        /// <summary>
+        /// Gets the properties for the run.
+        /// </summary>
+        public RunProperties Properties { get; private set; }
 
         #endregion
 
