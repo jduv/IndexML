@@ -35,6 +35,50 @@
         /// </summary>
         public RunProperties Properties { get; private set; }
 
+        /// <summary>
+        /// Gets a value indicating whether this run is bolded.
+        /// </summary>
+        public bool IsBold
+        {
+            get
+            {
+                return this.Properties != null && this.Properties.Bold != null;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether this run is italic.
+        /// </summary>
+        public bool IsItalic
+        {
+            get
+            {
+                return this.Properties != null && this.Properties.Italic != null;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether this run is emphatic.
+        /// </summary>
+        public bool IsEmphatic
+        {
+            get
+            {
+                return this.Properties != null && this.Properties.Emphasis != null;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether this run is underline.
+        /// </summary>
+        public bool IsUnderline
+        {
+            get
+            {
+                return this.Properties != null && this.Properties.Underline != null;
+            }
+        }
+
         #endregion
 
         #region Public Methods
